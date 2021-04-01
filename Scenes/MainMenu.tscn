@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="D:/Documents/Godot/GlobalGameJam2021/Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res:///Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/ValueSlider.tscn" type="PackedScene" id=3]
 

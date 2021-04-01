@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Core/Managers/UIManager.cs" type="Script" id=1]
-[ext_resource path="D:/Documents/Godot/GlobalGameJam2021/Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
