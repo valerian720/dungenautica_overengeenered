@@ -1,21 +1,33 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/ValueSlider.tscn" type="PackedScene" id=3]
 
+[sub_resource type="DynamicFontData" id=9]
+hinting = 0
+font_path = "res://Assets/Fonts/Pixel/ka1.ttf"
+
 [sub_resource type="DynamicFont" id=1]
-size = 12
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=10]
+hinting = 0
+font_path = "res://Assets/Fonts/Pixel/ka1.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 12
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=11]
+hinting = 0
+font_path = "res://Assets/Fonts/Pixel/ka1.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+font_data = SubResource( 11 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -98,33 +110,34 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="Buttons"]
-margin_right = 74.0
-margin_bottom = 21.0
+margin_right = 101.0
+margin_bottom = 29.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
-text = "Играть"
+text = "Play"
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
-margin_top = 31.0
-margin_right = 74.0
-margin_bottom = 52.0
+margin_top = 39.0
+margin_right = 101.141
+margin_bottom = 68.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
-text = "Настройки"
+text = "Options"
 
 [node name="OpenConsoleButton" type="Button" parent="Buttons"]
-margin_top = 62.0
-margin_right = 74.0
-margin_bottom = 82.0
+margin_top = 78.0
+margin_right = 101.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 12 )
 text = "console"
 
 [node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 92.0
-margin_right = 74.0
-margin_bottom = 113.0
+margin_top = 96.0
+margin_right = 101.0
+margin_bottom = 125.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
-text = "Выход"
+text = "Exit"
 
 [node name="SettingsWindow" type="ConfirmationDialog" parent="."]
 anchor_left = 0.5
