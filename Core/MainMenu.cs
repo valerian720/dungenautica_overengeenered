@@ -139,5 +139,35 @@ namespace SibGameJam2021.Core
 
 			AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), GD.Linear2Db(_settings.MasterVolume / 100f));
 		}
+
+		static int minArgumentToConsoleCount = 2;
+		static int firstElemet = 0;
+		public void _on_ConsoleInput_text_entered(string text)
+        {
+			GD.Print(text);
+
+			string[] splittedText = text.Split(" ");
+            if (splittedText.Length>=minArgumentToConsoleCount)
+            {
+                switch (splittedText[firstElemet])
+                {
+					case "lvl":
+						splittedText[firstElemet] = "";
+						string levelName = string.Join(" ", splittedText);
+                        try
+                        {
+							GameManager.Instance.SceneManager.LoadLevel(levelName.Substr(1, levelName.Length - 1), true);
+						}
+						catch (Exception)
+                        {
+
+                            throw;
+                        }
+						break;
+                    default:
+                        break;
+                }
+            }
+        }
 	}
 }
