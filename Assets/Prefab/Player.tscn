@@ -246,3 +246,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 24 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0.142319, -0.203361 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
