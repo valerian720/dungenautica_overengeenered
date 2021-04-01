@@ -115,12 +115,22 @@ namespace SibGameJam2021.Core
             OS.WindowBorderless = _settings.DisplayMode == DisplayModesNames[1];
             OS.WindowFullscreen = _settings.DisplayMode == DisplayModesNames[2];
 
-            var resolution = Resolutions[Array.IndexOf(ResolutionsNames, _settings.Resolution)];
+            Vector2 resolution = Resolutions[0];
+
+            try
+            {
+                resolution = Resolutions[Array.IndexOf(ResolutionsNames, _settings.Resolution)];
+            }
+            catch
+            {
+            }
+
+
             // window res
             OS.WindowSize = _settings.DisplayMode == DisplayModesNames[1] ? OS.GetScreenSize() : resolution;
             // viewport res
-            GetViewport().Size = resolution;
-            GetViewport().SizeOverrideStretch = true;
+            //GetViewport().Size = resolution;
+            //GetViewport().SizeOverrideStretch = true;
 
             OS.CenterWindow();
 
