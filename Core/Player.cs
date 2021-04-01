@@ -27,6 +27,7 @@
 
         public override void _PhysicsProcess(float delta)
         {
+            // получение вектора движения игрока
             Vector2 inputVector = Vector2.Zero;
             inputVector.x = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
             inputVector.y = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up");
@@ -34,17 +35,22 @@
 
             if (inputVector != Vector2.Zero)
             {
+                // передача текущей скорости игрока в дерево анимации
                 animationTree.Set("parameters/Idle/blend_position", inputVector);
                 animationTree.Set("parameters/Run/blend_position", inputVector);
 
+                // переключение дерева анимации на бег
                 animationState.Travel("Run");
 
+                // применение трения к игроку
                 velocity = velocity.MoveToward(inputVector * MAX_SPEED, ACCELERATION * delta);
             }
             else
             {
+                // переключение дерева анимации на idle
                 animationState.Travel("Idle");
 
+                // применение трения к игроку
                 velocity = velocity.MoveToward(Vector2.Zero, FRICTION * delta);
             }
 
