@@ -516,3 +516,5 @@ position = Vector2( 272.692, 113.122 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 154.703, 84.9479 )
+
+[node name="Weapon" type="Node2D" parent="."]

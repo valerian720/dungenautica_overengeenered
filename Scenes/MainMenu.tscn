@@ -89,39 +89,39 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -28.0
-margin_top = -41.5
-margin_right = 28.0
-margin_bottom = 41.5
+margin_top = -66.0
+margin_right = 57.0
+margin_bottom = 72.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayButton" type="Button" parent="Buttons"]
-margin_right = 74.0
-margin_bottom = 21.0
+margin_right = 85.0
+margin_bottom = 29.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 text = "Играть"
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
-margin_top = 31.0
-margin_right = 74.0
-margin_bottom = 52.0
+margin_top = 39.0
+margin_right = 85.0
+margin_bottom = 68.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "Настройки"
 
 [node name="OpenConsoleButton" type="Button" parent="Buttons"]
-margin_top = 62.0
-margin_right = 74.0
-margin_bottom = 82.0
+margin_top = 78.0
+margin_right = 85.0
+margin_bottom = 98.0
 text = "console"
 
 [node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 92.0
-margin_right = 74.0
-margin_bottom = 113.0
+margin_top = 108.0
+margin_right = 85.0
+margin_bottom = 138.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "Выход"
