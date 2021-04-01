@@ -23,7 +23,7 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadLevel(string levelName, bool firstLoad = false)
         {
-            var level = GD.Load<PackedScene>($"res://Scenes/{levelName}.tscn").Instance();
+            var level = GD.Load<PackedScene>($"res://Scenes/Levels/{levelName}.tscn").Instance();
             LoadLevel(level, firstLoad);
         }
 
