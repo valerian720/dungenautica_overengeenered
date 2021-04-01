@@ -1,36 +1,46 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="D:/Documents/Godot/GlobalGameJam2021/Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/ValueSlider.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 30
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 30
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 30
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 18
+size = 12
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 18
+size = 12
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 18
+size = 12
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -43,34 +53,38 @@ __meta__ = {
 }
 
 [node name="Buttons" type="VBoxContainer" parent="."]
-anchor_left = 0.4
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.6
-anchor_bottom = 0.9
-custom_constants/separation = 20
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -28.0
+margin_top = -41.5
+margin_right = 28.0
+margin_bottom = 41.5
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayButton" type="Button" parent="Buttons"]
-margin_right = 122.0
-margin_bottom = 42.0
+margin_right = 56.0
+margin_bottom = 21.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 text = "Play"
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
-margin_top = 62.0
-margin_right = 122.0
-margin_bottom = 104.0
+margin_top = 31.0
+margin_right = 56.0
+margin_bottom = 52.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 124.0
-margin_right = 122.0
-margin_bottom = 166.0
+margin_top = 62.0
+margin_right = 56.0
+margin_bottom = 83.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "Quit"
@@ -81,11 +95,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -150.0
-margin_right = 200.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 400, 300 )
+margin_left = -123.0
+margin_top = -61.0
+margin_right = 123.0
+margin_bottom = 61.0
+rect_min_size = Vector2( 0, 0 )
 popup_exclusive = true
 window_title = "Settings"
 dialog_autowrap = true
@@ -94,68 +108,76 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="SettingsWindow"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+anchor_left = 0.5
+anchor_top = 0.418
+anchor_right = 0.5
+anchor_bottom = 0.418
+margin_left = -115.0
+margin_top = -38.996
+margin_right = 115.0
+margin_bottom = 39.004
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="SettingsWindow/MarginContainer"]
-margin_left = 57.0
-margin_right = 327.0
-margin_bottom = 256.0
+margin_right = 230.0
+margin_bottom = 78.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
+size_flags_vertical = 0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 20
 columns = 2
 
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/GridContainer"]
-margin_right = 122.0
-margin_bottom = 22.0
+margin_right = 82.0
+margin_bottom = 21.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 4 )
 text = "Resolution"
+valign = 1
 
 [node name="ResolutionOptionButton" type="OptionButton" parent="SettingsWindow/MarginContainer/GridContainer"]
-margin_left = 142.0
-margin_right = 270.0
-margin_bottom = 22.0
+margin_left = 102.0
+margin_right = 230.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 7 )
 text = "1280x720"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="SettingsWindow/MarginContainer/GridContainer"]
-margin_top = 32.0
-margin_right = 122.0
-margin_bottom = 54.0
+margin_top = 34.0
+margin_right = 82.0
+margin_bottom = 49.0
 custom_fonts/font = SubResource( 5 )
 text = "Display Mode"
+valign = 1
 
 [node name="DisplayModeOptionButton" type="OptionButton" parent="SettingsWindow/MarginContainer/GridContainer"]
-margin_left = 142.0
-margin_top = 32.0
-margin_right = 270.0
-margin_bottom = 54.0
+margin_left = 102.0
+margin_top = 31.0
+margin_right = 230.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 8 )
 text = "Windowed"
 
 [node name="Label2" type="Label" parent="SettingsWindow/MarginContainer/GridContainer"]
-margin_top = 64.0
-margin_right = 122.0
-margin_bottom = 86.0
+margin_top = 62.0
+margin_right = 82.0
+margin_bottom = 77.0
 custom_fonts/font = SubResource( 6 )
 text = "Master Volume"
+valign = 1
 
 [node name="MasterVolumeValueSlider" parent="SettingsWindow/MarginContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 64.0
-margin_right = 270.0
-margin_bottom = 86.0
+margin_left = 102.0
+margin_top = 62.0
+margin_right = 230.0
+margin_bottom = 78.0
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
