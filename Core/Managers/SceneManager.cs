@@ -18,7 +18,7 @@ namespace SibGameJam2021.Core.Managers
 
 		public void LoadDemoLevel()
 		{
-			LoadLevel("level4", true);
+			LoadLevel("Empty", true);
 		}
 
 		public void LoadLevel(string levelName, bool firstLoad = false)
