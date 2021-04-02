@@ -80,9 +80,9 @@ namespace SibGameJam2021.Core
 
         private void DealDmg()
         {
-            сurrentHealth -= DMG_PER_HIT;
+            CurrentHealth -= DMG_PER_HIT;
 
-            if (сurrentHealth == 0)
+            if (CurrentHealth == 0)
             {
                 kill();
             }

@@ -7,7 +7,6 @@ public class Enemy : KinematicBody2D
         Node2D player = GetParent().GetNode("Player") as Node2D;
 
         Position += (player.Position - Position) / 50;
-        LookAt(player.Position);
     }
 
     public override void _Ready()
