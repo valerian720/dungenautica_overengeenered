@@ -10,9 +10,11 @@ namespace SibGameJam2021.Core.Managers
     {
         private static readonly List<PackedScene> _enemiesScenes = new List<PackedScene>();
 
-        private Node2D _playerSpawn;
+        private int _enemiesAlive = 0;
 
-        private int _remainingEnemies;
+        private int _enemiesToSpawn;
+
+        private Node2D _playerSpawn;
 
         private List<SpawnPoint> _spawnpoints = new List<SpawnPoint>();
 
@@ -52,15 +54,31 @@ namespace SibGameJam2021.Core.Managers
             _timer.Connect("timeout", this, nameof(OnTimer));
         }
 
+        [Signal]
+        public delegate void LevelCleared();
+
+        public int EnemiesAlive
+        {
+            get { return _enemiesAlive; }
+
+            set
+            {
+                _enemiesAlive = value;
+
+                if (_enemiesAlive <= 0)
+                {
+                    GD.Print("Level Cleared");
+
+                    EmitSignal(nameof(LevelCleared));
+                }
+            }
+        }
+
         [Export]
         private Dictionary<PackedScene, int> Enemies { get; set; } = _enemiesScenes.ToDictionary(x => x, y => 0);
 
         [Export]
         private float WaveDelay { get; set; } = 5;
-
-        public override void _PhysicsProcess(float delta)
-        {
-        }
 
         public override void _Ready()
         {
@@ -76,7 +94,7 @@ namespace SibGameJam2021.Core.Managers
                 }
             }
 
-            _remainingEnemies = Enemies.Sum(x => x.Value);
+            _enemiesToSpawn = Enemies.Sum(x => x.Value);
 
             AddChild(_timer);
             _timer.Start(WaveDelay);
@@ -88,21 +106,28 @@ namespace SibGameJam2021.Core.Managers
             {
                 var enemies = Enemies.Where(x => x.Value > 0);
 
+                if (enemies.Count() < 1)
+                {
+                    _timer.Stop();
+
+                    break;
+                }
+
                 var pair = enemies.ElementAt(new Random().Next(0, enemies.Count()));
 
                 Enemies[pair.Key]--;
 
                 var enemy = (Enemy)pair.Key.Instance();
+                enemy.SpawnManager = this;
 
                 point.SpawnEnemy(enemy);
 
-                _remainingEnemies--;
+                _enemiesToSpawn--;
+                EnemiesAlive++;
 
-                if (_remainingEnemies <= 0)
+                if (_enemiesToSpawn <= 0)
                 {
                     _timer.Stop();
-
-                    GD.Print("Level Cleared");
 
                     break;
                 }

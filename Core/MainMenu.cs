@@ -48,7 +48,7 @@ namespace SibGameJam2021.Core
                         string levelName = string.Join(" ", splittedText);
                         try
                         {
-                            GameManager.Instance.SceneManager.LoadLevel(levelName.Substr(1, levelName.Length - 1), true);
+                            GameManager.Instance.SceneManager.LoadLevel(levelName.Substr(1, levelName.Length - 1));
                         }
                         catch
                         {
@@ -64,7 +64,7 @@ namespace SibGameJam2021.Core
 
         public void _on_PlayButton_pressed()
         {
-            GameManager.Instance.SceneManager.LoadDemoLevel();
+            GameManager.Instance.SceneManager.LoadRandomLevel();
         }
 
         public void _on_QuitButton_pressed()

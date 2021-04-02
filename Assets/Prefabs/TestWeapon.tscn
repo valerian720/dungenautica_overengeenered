@@ -4,7 +4,7 @@
 
 [sub_resource type="NoiseTexture" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="WeaponBody" type="Sprite" parent="."]
@@ -12,5 +12,6 @@ position = Vector2( 4.73269, -0.213898 )
 scale = Vector2( 0.0182754, 0.00467915 )
 texture = SubResource( 1 )
 
-[node name="Muzzle" type="Node2D" parent="WeaponBody"]
-position = Vector2( 255.15, 31.8047 )
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2( 9.39566, -0.065079 )
+scale = Vector2( 0.0182754, 0.00467915 )
