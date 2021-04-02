@@ -220,13 +220,14 @@ start_node = "Idle"
 extents = Vector2( 9.99614, 13.0867 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 6
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 39
+frame = 36
 
 [node name="GunSlot" parent="." instance=ExtResource( 3 )]
 position = Vector2( -0.157715, -3.10006 )
