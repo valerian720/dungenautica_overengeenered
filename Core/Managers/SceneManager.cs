@@ -27,13 +27,14 @@ namespace SibGameJam2021.Core.Managers
 			LoadLevel(level, firstLoad);
 		}
 
-		public void LoadMainMenu()
-		{
-			_currentSceneInstance.QueueFree();
-			_tree.Root.RemoveChild(_uiManager);
-			_tree.Root.AddChild(_mainMenu);
-			_uiManager.ToggleHUD(false);
-		}
+        public void LoadMainMenu()
+        {
+            _currentSceneInstance.RemoveChild(GameManager.Instance.Player);
+            _currentSceneInstance.QueueFree();
+            _tree.Root.RemoveChild(_uiManager);
+            _tree.Root.AddChild(_mainMenu);
+            _uiManager.ToggleHUD(false);
+        }
 
 		private void LoadLevel(Node level, bool firstLoad = false)
 		{
@@ -47,9 +48,10 @@ namespace SibGameJam2021.Core.Managers
 				_currentSceneInstance.QueueFree();
 			}
 
-			_currentSceneInstance = level;
-			_tree.Root.AddChild(_currentSceneInstance);
-			_uiManager.ToggleHUD(true);
-		}
-	}
+            _currentSceneInstance = level;
+            _currentSceneInstance.AddChild(GameManager.Instance.Player);
+            _tree.Root.AddChild(_currentSceneInstance);
+            _uiManager.ToggleHUD(true);
+        }
+    }
 }

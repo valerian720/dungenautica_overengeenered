@@ -1,28 +1,37 @@
-﻿namespace SibGameJam2021.Core
-{
-    using Godot;
-    using System;
+﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
+namespace SibGameJam2021.Core
+{
     public class Player : KinematicBody2D
     {
+        private const int ACCELERATION = 600;
+        private const int DMG_PER_HIT = 10;
+        private const int FRICTION = 700;
+        private const int MAX_HEALTH = 100;
+        private const int MAX_SPEED = 80;
+        private int _сurrentHealth;
 
-        const int MAX_SPEED = 80;
-        const int ACCELERATION = 600;
-        const int FRICTION = 700;
+        private AnimationPlayer animationPlayer = null;
 
-        Vector2 velocity = Vector2.Zero;
+        private AnimationNodeStateMachinePlayback animationState = null;
 
-        AnimationTree animationTree = null;
-        AnimationPlayer animationPlayer = null;
-        AnimationNodeStateMachinePlayback animationState = null;
+        private AnimationTree animationTree = null;
 
-        public override void _Ready()
+        private Node2D gunSlot = null;
+
+        private Vector2 velocity = Vector2.Zero;
+
+        public Player()
         {
-            animationTree = GetNode("AnimationTree") as AnimationTree; // da
-            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
-            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
+            CurrentHealth = MAX_HEALTH;
+        }
 
-            animationTree.Active = true;
+        public int CurrentHealth
+        {
+            get { return _сurrentHealth; }
+
+            private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
         }
 
         public override void _PhysicsProcess(float delta)
@@ -56,8 +65,46 @@
 
             //MoveAndCollide(velocity * delta); // сильная потеря скорости при движении вдоль коллайдера
             velocity = MoveAndSlide(velocity); // скольжение вдоль коллайдера
+
+            //
+            gunSlot.LookAt(GetGlobalMousePosition());
         }
 
+        public override void _Ready()
+        {
+            animationTree = GetNode("AnimationTree") as AnimationTree; // da
+            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
+            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
 
+            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
+
+            animationTree.Active = true;
+        }
+
+        private void _on_Hitbox_body_entered(Area2D body)
+        {
+            if (body.Name.IndexOf("Enemy") == 0)
+            {
+                kill();
+            }
+
+            //GD.Print(body.Name);
+        }
+
+        private void DealDmg()
+        {
+            CurrentHealth -= DMG_PER_HIT;
+
+            if (CurrentHealth == 0)
+            {
+                kill();
+            }
+        }
+
+        private void kill()
+        {
+            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
+            GD.Print("dead");
+        }
     }
 }
