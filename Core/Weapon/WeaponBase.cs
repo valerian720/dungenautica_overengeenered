@@ -7,10 +7,11 @@ public class WeaponBase : Node2D
 
     public int AmmoCountdown
     {
-        get { return AmmoCountdown; }
+        get { return _ammoCountdown; }
 
-        private set { AmmoCountdown = value > 0 ? (value < MagSize ? value : MagSize) : 0; }
+        private set { _ammoCountdown = value > 0 ? (value < MagSize ? value : MagSize) : 0; }
     }
+    private int _ammoCountdown;
 
     public virtual int AmmoPerShot { get; private set; } = 1;
     public virtual int Damage { get; private set; } = 30;

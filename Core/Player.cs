@@ -9,6 +9,22 @@ namespace SibGameJam2021.Core
         private const int FRICTION = 700;
         private const int MAX_SPEED = 80;
 
+        private const int MAX_HEALTH = 100;
+        private const int DMG_PER_HIT = 10;
+
+        public int CurrentHealth
+        {
+            get { return _сurrentHealth; }
+
+            private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
+        }
+        private int _сurrentHealth;
+
+        public Player()
+        {
+            CurrentHealth = MAX_HEALTH;
+        }
+
         private AnimationPlayer animationPlayer = null;
         private AnimationNodeStateMachinePlayback animationState = null;
         private AnimationTree animationTree = null;
@@ -62,6 +78,15 @@ namespace SibGameJam2021.Core
             animationTree.Active = true;
         }
 
+        private void DealDmg()
+        {
+            сurrentHealth -= DMG_PER_HIT;
+
+            if (сurrentHealth == 0)
+            {
+                kill();
+            }
+        }
         private void _on_Hitbox_body_entered(Area2D body)
         {
             if (body.Name.IndexOf("Enemy") == 0)
