@@ -1,34 +1,19 @@
-﻿namespace SibGameJam2021.Core
-{
-    using Godot;
-    using SibGameJam2021.Core.Managers;
-    using System;
-    using Object = Godot.Object;
+﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
+namespace SibGameJam2021.Core
+{
     public class Player : KinematicBody2D
     {
+        private const int ACCELERATION = 600;
+        private const int FRICTION = 700;
+        private const int MAX_SPEED = 80;
 
-        const int MAX_SPEED = 80;
-        const int ACCELERATION = 600;
-        const int FRICTION = 700;
-
-        Vector2 velocity = Vector2.Zero;
-
-        AnimationTree animationTree = null;
-        AnimationPlayer animationPlayer = null;
-        AnimationNodeStateMachinePlayback animationState = null;
-        Node2D gunSlot = null;
-
-        public override void _Ready()
-        {
-            animationTree = GetNode("AnimationTree") as AnimationTree; // da
-            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
-            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
-
-            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
-
-            animationTree.Active = true;
-        }
+        private AnimationPlayer animationPlayer = null;
+        private AnimationNodeStateMachinePlayback animationState = null;
+        private AnimationTree animationTree = null;
+        private Node2D gunSlot = null;
+        private Vector2 velocity = Vector2.Zero;
 
         public override void _PhysicsProcess(float delta)
         {
@@ -66,21 +51,31 @@
             gunSlot.LookAt(GetGlobalMousePosition());
         }
 
-        private void kill()
+        public override void _Ready()
         {
-            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
-            GD.Print("ded");
+            animationTree = GetNode("AnimationTree") as AnimationTree; // da
+            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
+            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
+
+            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
+
+            animationTree.Active = true;
         }
 
         private void _on_Hitbox_body_entered(Area2D body)
         {
-            if (body.Name.IndexOf("Enemy")==0)    
+            if (body.Name.IndexOf("Enemy") == 0)
             {
                 kill();
             }
 
             GD.Print(body.Name);
+        }
 
+        private void kill()
+        {
+            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
+            GD.Print("dead");
         }
     }
 }
