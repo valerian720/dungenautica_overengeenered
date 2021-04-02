@@ -1,5 +1,5 @@
-public class Rifle : WeaponBase
+п»їpublic class Rifle : WeaponBase
 {
-    public override string GunDescription => "старый образец вооружения, который все еще каким то немыслемым образом не развалился ";
-    public override string GunName => "пушка";
+    public override string GunDescription => "СЃС‚Р°СЂС‹Р№ РѕР±СЂР°Р·РµС† РІРѕРѕСЂСѓР¶РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Р№ РІСЃРµ РµС‰Рµ РєР°РєРёРј С‚Рѕ РЅРµРјС‹СЃР»РµРјС‹Рј РѕР±СЂР°Р·РѕРј РЅРµ СЂР°Р·РІР°Р»РёР»СЃСЏ ";
+    public override string GunName => "РїСѓС€РєР°";
 }

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using Godot;
 
 public class BaloonGunType : GunType
@@ -14,13 +14,13 @@ public class BaloonGunType : GunType
 
 public abstract class GunType
 {
-    public PackedScene Bullet { get; } = (PackedScene)ResourceLoader.Load("res://Assets/Prefab/Bullet.tscn");
+    public PackedScene Bullet { get; } = (PackedScene)ResourceLoader.Load("res://Assets/Prefabs/Bullet.tscn");
     public virtual int BulletSpeed { get; private set; } = 500;
     public virtual string GunTypeName { get; private set; } = "base gun type (not implemented)";
 
     public abstract void Shoot(Node2D root, float rotationDegrees, Vector2 position, int Damage, double RateOfFire);
 
-    // загрузка объекта пули
+    // Р·Р°РіСЂСѓР·РєР° РѕР±СЉРµРєС‚Р° РїСѓР»Рё
 }
 
 public class LaserGunType : GunType

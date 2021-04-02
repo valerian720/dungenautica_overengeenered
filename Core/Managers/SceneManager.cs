@@ -29,6 +29,7 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadMainMenu()
         {
+            _currentSceneInstance.RemoveChild(GameManager.Instance.Player);
             _currentSceneInstance.QueueFree();
             _tree.Root.RemoveChild(_uiManager);
             _tree.Root.AddChild(_mainMenu);
@@ -48,6 +49,7 @@ namespace SibGameJam2021.Core.Managers
             }
 
             _currentSceneInstance = level;
+            _currentSceneInstance.AddChild(GameManager.Instance.Player);
             _tree.Root.AddChild(_currentSceneInstance);
             _uiManager.ToggleHUD(true);
         }

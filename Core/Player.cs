@@ -88,7 +88,7 @@ namespace SibGameJam2021.Core
                 kill();
             }
 
-            GD.Print(body.Name);
+            //GD.Print(body.Name);
         }
 
         private void DealDmg()

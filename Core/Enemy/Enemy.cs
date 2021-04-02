@@ -1,10 +1,11 @@
 using Godot;
+using SibGameJam2021.Core.Managers;
 
 public class Enemy : KinematicBody2D
 {
     public override void _PhysicsProcess(float delta)
     {
-        Node2D player = GetParent().GetNode("Player") as Node2D;
+        var player = GameManager.Instance.Player;
 
         Position += (player.Position - Position) / 50;
     }
@@ -19,7 +20,7 @@ public class Enemy : KinematicBody2D
         {
             QueueFree();
         }
-        GD.Print("enemy");
-        GD.Print(body.Name);
+        //GD.Print("enemy");
+        //GD.Print(body.Name);
     }
 }

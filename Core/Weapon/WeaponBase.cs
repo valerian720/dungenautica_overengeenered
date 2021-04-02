@@ -1,4 +1,4 @@
-using Godot;
+п»їusing Godot;
 
 public class WeaponBase : Node2D
 {
@@ -22,28 +22,27 @@ public class WeaponBase : Node2D
     public virtual double RateOfFire { get; private set; } = .5;
     public virtual int Recoil { get; private set; } = 100;
 
-    // отлавливание событий
+    // РѕС‚Р»Р°РІР»РёРІР°РЅРёРµ СЃРѕР±С‹С‚РёР№
     public override void _PhysicsProcess(float delta)
     {
         if (Input.IsActionJustPressed("ui_fire"))
         {
-            GD.Print(GetChild(0).GetParent());
-            // (GetParent() as Node2D)
-            Shoot(RotationDegrees, GlobalPosition);  // s своей позиции и направления вращения слота для оружия (0 индекс) //
-            GD.Print(RotationDegrees, GlobalPosition);
+            //GD.Print(GetChild(0).GetParent());
+            Shoot(RotationDegrees, GlobalPosition);  // s СЃРІРѕРµР№ РїРѕР·РёС†РёРё Рё РЅР°РїСЂР°РІР»РµРЅРёСЏ РІСЂР°С‰РµРЅРёСЏ СЃР»РѕС‚Р° РґР»СЏ РѕСЂСѓР¶РёСЏ (0 РёРЅРґРµРєСЃ) //
+            //GD.Print(RotationDegrees, GlobalPosition);
         }
     }
 
     public void Reload()
     {
-        // сразу идет перезарядка на фулл без наказания в виде убывания запаса патронов
+        // СЃСЂР°Р·Сѓ РёРґРµС‚ РїРµСЂРµР·Р°СЂСЏРґРєР° РЅР° С„СѓР»Р» Р±РµР· РЅР°РєР°Р·Р°РЅРёСЏ РІ РІРёРґРµ СѓР±С‹РІР°РЅРёСЏ Р·Р°РїР°СЃР° РїР°С‚СЂРѕРЅРѕРІ
         AmmoCountdown = MagSize;
     }
 
-    // ограничение количества активных патронов (от 0 до размера магазина)
+    // РѕРіСЂР°РЅРёС‡РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° Р°РєС‚РёРІРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ (РѕС‚ 0 РґРѕ СЂР°Р·РјРµСЂР° РјР°РіР°Р·РёРЅР°)
     public void Shoot(float rotationDegrees, Vector2 position)
     {
-        // за сам эффект стрельбы отвечает тип оружия
+        // Р·Р° СЃР°Рј СЌС„С„РµРєС‚ СЃС‚СЂРµР»СЊР±С‹ РѕС‚РІРµС‡Р°РµС‚ С‚РёРї РѕСЂСѓР¶РёСЏ
         GunType.Shoot(FindParent("World") as Node2D, rotationDegrees, position, Damage, RateOfFire);
         // aftershot delay (?)
     }
