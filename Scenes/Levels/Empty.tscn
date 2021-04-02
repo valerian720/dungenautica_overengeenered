@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Scenes/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Bush.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Core/Level.cs" type="Script" id=8]
+[ext_resource path="res://Assets/Prefabs/BrokenCollumn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/Collumn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/Rock.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -490,7 +493,7 @@ script = ExtResource( 8 )
 position = Vector2( 160, 90 )
 texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, -176.746, 1577.51, 804.555 )
 
 [node name="RoadsMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -517,7 +520,42 @@ Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
 Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 2
 }
 
-[node name="PlayerSpawn" parent="SpawnManager" index="0"]
+[node name="YSort" type="YSort" parent="SpawnManager"]
+
+[node name="BrokenCollumn" parent="SpawnManager/YSort" instance=ExtResource( 9 )]
+position = Vector2( 387.611, 63.216 )
+
+[node name="Bush" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
+position = Vector2( 243.798, 24.1945 )
+
+[node name="Bush2" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
+position = Vector2( 47.4451, 79.158 )
+
+[node name="Bush3" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
+position = Vector2( 142.339, 120.988 )
+
+[node name="Bush4" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
+position = Vector2( 272.692, 113.122 )
+
+[node name="Collumn" parent="SpawnManager/YSort" instance=ExtResource( 10 )]
+position = Vector2( 433.861, 61.9546 )
+
+[node name="Collumn2" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
+position = Vector2( 376.259, 127.124 )
+
+[node name="Collumn3" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
+position = Vector2( 437.224, 169.589 )
+
+[node name="Collumn4" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
+position = Vector2( 546.12, 119.976 )
+
+[node name="BrokenCollumn2" parent="SpawnManager/YSort" instance=ExtResource( 9 )]
+position = Vector2( 554.529, 31.6824 )
+
+[node name="Collumn5" parent="SpawnManager/YSort" instance=ExtResource( 10 )]
+position = Vector2( 558.313, 207.43 )
+
+[node name="PlayerSpawn" parent="SpawnManager" index="1"]
 position = Vector2( 91, 55 )
 
 [node name="SpawnPoint" parent="SpawnManager" instance=ExtResource( 1 )]
@@ -528,19 +566,5 @@ position = Vector2( 62, 134 )
 
 [node name="SpawnPoint3" parent="SpawnManager" instance=ExtResource( 1 )]
 position = Vector2( 230, 78 )
-
-[node name="YSort" type="YSort" parent="."]
-
-[node name="Bush" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 243.798, 24.1945 )
-
-[node name="Bush2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 47.4451, 79.158 )
-
-[node name="Bush3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 142.339, 120.988 )
-
-[node name="Bush4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 272.692, 113.122 )
 
 [editable path="SpawnManager"]
