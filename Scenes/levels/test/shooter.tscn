@@ -486,7 +486,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 position = Vector2( 160, 90 )
 texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( -1120, -1088, 2096, 1488 )
 
 [node name="RoadsMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

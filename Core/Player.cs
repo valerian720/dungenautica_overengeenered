@@ -15,12 +15,15 @@
         AnimationTree animationTree = null;
         AnimationPlayer animationPlayer = null;
         AnimationNodeStateMachinePlayback animationState = null;
+        Node2D gunSlot = null;
 
         public override void _Ready()
         {
             animationTree = GetNode("AnimationTree") as AnimationTree; // da
             animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
             animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
+
+            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
 
             animationTree.Active = true;
         }
@@ -56,6 +59,9 @@
 
             //MoveAndCollide(velocity * delta); // сильная потеря скорости при движении вдоль коллайдера
             velocity = MoveAndSlide(velocity); // скольжение вдоль коллайдера
+
+            //
+            gunSlot.LookAt(GetGlobalMousePosition());
         }
 
 
