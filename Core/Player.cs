@@ -1,7 +1,9 @@
 ﻿namespace SibGameJam2021.Core
 {
     using Godot;
+    using SibGameJam2021.Core.Managers;
     using System;
+    using Object = Godot.Object;
 
     public class Player : KinematicBody2D
     {
@@ -64,6 +66,21 @@
             gunSlot.LookAt(GetGlobalMousePosition());
         }
 
+        private void kill()
+        {
+            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
+            GD.Print("ded");
+        }
 
+        private void _on_Hitbox_body_entered(Area2D body)
+        {
+            if (body.Name.IndexOf("Enemy")==0)    
+            {
+                kill();
+            }
+
+            GD.Print(body.Name);
+
+        }
     }
 }

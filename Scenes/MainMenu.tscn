@@ -53,8 +53,9 @@ __meta__ = {
 }
 
 [node name="DevConsle" type="Control" parent="."]
+margin_top = -0.561234
 margin_right = 320.0
-margin_bottom = 180.0
+margin_bottom = 179.439
 __meta__ = {
 "_edit_use_anchors_": false
 }

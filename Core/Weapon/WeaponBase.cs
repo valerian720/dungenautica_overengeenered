@@ -13,20 +13,21 @@ public class WeaponBase : Node2D
     public virtual double RateOfFire { get; private set; } = .5;
     public virtual double aftershotDelay { get; private set; } = 3;
     public int ammoCountdown { get { return this.ammoCountdown; } private set { this.ammoCountdown = value > 0 ? (value<MagSize?value:MagSize) : 0; } } // ограничение количества активных патронов (от 0 до размера магазина)
-
-    private TimeStamp canShootAt = new Timer(); // TODO
-    
+    //public virtual double aftershotDelay { get; private set; } = 3; TODO
 
 
-    public void shoot(float rotationDegrees, Vector2 position)
+    private double canShootAt = 0; 
+
+
+    public void Shoot(float rotationDegrees, Vector2 position)
     {
-        canShootAt.
+        
         // за сам эффект стрельбы отвечает тип оружия
-        GunType.Shoot(rotationDegrees, position, Damage, RateOfFire);
+        GunType.Shoot(this.FindParent("World") as Node2D, rotationDegrees, position, Damage, RateOfFire);
         // aftershot delay (?)
     }
 
-    public void reload()
+    public void Reload()
     {
         // сразу идет перезарядка на фулл без наказания в виде убывания запаса патронов
         ammoCountdown = MagSize;
@@ -35,7 +36,13 @@ public class WeaponBase : Node2D
     // отлавливание событий
     public override void _PhysicsProcess(float delta)
     {
-        if 
+        if (Input.IsActionJustPressed("ui_fire"))
+        {
+            GD.Print(this.GetChild(0).GetParent());
+            // (this.GetParent() as Node2D)
+            this.Shoot(this.RotationDegrees, this.GlobalPosition);  // s своей позиции и направления вращения слота для оружия (0 индекс) // 
+            GD.Print(this.RotationDegrees, this.GlobalPosition);
+        }
     }
 }
 
