@@ -2,6 +2,7 @@ using Godot;
 
 public class WeaponBase : Node2D
 {
+    private int _ammoCountdown;
     private double CanShootAt = 0;
     public virtual double AftershotDelay { get; private set; } = 3;
 
@@ -11,7 +12,6 @@ public class WeaponBase : Node2D
 
         private set { _ammoCountdown = value > 0 ? (value < MagSize ? value : MagSize) : 0; }
     }
-    private int _ammoCountdown;
 
     public virtual int AmmoPerShot { get; private set; } = 1;
     public virtual int Damage { get; private set; } = 30;

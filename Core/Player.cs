@@ -6,11 +6,26 @@ namespace SibGameJam2021.Core
     public class Player : KinematicBody2D
     {
         private const int ACCELERATION = 600;
-        private const int FRICTION = 700;
-        private const int MAX_SPEED = 80;
-
-        private const int MAX_HEALTH = 100;
         private const int DMG_PER_HIT = 10;
+        private const int FRICTION = 700;
+        private const int MAX_HEALTH = 100;
+        private const int MAX_SPEED = 80;
+        private int _сurrentHealth;
+
+        private AnimationPlayer animationPlayer = null;
+
+        private AnimationNodeStateMachinePlayback animationState = null;
+
+        private AnimationTree animationTree = null;
+
+        private Node2D gunSlot = null;
+
+        private Vector2 velocity = Vector2.Zero;
+
+        public Player()
+        {
+            CurrentHealth = MAX_HEALTH;
+        }
 
         public int CurrentHealth
         {
@@ -18,18 +33,6 @@ namespace SibGameJam2021.Core
 
             private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
         }
-        private int _сurrentHealth;
-
-        public Player()
-        {
-            CurrentHealth = MAX_HEALTH;
-        }
-
-        private AnimationPlayer animationPlayer = null;
-        private AnimationNodeStateMachinePlayback animationState = null;
-        private AnimationTree animationTree = null;
-        private Node2D gunSlot = null;
-        private Vector2 velocity = Vector2.Zero;
 
         public override void _PhysicsProcess(float delta)
         {
@@ -78,15 +81,6 @@ namespace SibGameJam2021.Core
             animationTree.Active = true;
         }
 
-        private void DealDmg()
-        {
-            CurrentHealth -= DMG_PER_HIT;
-
-            if (CurrentHealth == 0)
-            {
-                kill();
-            }
-        }
         private void _on_Hitbox_body_entered(Area2D body)
         {
             if (body.Name.IndexOf("Enemy") == 0)
@@ -95,6 +89,16 @@ namespace SibGameJam2021.Core
             }
 
             GD.Print(body.Name);
+        }
+
+        private void DealDmg()
+        {
+            CurrentHealth -= DMG_PER_HIT;
+
+            if (CurrentHealth == 0)
+            {
+                kill();
+            }
         }
 
         private void kill()
