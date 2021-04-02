@@ -91,7 +91,7 @@ namespace SibGameJam2021.Core
         {
             if (body.Name.IndexOf("Enemy") == 0)
             {
-                kill();
+                DealDmg();
             }
 
             GD.Print(body.Name);
