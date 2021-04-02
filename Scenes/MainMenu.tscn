@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/ValueSlider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Music/background_music.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFontData" id=1]
 hinting = 0
@@ -228,6 +229,11 @@ margin_left = 102.0
 margin_top = 62.0
 margin_right = 230.0
 margin_bottom = 78.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -6.933
+autoplay = true
 [connection signal="text_entered" from="DevConsle/VBoxContainer/ConsoleInput" to="." method="_on_ConsoleInput_text_entered"]
 [connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_SettingsButton_pressed"]
