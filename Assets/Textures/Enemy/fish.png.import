@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/angler_move.png-4c6399d59c33169d7fb27ce63eec32fc.stex"
+path="res://.import/fish.png-f6c5a01b3e280dc62dcb56efd8dffe07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Enemy/angler_move.png"
-dest_files=[ "res://.import/angler_move.png-4c6399d59c33169d7fb27ce63eec32fc.stex" ]
+source_file="res://Assets/Textures/Enemy/fish.png"
+dest_files=[ "res://.import/fish.png-f6c5a01b3e280dc62dcb56efd8dffe07.stex" ]
 
 [params]
 
