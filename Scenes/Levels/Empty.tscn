@@ -514,48 +514,48 @@ tile_data = PoolIntArray( -65535, 0, 3, -65532, 0, 3, 1, 0, 131075, 4, 0, 65539,
 [node name="Gate" parent="." instance=ExtResource( 7 )]
 position = Vector2( 115, 10 )
 
+[node name="YSort" type="YSort" parent="."]
+
+[node name="BrokenCollumn" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 387.611, 63.216 )
+
+[node name="Bush" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 243.798, 24.1945 )
+
+[node name="Bush2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 47.4451, 79.158 )
+
+[node name="Bush3" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 142.339, 120.988 )
+
+[node name="Bush4" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 272.692, 113.122 )
+
+[node name="Collumn" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 433.861, 61.9546 )
+
+[node name="Collumn2" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 376.259, 127.124 )
+
+[node name="Collumn3" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 437.224, 169.589 )
+
+[node name="Collumn4" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 546.12, 119.976 )
+
+[node name="BrokenCollumn2" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 554.529, 31.6824 )
+
+[node name="Collumn5" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 558.313, 207.43 )
+
 [node name="SpawnManager" parent="." instance=ExtResource( 6 )]
 Enemies = {
 Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
 Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 2
 }
 
-[node name="YSort" type="YSort" parent="SpawnManager"]
-
-[node name="BrokenCollumn" parent="SpawnManager/YSort" instance=ExtResource( 9 )]
-position = Vector2( 387.611, 63.216 )
-
-[node name="Bush" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
-position = Vector2( 243.798, 24.1945 )
-
-[node name="Bush2" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
-position = Vector2( 47.4451, 79.158 )
-
-[node name="Bush3" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
-position = Vector2( 142.339, 120.988 )
-
-[node name="Bush4" parent="SpawnManager/YSort" instance=ExtResource( 2 )]
-position = Vector2( 272.692, 113.122 )
-
-[node name="Collumn" parent="SpawnManager/YSort" instance=ExtResource( 10 )]
-position = Vector2( 433.861, 61.9546 )
-
-[node name="Collumn2" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
-position = Vector2( 376.259, 127.124 )
-
-[node name="Collumn3" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
-position = Vector2( 437.224, 169.589 )
-
-[node name="Collumn4" parent="SpawnManager/YSort" instance=ExtResource( 11 )]
-position = Vector2( 546.12, 119.976 )
-
-[node name="BrokenCollumn2" parent="SpawnManager/YSort" instance=ExtResource( 9 )]
-position = Vector2( 554.529, 31.6824 )
-
-[node name="Collumn5" parent="SpawnManager/YSort" instance=ExtResource( 10 )]
-position = Vector2( 558.313, 207.43 )
-
-[node name="PlayerSpawn" parent="SpawnManager" index="1"]
+[node name="PlayerSpawn" parent="SpawnManager" index="0"]
 position = Vector2( 91, 55 )
 
 [node name="SpawnPoint" parent="SpawnManager" instance=ExtResource( 1 )]
