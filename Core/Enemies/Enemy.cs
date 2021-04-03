@@ -7,7 +7,7 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
-        private Healthbar _healthbar;
+        private HealthBar _healthbar;
 
         // AI
         [Export]
@@ -38,7 +38,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             base._Ready();
 
-            _healthbar = GetNode<Healthbar>("Healthbar");
+            _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
         public override void GetDamage(float damage)

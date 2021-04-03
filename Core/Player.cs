@@ -1,16 +1,40 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Godot;
 using SibGameJam2021.Core.Enemies;
 using SibGameJam2021.Core.Managers;
+using SibGameJam2021.Core.UI;
+using SibGameJam2021.Core.Utility;
+using SibGameJam2021.Core.Weapons;
 
 namespace SibGameJam2021.Core
 {
     public class Player : Entity
     {
+        private static readonly Dictionary<string, PackedScene> _weapons = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
+
+        private Node2D _gunSlot = null;
+        private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
-        private Node2D gunSlot = null;
+        private WeaponBase _weapon;
 
         public Player() : base()
         {
+        }
+
+        public int Coins { get; set; } = 0;
+
+        public override void _Input(InputEvent inputEvent)
+        {
+            if (inputEvent.IsActionPressed("ui_fire"))
+            {
+                _weapon.StartShooting();
+            }
+            if (inputEvent.IsActionPressed("reload"))
+            {
+                _weapon.StartReloading();
+                _reloadBar.StartReloading(_weapon.ReloadDuration);
+            }
         }
 
         public override void _PhysicsProcess(float delta)
@@ -44,14 +68,22 @@ namespace SibGameJam2021.Core
 
             _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
 
-            gunSlot.LookAt(GetGlobalMousePosition());
+            _gunSlot.LookAt(GetGlobalMousePosition());
         }
 
         public override void _Ready()
         {
             base._Ready();
 
-            gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
+            _reloadBar = GetNode<ReloadBar>("ReloadBar");
+
+            _gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
+
+            _weapon = _weapons.Values.First().Instance() as WeaponBase;
+
+            _gunSlot.AddChild(_weapon);
+
+            _reloadBar.Connect(nameof(ReloadBar.ReloadFinished), _weapon, nameof(WeaponBase.FinishReloading));
         }
 
         public void ApplyImpulse(Vector2 velocity)

@@ -17,7 +17,7 @@ namespace SibGameJam2021.Core.Weapons
 
         protected WeaponBase()
         {
-            Reload();
+            FinishReloading();
         }
 
         [Export]
@@ -54,19 +54,10 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public virtual float Recoil { get; protected set; } = 0f;
 
-        public float ShotDelay => 1f / RateOfFire;
+        [Export]
+        public virtual float ReloadDuration { get; protected set; } = 2f;
 
-        public override void _Input(InputEvent inputEvent)
-        {
-            if (inputEvent.IsActionPressed("ui_fire"))
-            {
-                StartShooting();
-            }
-            if (inputEvent.IsActionPressed("reload"))
-            {
-                Reload();
-            }
-        }
+        public float ShotDelay => 1f / RateOfFire;
 
         public override void _Process(float delta)
         {
@@ -92,14 +83,26 @@ namespace SibGameJam2021.Core.Weapons
             _muzzlePoint = GetNode<Node2D>("Muzzle");
         }
 
-        protected abstract void AdditionalLogic();
-
-        protected abstract void SpawnBullets();
-
-        private void Reload()
+        public void FinishReloading()
         {
             AmmoCount = MagSize;
         }
+
+        public void StartReloading()
+        {
+            AmmoCount = 0;
+        }
+
+        public void StartShooting()
+        {
+            Shoot();
+            SetProcess(true);
+            _timeElapsed = 0f;
+        }
+
+        protected abstract void AdditionalLogic();
+
+        protected abstract void SpawnBullets();
 
         private void Shoot()
         {
@@ -110,13 +113,6 @@ namespace SibGameJam2021.Core.Weapons
 
             SpawnBullets();
             AdditionalLogic();
-        }
-
-        private void StartShooting()
-        {
-            Shoot();
-            SetProcess(true);
-            _timeElapsed = 0f;
         }
     }
 }

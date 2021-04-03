@@ -2,15 +2,14 @@
 
 [ext_resource path="res://Assets/Icons/icon.png" type="Texture" id=1]
 [ext_resource path="res://Core/Enemies/Enemy.cs" type="Script" id=2]
-[ext_resource path="res://Assets/Prefabs/Healthbar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 9.18719
-height = 3.56675
+height = 5.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 12.5459
-height = 4.98093
+radius = 12.0
+height = 6.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "placeholder_attack"
@@ -191,7 +190,7 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
 
-[node name="Healthbar" parent="." instance=ExtResource( 3 )]
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -199,7 +198,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.148643, 0.148651 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 
