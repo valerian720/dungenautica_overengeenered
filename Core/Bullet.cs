@@ -4,10 +4,12 @@ namespace SibGameJam2021.Core
 {
     public class Bullet : KinematicBody2D
     {
-        private const float LifeTime = 10f;
+        [Export]
+        public float LifeTime = 10f;
 
         private Timer _timer = new Timer();
 
+        public float Damage { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using SibGameJam2021.Core.Enemies;
 using SibGameJam2021.Core.Spawn;
 
 namespace SibGameJam2021.Core.Managers
@@ -83,7 +84,6 @@ namespace SibGameJam2021.Core.Managers
         public override void _Ready()
         {
             _playerSpawn = GetNode<Node2D>("PlayerSpawn");
-            GameManager.Instance.Player.GlobalPosition = _playerSpawn.GlobalPosition;
 
             foreach (var child in GetChildren())
             {
@@ -100,8 +100,24 @@ namespace SibGameJam2021.Core.Managers
             _timer.Start(WaveDelay);
         }
 
+        public void RemovePlayer()
+        {
+            CallDeferred("remove_child", GameManager.Instance.Player);
+        }
+
+        public void SpawnPlayer()
+        {
+            CallDeferred("add_child", GameManager.Instance.Player);
+            GameManager.Instance.Player.GlobalPosition = _playerSpawn.GlobalPosition;
+        }
+
         private void OnTimer()
         {
+            if (_enemiesToSpawn <= 0)
+            {
+                EnemiesAlive = 0;
+            }
+
             foreach (var point in _spawnpoints)
             {
                 var enemies = Enemies.Where(x => x.Value > 0);

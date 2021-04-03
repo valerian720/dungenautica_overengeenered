@@ -10,10 +10,20 @@ namespace SibGameJam2021.Core
 
         public override void _Ready()
         {
-            _gate = GetNode<Gate>("Gate");
-            _spawnManager = GetNode<SpawnManager>("SpawnManager");
+            _gate = GetNode<Gate>("YSort/Gate");
+            _spawnManager = GetNode<SpawnManager>("YSort/SpawnManager");
 
             _spawnManager.Connect("LevelCleared", this, nameof(OnLevelCleared));
+        }
+
+        public void RemovePlayer()
+        {
+            _spawnManager.RemovePlayer();
+        }
+
+        public void SpawnPlayer()
+        {
+            _spawnManager.SpawnPlayer();
         }
 
         private void OnLevelCleared()
