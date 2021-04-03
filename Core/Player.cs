@@ -13,6 +13,11 @@ namespace SibGameJam2021.Core
         {
         }
 
+        public  void ApplyImpulse(Vector2 velocity)
+        {
+            _velocity += velocity;
+        }
+
         public override void _PhysicsProcess(float delta)
         {
             // получение вектора движения игрока

@@ -1,5 +1,7 @@
 using Godot;
 using SibGameJam2021.Core.Managers;
+using SibGameJam2021.Core.UI;
+using SibGameJam2021.Core.Weapons;
 
 namespace SibGameJam2021.Core.Enemies
 {
@@ -46,6 +48,15 @@ namespace SibGameJam2021.Core.Enemies
             _healthbar.UpdateHealth(CurrentHealth, MAX_HEALTH);
         }
 
+        virtual public void UpdateAnimation(Player player)
+        {
+            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
+            {
+                // обновление анимаций моба если игрок входит в определенный радиус
+                UpdateAnimationTreeState((player.Position - Position).Normalized());
+            }
+        }
+
         virtual public void UpdatePosition(Player player)
         {
             if (player.Position.DistanceSquaredTo(Position) < ActivationRadius * ActivationRadius)
@@ -57,14 +68,6 @@ namespace SibGameJam2021.Core.Enemies
             else
             {
                 SetAnimationIdle();
-            }
-        }
-        virtual public void UpdateAnimation(Player player)
-        {
-            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
-            {
-                // обновление анимаций моба если игрок входит в определенный радиус
-                UpdateAnimationTreeState((player.Position - Position).Normalized());
             }
         }
 

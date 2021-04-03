@@ -89,8 +89,8 @@ namespace SibGameJam2021.Core.Managers
             }
 
             _currentLevel = (Level)level;
-            _tree.Root.AddChild(_currentLevel);
-            _currentLevel.SpawnPlayer();
+            _tree.Root.CallDeferred("add_child", _currentLevel);
+            _currentLevel.CallDeferred(nameof(_currentLevel.SpawnPlayer));
 
             _uiManager.ToggleHUD(true);
         }

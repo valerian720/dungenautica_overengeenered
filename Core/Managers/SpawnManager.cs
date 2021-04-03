@@ -116,6 +116,8 @@ namespace SibGameJam2021.Core.Managers
             if (_enemiesToSpawn <= 0)
             {
                 EnemiesAlive = 0;
+                _timer.Stop();
+                return;
             }
 
             foreach (var point in _spawnpoints)
