@@ -1,28 +1,43 @@
-﻿namespace SibGameJam2021.Core
-{
-    using Godot;
-    using System;
+﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
+namespace SibGameJam2021.Core
+{
     public class Player : KinematicBody2D
     {
+        [Export]
+        private int ACCELERATION = 600;
+        [Export]
+        private int GET_DMG_PER_HIT = 10;
+        [Export]
+        private int FRICTION = 700;
+        [Export]
+        private int MAX_HEALTH = 100;
+        [Export]
+        private int MAX_SPEED = 80;
 
-        const int MAX_SPEED = 80;
-        const int ACCELERATION = 600;
-        const int FRICTION = 700;
+        private int _сurrentHealth;
 
-        Vector2 velocity = Vector2.Zero;
+        private AnimationPlayer animationPlayer = null;
 
-        AnimationTree animationTree = null;
-        AnimationPlayer animationPlayer = null;
-        AnimationNodeStateMachinePlayback animationState = null;
+        private AnimationNodeStateMachinePlayback animationState = null;
 
-        public override void _Ready()
+        private AnimationTree animationTree = null;
+
+        private Node2D gunSlot = null;
+
+        private Vector2 velocity = Vector2.Zero;
+
+        public Player()
         {
-            animationTree = GetNode("AnimationTree") as AnimationTree; // da
-            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
-            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
+            CurrentHealth = MAX_HEALTH;
+        }
 
-            animationTree.Active = true;
+        public int CurrentHealth
+        {
+            get { return _сurrentHealth; }
+
+            private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
         }
 
         public override void _PhysicsProcess(float delta)
@@ -56,8 +71,46 @@
 
             //MoveAndCollide(velocity * delta); // сильная потеря скорости при движении вдоль коллайдера
             velocity = MoveAndSlide(velocity); // скольжение вдоль коллайдера
+
+            //
+            gunSlot.LookAt(GetGlobalMousePosition());
         }
 
+        public override void _Ready()
+        {
+            animationTree = GetNode("AnimationTree") as AnimationTree; // da
+            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
+            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
 
+            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
+
+            animationTree.Active = true;
+        }
+
+        private void _on_Hitbox_body_entered(Area2D body)
+        {
+            if (body.Name.IndexOf("Enemy") == 0)
+            {
+                DealDmg();
+            }
+
+            //GD.Print(body.Name);
+        }
+
+        private void DealDmg()
+        {
+            CurrentHealth -= GET_DMG_PER_HIT;
+
+            if (CurrentHealth == 0)
+            {
+                kill();
+            }
+        }
+
+        private void kill()
+        {
+            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
+            GD.Print("dead");
+        }
     }
 }
