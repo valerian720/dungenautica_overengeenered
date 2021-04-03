@@ -5,12 +5,11 @@
 [ext_resource path="res://Assets/Prefabs/HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 9.18719
-height = 3.56675
+height = 5.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 12.5459
-height = 4.98093
+radius = 12.0
+height = 6.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "placeholder_attack"
@@ -199,7 +198,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.148643, 0.148651 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 
