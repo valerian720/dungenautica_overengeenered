@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Core/Managers/UIManager.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Fonts/Pixel/Pixel-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 12
+size = 10
 use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 12
+size = 10
 use_filter = true
 font_data = ExtResource( 2 )
 
@@ -25,12 +25,10 @@ __meta__ = {
 }
 
 [node name="PauseButton" type="Button" parent="HUD"]
-anchor_left = 0.95
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.05
-margin_left = -46.0
-margin_bottom = 21.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -57.0
+margin_bottom = 19.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 1 )
 text = "Pause"
@@ -60,33 +58,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -36.0
+margin_left = -41.0
 margin_top = -41.5
-margin_right = 36.0
-margin_bottom = 41.5
+margin_right = 41.0
+margin_bottom = 35.5
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
-margin_right = 72.0
-margin_bottom = 21.0
+margin_right = 82.0
+margin_bottom = 19.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "Resume"
 
 [node name="SaveButton" type="Button" parent="PauseMenu/VBoxContainer"]
-margin_top = 31.0
-margin_right = 72.0
-margin_bottom = 52.0
+margin_top = 29.0
+margin_right = 82.0
+margin_bottom = 48.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 
 [node name="MainMenuButton" type="Button" parent="PauseMenu/VBoxContainer"]
-margin_top = 62.0
-margin_right = 72.0
-margin_bottom = 83.0
+margin_top = 58.0
+margin_right = 82.0
+margin_bottom = 77.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "Main Menu"
