@@ -1,7 +1,6 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Scenes/SpawnPoint.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Prefabs/Bush.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Textures/World/WallTileset.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Textures/World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Textures/World/GrassBackground.png" type="Texture" id=5]
@@ -519,18 +518,6 @@ position = Vector2( 115, 10 )
 [node name="BrokenCollumn" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 387.611, 63.216 )
 
-[node name="Bush" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 243.798, 24.1945 )
-
-[node name="Bush2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 47.4451, 79.158 )
-
-[node name="Bush3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 142.339, 120.988 )
-
-[node name="Bush4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 272.692, 113.122 )
-
 [node name="Collumn" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 433.861, 61.9546 )
 
@@ -548,6 +535,33 @@ position = Vector2( 554.529, 31.6824 )
 
 [node name="Collumn5" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 558.313, 207.43 )
+
+[node name="Collumn6" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 47.5935, 99.4022 )
+
+[node name="Collumn7" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 175.96, 116.392 )
+
+[node name="BrokenCollumn3" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 182.755, 18.6415 )
+
+[node name="BrokenCollumn4" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 292.244, 159.279 )
+
+[node name="Rock" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( -53.4011, 45.6013 )
+
+[node name="Rock2" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( -119.472, 218.802 )
+
+[node name="Rock3" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 223.029, 284.722 )
+
+[node name="BrokenCollumn5" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 360.414, 243.214 )
+
+[node name="BrokenCollumn6" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( -88.5986, 400.012 )
 
 [node name="SpawnManager" parent="." instance=ExtResource( 6 )]
 Enemies = {
