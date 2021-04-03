@@ -1,43 +1,16 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Enemies;
 using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core
 {
-    public class Player : KinematicBody2D
+    public class Player : Entity
     {
-        [Export]
-        private int ACCELERATION = 600;
-        [Export]
-        private int GET_DMG_PER_HIT = 10;
-        [Export]
-        private int FRICTION = 700;
-        [Export]
-        private int MAX_HEALTH = 100;
-        [Export]
-        private int MAX_SPEED = 80;
-
-        private int _сurrentHealth;
-
-        private AnimationPlayer animationPlayer = null;
-
-        private AnimationNodeStateMachinePlayback animationState = null;
-
-        private AnimationTree animationTree = null;
-
+        private Vector2 _velocity = Vector2.Zero;
         private Node2D gunSlot = null;
 
-        private Vector2 velocity = Vector2.Zero;
-
-        public Player()
+        public Player() : base()
         {
-            CurrentHealth = MAX_HEALTH;
-        }
-
-        public int CurrentHealth
-        {
-            get { return _сurrentHealth; }
-
-            private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
         }
 
         public override void _PhysicsProcess(float delta)
@@ -48,69 +21,50 @@ namespace SibGameJam2021.Core
             inputVector.y = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up");
             inputVector = inputVector.Normalized();
 
-            if (inputVector != Vector2.Zero)
+            if (!inputVector.IsEqualApprox(Vector2.Zero))
             {
                 // передача текущей скорости игрока в дерево анимации
-                animationTree.Set("parameters/Idle/blend_position", inputVector);
-                animationTree.Set("parameters/Run/blend_position", inputVector);
+                _animationTree.Set("parameters/Idle/blend_position", inputVector);
+                _animationTree.Set("parameters/Run/blend_position", inputVector);
 
                 // переключение дерева анимации на бег
-                animationState.Travel("Run");
+                _animationState.Travel("Run");
 
                 // применение трения к игроку
-                velocity = velocity.MoveToward(inputVector * MAX_SPEED, ACCELERATION * delta);
+                _velocity = _velocity.MoveToward(inputVector * MAX_SPEED, ACCELERATION * delta);
             }
             else
             {
                 // переключение дерева анимации на idle
-                animationState.Travel("Idle");
+                _animationState.Travel("Idle");
 
                 // применение трения к игроку
-                velocity = velocity.MoveToward(Vector2.Zero, FRICTION * delta);
+                _velocity = _velocity.MoveToward(Vector2.Zero, FRICTION * delta);
             }
 
-            //MoveAndCollide(velocity * delta); // сильная потеря скорости при движении вдоль коллайдера
-            velocity = MoveAndSlide(velocity); // скольжение вдоль коллайдера
+            _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
 
-            //
             gunSlot.LookAt(GetGlobalMousePosition());
         }
 
         public override void _Ready()
         {
-            animationTree = GetNode("AnimationTree") as AnimationTree; // da
-            animationPlayer = GetNode("AnimationPlayer") as AnimationPlayer; // da
-            animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
+            base._Ready();
 
-            gunSlot = GetNode("GunSlot") as Node2D; // подгрузка ссылки на слот для оружия
-
-            animationTree.Active = true;
+            gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
         }
 
-        private void _on_Hitbox_body_entered(Area2D body)
+        protected override void Die()
+        {
+            GameManager.Instance.SceneManager.LoadMainMenu();
+        }
+
+        private void _on_Hitbox_body_entered(Node body)
         {
             if (body.Name.IndexOf("Enemy") == 0)
             {
-                DealDmg();
+                GetDamage((body as Enemy).Damage);
             }
-
-            //GD.Print(body.Name);
-        }
-
-        private void DealDmg()
-        {
-            CurrentHealth -= GET_DMG_PER_HIT;
-
-            if (CurrentHealth == 0)
-            {
-                kill();
-            }
-        }
-
-        private void kill()
-        {
-            GameManager.Instance.SceneManager.LoadMainMenu(); // todo нормальная смерть
-            GD.Print("dead");
         }
     }
 }

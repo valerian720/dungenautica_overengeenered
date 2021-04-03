@@ -534,10 +534,25 @@ position = Vector2( 289.796, -207.727 )
 [node name="Rock2" parent="WallMap/Rock" instance=ExtResource( 11 )]
 position = Vector2( -188.077, -259.786 )
 
-[node name="Gate" parent="." instance=ExtResource( 7 )]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Gate" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 115, 10 )
 
-[node name="YSort" type="YSort" parent="."]
+[node name="SpawnManager" parent="YSort" instance=ExtResource( 6 )]
+Enemies = {
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 2
+}
+
+[node name="SpawnPoint" parent="YSort/SpawnManager" instance=ExtResource( 1 )]
+position = Vector2( 14, 18 )
+
+[node name="SpawnPoint2" parent="YSort/SpawnManager" instance=ExtResource( 1 )]
+position = Vector2( 62, 134 )
+
+[node name="SpawnPoint3" parent="YSort/SpawnManager" instance=ExtResource( 1 )]
+position = Vector2( 230, 78 )
 
 [node name="BrokenCollumn" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 387.611, 63.216 )
@@ -586,23 +601,3 @@ position = Vector2( 360.414, 243.214 )
 
 [node name="BrokenCollumn6" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( -88.5986, 400.012 )
-
-[node name="SpawnManager" parent="." instance=ExtResource( 6 )]
-Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 2
-}
-
-[node name="PlayerSpawn" parent="SpawnManager" index="0"]
-position = Vector2( 91, 55 )
-
-[node name="SpawnPoint" parent="SpawnManager" instance=ExtResource( 1 )]
-position = Vector2( 14, 18 )
-
-[node name="SpawnPoint2" parent="SpawnManager" instance=ExtResource( 1 )]
-position = Vector2( 62, 134 )
-
-[node name="SpawnPoint3" parent="SpawnManager" instance=ExtResource( 1 )]
-position = Vector2( 230, 78 )
-
-[editable path="SpawnManager"]

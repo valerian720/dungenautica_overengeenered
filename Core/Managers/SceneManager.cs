@@ -8,7 +8,7 @@ namespace SibGameJam2021.Core.Managers
     public class SceneManager
     {
         private static readonly Dictionary<string, PackedScene> _levels = new Dictionary<string, PackedScene>();
-        private Node _currentSceneInstance = null;
+        private Level _currentLevel = null;
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
@@ -61,9 +61,9 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadMainMenu()
         {
-            _currentSceneInstance.RemoveChild(GameManager.Instance.Player);
-            _currentSceneInstance.QueueFree();
-            _currentSceneInstance = null;
+            _currentLevel.RemovePlayer();
+            _currentLevel.QueueFree();
+            _currentLevel = null;
 
             _tree.Root.RemoveChild(_uiManager);
             _tree.Root.AddChild(_mainMenu);
@@ -77,20 +77,21 @@ namespace SibGameJam2021.Core.Managers
 
         private void LoadLevel(Node level)
         {
-            if (_currentSceneInstance == null)
+            if (_currentLevel == null)
             {
                 _tree.Root.RemoveChild(_mainMenu);
                 _tree.Root.AddChild(_uiManager);
             }
             else
             {
-                _currentSceneInstance.RemoveChild(GameManager.Instance.Player);
-                _currentSceneInstance.QueueFree();
+                _currentLevel.RemovePlayer();
+                _currentLevel.QueueFree();
             }
 
-            _currentSceneInstance = level;
-            _currentSceneInstance.AddChild(GameManager.Instance.Player);
-            _tree.Root.AddChild(_currentSceneInstance);
+            _currentLevel = (Level)level;
+            _tree.Root.AddChild(_currentLevel);
+            _currentLevel.SpawnPlayer();
+
             _uiManager.ToggleHUD(true);
         }
     }

@@ -9,8 +9,6 @@ public class WeaponBase : Node2D
 
     private Node2D _muzzlePoint;
 
-    private Node2D _world;
-
     static WeaponBase()
     {
         Bullet = GD.Load<PackedScene>("res://Assets/Prefabs/Bullet.tscn");
@@ -27,7 +25,7 @@ public class WeaponBase : Node2D
 
     public virtual int AmmoPerShot { get; private set; } = 1;
     public virtual int BulletSpeed { get; private set; } = 200;
-    public virtual int Damage { get; private set; } = 30;
+    public virtual int Damage { get; private set; } = 35;
     public virtual string GunDescription { get; private set; } = "an abomination";
     public virtual string GunName { get; private set; } = "XYN";
     public virtual int MagSize { get; private set; } = 30;
@@ -47,11 +45,6 @@ public class WeaponBase : Node2D
         _muzzlePoint = GetNode<Node2D>("Muzzle");
     }
 
-    public override void _EnterTree()
-    {
-        _world = GetTree().Root.GetNode<Node2D>("World");
-    }
-
     public void Reload()
     {
         // сразу идет перезарядка на фулл без наказания в виде убывания запаса патронов
@@ -62,10 +55,11 @@ public class WeaponBase : Node2D
     {
         var bullet = (Bullet)Bullet.Instance();
 
-        _world.AddChild(bullet);
-
         bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
         bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
         bullet.Speed = BulletSpeed;
+        bullet.Damage = Damage;
+
+        GetParent().GetParent().AddChild(bullet);
     }
 }

@@ -12,6 +12,8 @@ namespace SibGameJam2021.Core
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 
+        public float Damage { get; set; }
+
         public override void _PhysicsProcess(float delta)
         {
             var info = MoveAndCollide(Direction * Speed * delta);
