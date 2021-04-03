@@ -228,7 +228,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 19
+frame = 36
 
 [node name="GunSlot" parent="." instance=ExtResource( 3 )]
 position = Vector2( -0.157715, -3.10006 )
