@@ -5,11 +5,17 @@ namespace SibGameJam2021.Core
 {
     public class Player : KinematicBody2D
     {
-        private const int ACCELERATION = 600;
-        private const int DMG_PER_HIT = 10;
-        private const int FRICTION = 700;
-        private const int MAX_HEALTH = 100;
-        private const int MAX_SPEED = 80;
+        [Export]
+        private int ACCELERATION = 600;
+        [Export]
+        private int GET_DMG_PER_HIT = 10;
+        [Export]
+        private int FRICTION = 700;
+        [Export]
+        private int MAX_HEALTH = 100;
+        [Export]
+        private int MAX_SPEED = 80;
+
         private int _сurrentHealth;
 
         private AnimationPlayer animationPlayer = null;
@@ -85,7 +91,7 @@ namespace SibGameJam2021.Core
         {
             if (body.Name.IndexOf("Enemy") == 0)
             {
-                kill();
+                DealDmg();
             }
 
             //GD.Print(body.Name);
@@ -93,7 +99,7 @@ namespace SibGameJam2021.Core
 
         private void DealDmg()
         {
-            CurrentHealth -= DMG_PER_HIT;
+            CurrentHealth -= GET_DMG_PER_HIT;
 
             if (CurrentHealth == 0)
             {

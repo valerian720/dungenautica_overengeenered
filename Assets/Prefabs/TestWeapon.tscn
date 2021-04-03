@@ -8,10 +8,10 @@
 script = ExtResource( 2 )
 
 [node name="WeaponBody" type="Sprite" parent="."]
-position = Vector2( 4.73269, -0.213898 )
-scale = Vector2( 0.0182754, 0.00467915 )
+position = Vector2( 8.25473, -0.0154737 )
+scale = Vector2( 0.032, 0.005 )
 texture = SubResource( 1 )
 
 [node name="Muzzle" type="Node2D" parent="."]
-position = Vector2( 9.39566, -0.065079 )
+position = Vector2( 15.807, 0 )
 scale = Vector2( 0.0182754, 0.00467915 )

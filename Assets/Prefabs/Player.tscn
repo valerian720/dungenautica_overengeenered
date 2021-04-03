@@ -207,6 +207,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
 [sub_resource type="AnimationNodeStateMachine" id=23]
+resource_local_to_scene = true
 states/Idle/node = SubResource( 15 )
 states/Idle/position = Vector2( 431, 112 )
 states/Run/node = SubResource( 20 )
@@ -252,8 +253,8 @@ anims/RunUp = SubResource( 10 )
 tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 24 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Run/blend_position = Vector2( 0.142319, -0.203361 )
+parameters/Idle/blend_position = Vector2( 0.0980788, -0.521552 )
+parameters/Run/blend_position = Vector2( 0.0677452, 0.17069 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
