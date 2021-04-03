@@ -13,11 +13,6 @@ namespace SibGameJam2021.Core
         {
         }
 
-        public  void ApplyImpulse(Vector2 velocity)
-        {
-            _velocity += velocity;
-        }
-
         public override void _PhysicsProcess(float delta)
         {
             // получение вектора движения игрока
@@ -57,6 +52,11 @@ namespace SibGameJam2021.Core
             base._Ready();
 
             gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
+        }
+
+        public void ApplyImpulse(Vector2 velocity)
+        {
+            _velocity += velocity;
         }
 
         protected override void Die()
