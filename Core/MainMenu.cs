@@ -12,9 +12,10 @@ namespace SibGameJam2021.Core
 
         private static readonly string[] DisplayModesNames = { "Windowed", "Borderless Fullscreen", "Fullscreen" };
 
+        private static readonly DynamicFont Font = new DynamicFont();
+
         private static readonly Vector2[] Resolutions =
         {
-            new Vector2(320, 180),
             new Vector2(1024, 576),
             new Vector2(1280, 720),
             new Vector2(1366, 768),
@@ -26,40 +27,19 @@ namespace SibGameJam2021.Core
         private static readonly string[] ResolutionsNames = Resolutions.Select(x => $"{(int)x.x}x{(int)x.y}").ToArray();
 
         private OptionButton _displayModeOption;
-        private int _firstElemet = 0;
+
         private ValueSlider _masterVolumeSlider;
-        private int _minArgumentToConsoleCount = 2;
+
         private OptionButton _resolutionsOption;
+
         private Settings _settings;
+
         private ConfirmationDialog _settingsWindow;
 
-        public void _on_ConsoleInput_text_entered(string text)
+        static MainMenu()
         {
-            GD.Print(text);
-
-            string[] splittedText = text.Split(" ");
-
-            if (splittedText.Length >= _minArgumentToConsoleCount)
-            {
-                switch (splittedText[_firstElemet])
-                {
-                    case "lvl":
-                        splittedText[_firstElemet] = "";
-                        string levelName = string.Join(" ", splittedText);
-                        try
-                        {
-                            GameManager.Instance.SceneManager.LoadLevel(levelName.Substr(1, levelName.Length - 1));
-                        }
-                        catch
-                        {
-                            throw;
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-            }
+            Font.FontData = ResourceLoader.Load<DynamicFontData>("res://Assets/Fonts/Pixel/Pixel-Regular.ttf");
+            Font.Size = 10;
         }
 
         public void _on_PlayButton_pressed()
@@ -101,10 +81,16 @@ namespace SibGameJam2021.Core
         public override void _Ready()
         {
             _settingsWindow = GetNode<ConfirmationDialog>("SettingsWindow");
+
             _settingsWindow.Connect("confirmed", this, nameof(_on_SettingsWindow_confirmed));
-            _settingsWindow.GetOk().Text = "Apply";
             _settingsWindow.GetCancel().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
             _settingsWindow.GetCloseButton().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
+
+            _settingsWindow.GetOk().Text = "Apply";
+            _settingsWindow.GetLabel().AddFontOverride("font", Font);
+            _settingsWindow.GetOk().AddFontOverride("font", Font);
+            _settingsWindow.GetCancel().AddFontOverride("font", Font);
+            _settingsWindow.GetCloseButton().AddFontOverride("font", Font);
 
             _resolutionsOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/ResolutionOptionButton");
             _displayModeOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/DisplayModeOptionButton");

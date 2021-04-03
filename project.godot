@@ -19,6 +19,10 @@ config/name="SibGameJam2021"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://Assets/Icons/icon.png"
 
+[autoload]
+
+DebugManager="*res://Scenes/DebugManager.tscn"
+
 [display]
 
 window/size/width=320
