@@ -64,7 +64,6 @@ namespace SibGameJam2021.Core.Enemies
             if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
             {
                 // обновление анимаций моба если игрок входит в определенный радиус
-                GD.Print((player.Position - Position).Normalized());
                 UpdateAnimationTreeState((player.Position - Position).Normalized());
             }
         }
