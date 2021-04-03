@@ -1,25 +1,88 @@
 using Godot;
+using SibGameJam2021.Core;
 using SibGameJam2021.Core.Managers;
 
 public class Enemy : KinematicBody2D
 {
     public SpawnManager SpawnManager { get; set; }
+    
+    private int _сurrentHealth;
+    [Export]
+    private int MAX_HEALTH = 100;
 
+    [Export]
+    private int GET_DMG_PER_HIT = 30;
+
+    // AI
+    [Export]
+    private float ActivationRadius = 300;
+    [Export]
+    private float SightActivationRadius = 350;
+    //
+
+    public Enemy()
+    {
+        CurrentHealth = MAX_HEALTH;
+    }
+
+    public int CurrentHealth
+    {
+        get { return _сurrentHealth; }
+
+        private set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
+    }
 
     public override void _PhysicsProcess(float delta)
     {
         var player = GameManager.Instance.Player;
 
-        Position += (player.Position - Position) / 50;
+        UpdatePosition(player);
 
         direction = (player.Position - Position).Normalized();
-        UpdateAnimationTreeState();
+        
+    }
+
+    virtual public void UpdatePosition(Player player)
+    {
+        if (player.Position.DistanceSquaredTo(Position) < ActivationRadius* ActivationRadius)
+        {
+            // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
+            Position += (player.Position - Position) / 50;
+            SetAnimationRun();
+        }
+        else 
+        {
+            SetAnimationIdle();
+        }
+    }
+    virtual public void UpdateAnimation(Player player)
+    {
+        if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
+        {
+            // обновление анимаций моба если игрок входит в определенный радиус
+            UpdateAnimationTreeState();
+        }
     }
 
     private void _on_Area2D_body_entered(Node body)
     {
-        QueueFree();
+        
+        DealDmg();
+    }
 
+    private void DealDmg()
+    {
+        CurrentHealth -= GET_DMG_PER_HIT;
+        SetAnimationHurt();
+
+        if (CurrentHealth == 0)
+        {
+            Kill();
+        }
+    }
+    private void Kill()
+    {
+        QueueFree();
         SpawnManager.EnemiesAlive--;
     }
 
@@ -35,6 +98,8 @@ public class Enemy : KinematicBody2D
          animationState = animationTree.Get("parameters/playback") as AnimationNodeStateMachinePlayback; // da
 
         animationTree.Active = true;
+
+        SetAnimationRun(); // TODO
     }
 
     private void UpdateAnimationTreeState()

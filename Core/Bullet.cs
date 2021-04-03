@@ -4,7 +4,8 @@ namespace SibGameJam2021.Core
 {
     public class Bullet : KinematicBody2D
     {
-        private const float LifeTime = 10f;
+        [Export]
+        public float LifeTime = 10f;
 
         private Timer _timer = new Timer();
 

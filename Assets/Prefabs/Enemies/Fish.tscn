@@ -1,7 +1,7 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Assets/Textures/Enemy/fish.png" type="Texture" id=1]
-[ext_resource path="res://Core/Enemy/Enemy.cs" type="Script" id=2]
+[ext_resource path="res://Core/Enemy/Fish.cs" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.18719
@@ -271,70 +271,149 @@ tracks/0/keys = {
 "values": [ 52, 53, 54, 55, 52 ]
 }
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=19]
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "attack_right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "attack_up"
 
 [sub_resource type="AnimationNodeAnimation" id=21]
-animation = "idle_up"
+animation = "attack_down"
 
 [sub_resource type="AnimationNodeAnimation" id=22]
-animation = "idle_right"
+animation = "attack_left"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
-animation = "idle_left"
-
-[sub_resource type="AnimationNodeAnimation" id=24]
-animation = "idle_down"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=25]
-blend_point_0/node = SubResource( 21 )
-blend_point_0/pos = Vector2( 0, 1.1 )
-blend_point_1/node = SubResource( 22 )
-blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 23 )
-blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 24 )
-blend_point_3/pos = Vector2( 0, -1.1 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 20 )
+blend_point_1/pos = Vector2( 0, -1.1 )
+blend_point_2/node = SubResource( 21 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = Vector2( -1, 0 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "hurt_up"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "hurt_right"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "hurt_down"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "hurt_left"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeBlendSpace2D" id=28]
+blend_point_0/node = SubResource( 24 )
+blend_point_0/pos = Vector2( 0, -1.1 )
+blend_point_1/node = SubResource( 25 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 26 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 27 )
+blend_point_3/pos = Vector2( -1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "idle_up"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "idle_right"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "idle_left"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "idle_down"
 
-[sub_resource type="AnimationNodeStateMachine" id=35]
-states/Attack/node = SubResource( 19 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=33]
+blend_point_0/node = SubResource( 29 )
+blend_point_0/pos = Vector2( 0, -1.1 )
+blend_point_1/node = SubResource( 30 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 31 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 32 )
+blend_point_3/pos = Vector2( 0, 1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "run_up"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "run_right"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "run_down"
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "run_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=38]
+blend_point_0/node = SubResource( 34 )
+blend_point_0/pos = Vector2( 0, -1.1 )
+blend_point_1/node = SubResource( 35 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 36 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 37 )
+blend_point_3/pos = Vector2( -1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachine" id=48]
+states/Attack/node = SubResource( 23 )
 states/Attack/position = Vector2( 313, 159 )
-states/Hurt/node = SubResource( 20 )
+states/Hurt/node = SubResource( 28 )
 states/Hurt/position = Vector2( 506, 28 )
-states/Idle/node = SubResource( 25 )
+states/Idle/node = SubResource( 33 )
 states/Idle/position = Vector2( 699, 159 )
-states/Run/node = SubResource( 26 )
+states/Run/node = SubResource( 38 )
 states/Run/position = Vector2( 506, 112 )
-transitions = [ "Idle", "Hurt", SubResource( 27 ), "Attack", "Hurt", SubResource( 28 ), "Hurt", "Run", SubResource( 29 ), "Idle", "Attack", SubResource( 30 ), "Idle", "Run", SubResource( 31 ), "Attack", "Run", SubResource( 32 ), "Run", "Attack", SubResource( 33 ), "Run", "Idle", SubResource( 34 ) ]
+transitions = [ "Idle", "Hurt", SubResource( 39 ), "Attack", "Hurt", SubResource( 40 ), "Hurt", "Run", SubResource( 41 ), "Idle", "Attack", SubResource( 42 ), "Idle", "Run", SubResource( 43 ), "Attack", "Run", SubResource( 44 ), "Run", "Attack", SubResource( 45 ), "Run", "Idle", SubResource( 46 ), "Run", "Hurt", SubResource( 47 ) ]
+start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=36]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=49]
 
 [node name="EnemyAngler" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
+MAX_HEALTH = 50
+ActivationRadius = 20.0
+SightActivationRadius = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -345,7 +424,6 @@ shape = SubResource( 1 )
 position = Vector2( -0.148643, 0.148651 )
 texture = ExtResource( 1 )
 hframes = 76
-frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -377,12 +455,11 @@ anims/run_right = SubResource( 17 )
 anims/run_up = SubResource( 18 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Animations"]
-tree_root = SubResource( 35 )
+tree_root = SubResource( 48 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 36 )
-parameters/Attack/blend_position = Vector2( 0.696663, -0.208621 )
-parameters/Hurt/blend_position = Vector2( 0.510617, -0.322414 )
-parameters/Idle/blend_position = Vector2( 0.534884, -0.237069 )
-parameters/Run/blend_position = Vector2( 0.421638, -0.37931 )
+parameters/playback = SubResource( 49 )
+parameters/Attack/blend_position = Vector2( 0.660263, -0.151724 )
+parameters/Hurt/blend_position = Vector2( 0.708797, -0.180172 )
+parameters/Idle/blend_position = Vector2( 0.638018, -0.284483 )
+parameters/Run/blend_position = Vector2( 0.619818, -0.199138 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
