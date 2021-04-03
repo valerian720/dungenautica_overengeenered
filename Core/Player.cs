@@ -64,6 +64,7 @@ namespace SibGameJam2021.Core
             if (body.Name.IndexOf("Enemy") == 0)
             {
                 GetDamage((body as Enemy).Damage);
+                _animationState.Travel("Hurt");
             }
         }
     }
