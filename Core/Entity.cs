@@ -38,7 +38,7 @@ namespace SibGameJam2021.Core
             _animationTree.Active = true;
         }
 
-        public void GetDamage(float damage)
+        public virtual void GetDamage(float damage)
         {
             CurrentHealth -= damage;
 

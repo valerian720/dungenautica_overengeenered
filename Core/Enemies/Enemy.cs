@@ -5,6 +5,8 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
+        private Healthbar _healthbar;
+
         // AI
         [Export]
         private float ActivationRadius = 300;
@@ -28,6 +30,20 @@ namespace SibGameJam2021.Core.Enemies
             UpdatePosition(player);
 
             var direction = (player.Position - Position).Normalized();
+        }
+
+        public override void _Ready()
+        {
+            base._Ready();
+
+            _healthbar = GetNode<Healthbar>("Healthbar");
+        }
+
+        public override void GetDamage(float damage)
+        {
+            base.GetDamage(damage);
+
+            _healthbar.UpdateHealth(CurrentHealth, MAX_HEALTH);
         }
 
         virtual public void UpdatePosition(Player player)

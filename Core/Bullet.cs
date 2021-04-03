@@ -9,10 +9,9 @@ namespace SibGameJam2021.Core
 
         private Timer _timer = new Timer();
 
+        public float Damage { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
-
-        public float Damage { get; set; }
 
         public override void _PhysicsProcess(float delta)
         {
