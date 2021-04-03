@@ -22,6 +22,8 @@ namespace SibGameJam2021.Core
         {
         }
 
+        public int Coins { get; set; } = 0;
+
         public override void _Input(InputEvent inputEvent)
         {
             if (inputEvent.IsActionPressed("ui_fire"))
