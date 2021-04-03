@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core

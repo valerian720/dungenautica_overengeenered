@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/barHorizontal_green.png-81ba382bc6a6aec6d1757836c8aa1adb.stex"
+path="res://.import/Vase.png-d1f6e8e3154933de7384f172eb59499c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/UI/barHorizontal_green.png"
-dest_files=[ "res://.import/barHorizontal_green.png-81ba382bc6a6aec6d1757836c8aa1adb.stex" ]
+source_file="res://Assets/Textures/World/Vase.png"
+dest_files=[ "res://.import/Vase.png-d1f6e8e3154933de7384f172eb59499c.stex" ]
 
 [params]
 

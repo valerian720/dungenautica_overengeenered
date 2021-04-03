@@ -1,11 +1,13 @@
 using Godot;
 using SibGameJam2021.Core.Managers;
+using SibGameJam2021.Core.UI;
+using SibGameJam2021.Core.Weapons;
 
 namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
-        private Healthbar _healthbar;
+        private HealthBar _healthbar;
 
         // AI
         [Export]
@@ -36,7 +38,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             base._Ready();
 
-            _healthbar = GetNode<Healthbar>("Healthbar");
+            _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
         public override void GetDamage(float damage)
@@ -44,6 +46,15 @@ namespace SibGameJam2021.Core.Enemies
             base.GetDamage(damage);
 
             _healthbar.UpdateHealth(CurrentHealth, MAX_HEALTH);
+        }
+
+        virtual public void UpdateAnimation(Player player)
+        {
+            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
+            {
+                // обновление анимаций моба если игрок входит в определенный радиус
+                UpdateAnimationTreeState((player.Position - Position).Normalized());
+            }
         }
 
         virtual public void UpdatePosition(Player player)
@@ -57,14 +68,6 @@ namespace SibGameJam2021.Core.Enemies
             else
             {
                 SetAnimationIdle();
-            }
-        }
-        virtual public void UpdateAnimation(Player player)
-        {
-            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
-            {
-                // обновление анимаций моба если игрок входит в определенный радиус
-                UpdateAnimationTreeState((player.Position - Position).Normalized());
             }
         }
 

@@ -2,44 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using SibGameJam2021.Core.UI;
+using SibGameJam2021.Core.Utility;
 
 namespace SibGameJam2021.Core.Managers
 {
     public class SceneManager
     {
-        private static readonly Dictionary<string, PackedScene> _levels = new Dictionary<string, PackedScene>();
+        private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels");
         private Level _currentLevel = null;
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
-
-        static SceneManager()
-        {
-            var dir = new Directory();
-            var path = "res://Scenes/Levels";
-
-            if (dir.Open(path) == Error.Ok)
-            {
-                dir.ListDirBegin();
-                var filename = dir.GetNext();
-
-                while (!string.IsNullOrEmpty(filename))
-                {
-                    if (dir.CurrentIsDir())
-                    {
-                        filename = dir.GetNext();
-                        continue;
-                    }
-
-                    //GD.Print(filename);
-
-                    var level = GD.Load<PackedScene>($"{path}/{filename}");
-                    _levels.Add(System.IO.Path.GetFileNameWithoutExtension(filename), level);
-
-                    filename = dir.GetNext();
-                }
-            }
-        }
 
         public SceneManager()
         {
@@ -89,8 +63,8 @@ namespace SibGameJam2021.Core.Managers
             }
 
             _currentLevel = (Level)level;
-            _tree.Root.AddChild(_currentLevel);
-            _currentLevel.SpawnPlayer();
+            _tree.Root.CallDeferred("add_child", _currentLevel);
+            _currentLevel.CallDeferred(nameof(_currentLevel.SpawnPlayer));
 
             _uiManager.ToggleHUD(true);
         }

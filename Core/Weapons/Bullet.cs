@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace SibGameJam2021.Core
+namespace SibGameJam2021.Core.Weapons
 {
     public class Bullet : KinematicBody2D
     {
