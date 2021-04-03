@@ -29,7 +29,7 @@ namespace SibGameJam2021.Core.Enemies
 
             UpdatePosition(player);
 
-            var direction = (player.Position - Position).Normalized();
+            UpdateAnimation(player);
         }
 
         public override void _Ready()
@@ -57,6 +57,15 @@ namespace SibGameJam2021.Core.Enemies
             else
             {
                 SetAnimationIdle();
+            }
+        }
+        virtual public void UpdateAnimation(Player player)
+        {
+            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
+            {
+                // обновление анимаций моба если игрок входит в определенный радиус
+                GD.Print((player.Position - Position).Normalized());
+                UpdateAnimationTreeState((player.Position - Position).Normalized());
             }
         }
 

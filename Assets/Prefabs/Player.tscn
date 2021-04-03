@@ -249,6 +249,7 @@ shape = SubResource( 2 )
 [node name="Animations" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
 anims/AttackDown = SubResource( 3 )
 anims/IdleDown = SubResource( 4 )
 anims/IdleLeft = SubResource( 5 )
@@ -263,6 +264,6 @@ anims/RunUp = SubResource( 11 )
 tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 25 )
-parameters/Idle/blend_position = Vector2( 0.0980788, -0.521552 )
+parameters/Idle/blend_position = Vector2( 0.00101113, -0.0572255 )
 parameters/Run/blend_position = Vector2( 0.0677452, 0.17069 )
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
