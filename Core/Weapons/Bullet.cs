@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace SibGameJam2021.Core
+namespace SibGameJam2021.Core.Weapons
 {
     public class Bullet : KinematicBody2D
     {
@@ -9,6 +9,7 @@ namespace SibGameJam2021.Core
 
         private Timer _timer = new Timer();
 
+        public float Damage { get; set; }
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 
