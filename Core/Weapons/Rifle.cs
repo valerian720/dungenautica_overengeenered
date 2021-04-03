@@ -31,7 +31,7 @@ namespace SibGameJam2021.Core.Weapons
             bullet.Speed = BulletSpeed;
             bullet.Damage = Damage;
 
-            GetParent().GetParent().AddChild(bullet);
+            GetParent().GetParent().GetParent().AddChild(bullet);
         }
     }
 }

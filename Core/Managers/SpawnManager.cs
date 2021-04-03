@@ -4,12 +4,13 @@ using System.Linq;
 using Godot;
 using SibGameJam2021.Core.Enemies;
 using SibGameJam2021.Core.Spawn;
+using SibGameJam2021.Core.Utility;
 
 namespace SibGameJam2021.Core.Managers
 {
     public class SpawnManager : YSort
     {
-        private static readonly List<PackedScene> _enemiesScenes = new List<PackedScene>();
+        private static readonly List<PackedScene> _enemiesScenes = PrefabHelper.LoadPrefabsList("res://Assets/Prefabs/Enemies");
 
         private int _enemiesAlive = 0;
 
@@ -20,34 +21,6 @@ namespace SibGameJam2021.Core.Managers
         private List<SpawnPoint> _spawnpoints = new List<SpawnPoint>();
 
         private Timer _timer = new Timer();
-
-        static SpawnManager()
-        {
-            var dir = new Directory();
-            var path = "res://Assets/Prefabs/Enemies";
-
-            if (dir.Open(path) == Error.Ok)
-            {
-                dir.ListDirBegin();
-                var filename = dir.GetNext();
-
-                while (!string.IsNullOrEmpty(filename))
-                {
-                    if (dir.CurrentIsDir())
-                    {
-                        filename = dir.GetNext();
-                        continue;
-                    }
-
-                    //GD.Print(filename);
-
-                    var enemyScene = GD.Load<PackedScene>($"{path}/{filename}");
-                    _enemiesScenes.Add(enemyScene);
-
-                    filename = dir.GetNext();
-                }
-            }
-        }
 
         public SpawnManager()
         {
