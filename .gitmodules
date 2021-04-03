@@ -1,0 +1,3 @@
+[submodule "addons/godot_2d_navmesh_generator"]
+	path = addons/godot_2d_navmesh_generator
+	url = https://github.com/samuelbigos/godot_2d_navmesh_generator
