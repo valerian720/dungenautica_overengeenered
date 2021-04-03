@@ -1,4 +1,4 @@
-﻿namespace SibGameJam2021.Core
+﻿namespace SibGameJam2021.Core.UI
 {
     public class Settings
     {
