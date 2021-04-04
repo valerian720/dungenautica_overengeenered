@@ -10,6 +10,7 @@ namespace SibGameJam2021.Core.World
         private AnimatedSprite _animatedSprite;
         private Area2D _area2D;
         private CollisionShape2D _collisionShape;
+        private CollisionShape2D _enterCollisionShape;
 
         public override void _Ready()
         {
@@ -20,6 +21,10 @@ namespace SibGameJam2021.Core.World
             _area2D.Connect("body_entered", this, nameof(OnBodyEntered));
 
             _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+            _enterCollisionShape = GetNode<CollisionShape2D>("Area2D/CollisionShape2D");
+
+            _collisionShape.SetDeferred("disabled", false);
+            _enterCollisionShape.SetDeferred("disabled", true);
         }
 
         public void OnBodyEntered(Node body)
@@ -66,6 +71,7 @@ namespace SibGameJam2021.Core.World
             CallDeferred("add_child", loot);
 
             _collisionShape.SetDeferred("disabled", true);
+            _enterCollisionShape.SetDeferred("disabled", false);
         }
     }
 }
