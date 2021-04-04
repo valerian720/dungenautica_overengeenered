@@ -2,19 +2,19 @@
 
 namespace SibGameJam2021.Core.UI
 {
-    public class Healthbar : Node2D
+    public class HealthBar : Node2D
     {
         private static readonly Texture _greeenBar;
-        private static readonly Texture _redBar;
+        private static readonly Texture _orangeBar;
         private static readonly Texture _yellowBar;
 
         private TextureProgress _textureProgress;
 
-        static Healthbar()
+        static HealthBar()
         {
-            _greeenBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/barHorizontal_green.png");
-            _redBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/barHorizontal_red.png");
-            _yellowBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/barHorizontal_yellow.png");
+            _greeenBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/GreenBar.png");
+            _orangeBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/OrangeBar.png");
+            _yellowBar = ResourceLoader.Load<Texture>("res://Assets/Textures/UI/YellowBar.png");
         }
 
         public override void _Ready()
@@ -26,7 +26,7 @@ namespace SibGameJam2021.Core.UI
         {
             _textureProgress.Value = currentHealth;
 
-            _textureProgress.TextureProgress_ = currentHealth < maxHealth * 0.7f ? currentHealth < maxHealth * 0.35f ? _redBar : _yellowBar : _greeenBar;
+            _textureProgress.TextureProgress_ = currentHealth < maxHealth * 0.7f ? currentHealth < maxHealth * 0.35f ? _orangeBar : _yellowBar : _greeenBar;
         }
     }
 }
