@@ -31,7 +31,7 @@ namespace SibGameJam2021.Core.Weapons
             protected set
             {
                 _ammoCount = value > 0 ? (value < MagSize ? value : MagSize) : 0;
-                GameManager.Instance.UIManager.UpdateAmmoCount(AmmoCount);
+                GameManager.Instance.UIManager.UpdateAmmoCount(_ammoCount);
             }
         }
 

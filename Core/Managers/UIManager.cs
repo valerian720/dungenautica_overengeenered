@@ -92,7 +92,13 @@ namespace SibGameJam2021.Core.Managers
 
         public void UpdateAmmoCount(int count)
         {
-            ((AtlasTexture)_ammoTexture.Texture).Region = new Rect2(0, 0, count * AmmoBubbleSize, AmmoBubbleSize);
+            var rectSize = new Vector2(count * AmmoBubbleSize, AmmoBubbleSize);
+
+            _ammoTexture.RectSize = rectSize;
+
+            var rect = new Rect2(0, 0, rectSize);
+
+            ((AtlasTexture)_ammoTexture.Texture).Region = rect;
         }
 
         public void UpdateBounceBoost(int value)
