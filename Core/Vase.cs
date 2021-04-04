@@ -36,7 +36,7 @@ namespace SibGameJam2021.Core
             var coin = CoinScene.Instance();
             CallDeferred("add_child", coin);
 
-            bullet.QueueFree();
+            bullet.Pop();
         }
     }
 }
