@@ -586,7 +586,7 @@ position = Vector2( -527.005, -20.0613 )
 ActivationRadius = 1.0
 
 [node name="EnemyAngler" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( -337.117, -13.2091 )
+position = Vector2( -335.433, -14.3316 )
 ActivationRadius = 1.0
 
 [node name="BrokenCollumn2" parent="YSort" instance=ExtResource( 9 )]
