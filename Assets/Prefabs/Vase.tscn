@@ -45,6 +45,7 @@ position = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0.148651, 17.0949 )
 monitorable = false
 collision_layer = 0
 collision_mask = 8
