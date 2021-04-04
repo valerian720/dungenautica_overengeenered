@@ -186,6 +186,7 @@ namespace SibGameJam2021.Core
 
                 // переключение дерева анимации на бег
                 _animationState.Travel("Run");
+                audioPlayer.Stream = player_hurt;
 
                 // применение трения к игроку
                 _velocity = _velocity.MoveToward(inputVector * MaxSpeed * Mathf.Round(1f + SpeedBoost), Acceleration * delta);
@@ -299,6 +300,7 @@ namespace SibGameJam2021.Core
                 GetDamage((area.GetParent() as Enemy).Damage);
                 _animationState.Travel("Hurt");
                 audioPlayer.Stream = player_hurt;
+                audioPlayer.Playing = true;
             }
         }
 

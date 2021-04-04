@@ -7,6 +7,7 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
+        public AudioStreamPlayer2D audioPlayer = null;
         private Timer _attackDurationTimer = new Timer();
         private CollisionShape2D _attackShape;
         private HealthBar _healthbar;
@@ -52,6 +53,10 @@ namespace SibGameJam2021.Core.Enemies
 
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             AddChild(movementOnNav2D);
+
+            audioPlayer = new AudioStreamPlayer2D();
+            AddChild(audioPlayer);
+            audioPlayer.Playing = true;
         }
 
         public override void GetDamage(float damage)
@@ -95,6 +100,16 @@ namespace SibGameJam2021.Core.Enemies
             }
         }
 
+        virtual protected void Attack()
+        {
+            SetAnimationAttack();
+
+            _attackShape.SetDeferred("disabled", false);
+            _attackDurationTimer.Start(0.5f);
+
+            // here
+        }
+
         protected override void Die()
         {
             QueueFree();
@@ -111,16 +126,6 @@ namespace SibGameJam2021.Core.Enemies
             }
 
             GetDamage(bullet.Pop());
-        }
-
-        private void Attack()
-        {
-            SetAnimationAttack();
-
-            _attackShape.SetDeferred("disabled", false);
-            _attackDurationTimer.Start(0.5f);
-
-            // here
         }
 
         private void OnAttackDurationEnded()
