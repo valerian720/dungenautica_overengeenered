@@ -39,7 +39,7 @@ namespace SibGameJam2021.Core.Managers
             {
                 _enemiesAlive = value;
 
-                if (_enemiesAlive <= 0)
+                if (_enemiesAlive <= 0 && _enemiesToSpawn <= 0)
                 {
                     GD.Print("Level Cleared");
 
