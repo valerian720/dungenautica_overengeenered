@@ -50,6 +50,7 @@ namespace SibGameJam2021.Core.Enemies
             base.GetDamage(damage);
 
             _healthbar.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            SetAnimationHurt();
         }
 
         virtual public void UpdateAnimation(Player player)
@@ -69,7 +70,7 @@ namespace SibGameJam2021.Core.Enemies
                 // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
                 //Position += (player.Position - Position) / 50;
                 //this.MoveAndCollide(); TODO
-                FollowPath(this.MAX_SPEED*delta, player.Position);
+                FollowPath(player.GlobalPosition);
                 SetAnimationRun();
             }
             else
@@ -78,13 +79,13 @@ namespace SibGameJam2021.Core.Enemies
             }
         }
         //
-        private void FollowPath(float moveDistance, Vector2 destiny)
+        private void FollowPath( Vector2 destiny)
         {
             // https://youtu.be/0fPOt0Jw52s
-            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
-            GD.Print(nextPoint);
-            
-            Position = Position.MoveToward(nextPoint, moveDistance);
+            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(GlobalPosition, destiny);
+            var velocity = (nextPoint - GlobalPosition).Normalized() * MAX_SPEED;
+
+            MoveAndSlide(velocity);
         }
         //
 

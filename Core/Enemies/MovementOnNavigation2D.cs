@@ -35,7 +35,6 @@ namespace SibGameJam2021.Core.Enemies
 
             // TODO не вызывать кучу раз (на каждом кадре), а вызвать, затем пройти некоторый путь по path, затем пересчитать path
             // или мб добавить просчет пути по таймеру каждую секунду (?)
-            GD.Print(_canCalucate);
             if (_canCalucate)
             {
             try

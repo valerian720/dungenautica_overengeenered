@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/vase_broke.wav-a0d1a75ed568b92fca1ac1a039df05fa.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/vase_broke.wav"
+dest_files=[ "res://.import/vase_broke.wav-a0d1a75ed568b92fca1ac1a039df05fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

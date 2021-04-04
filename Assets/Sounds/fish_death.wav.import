@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fish_death.wav-0cadc97d8de77b028e17eae49123a77a.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/fish_death.wav"
+dest_files=[ "res://.import/fish_death.wav-0cadc97d8de77b028e17eae49123a77a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
