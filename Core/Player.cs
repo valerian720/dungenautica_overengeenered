@@ -255,6 +255,8 @@ namespace SibGameJam2021.Core
             _velocity = Vector2.Zero;
 
             EquipWeapon(0);
+
+            GameManager.Instance.SceneManager.LevelCount = 0;
         }
 
         protected override void Die()

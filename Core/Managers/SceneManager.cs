@@ -14,7 +14,6 @@ namespace SibGameJam2021.Core.Managers
 
         private static PackedScene _shopLevel = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/shop.tscn");
 
-        private int _levelCount;
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
@@ -30,6 +29,8 @@ namespace SibGameJam2021.Core.Managers
         public delegate void OnLevelChange();
 
         public Level CurrentLevel { get; private set; } = null;
+
+        public int LevelCount { get; set; } = 0;
 
         public void LoadDemoLevel()
         {
@@ -67,9 +68,9 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadRandomLevel()
         {
-            _levelCount++;
+            LevelCount++;
 
-            if (_levelCount % _shopLevelInterval == 0)
+            if (LevelCount % _shopLevelInterval == 0)
             {
                 LoadLevel(_shopLevel.Instance());
             }
