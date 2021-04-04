@@ -8,6 +8,7 @@ namespace SibGameJam2021.Core.Enemies
     public class Enemy : Entity
     {
         private HealthBar _healthbar;
+        private MovementOnNavigation2D movementOnNav2D;
 
         // AI
         [Export]
@@ -15,6 +16,8 @@ namespace SibGameJam2021.Core.Enemies
 
         [Export]
         private float SightActivationRadius = 350;
+        [Export]
+        private float StopAtRadius = 5;
 
         public Enemy() : base()
         {
@@ -37,7 +40,7 @@ namespace SibGameJam2021.Core.Enemies
         public override void _Ready()
         {
             base._Ready();
-
+            movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
@@ -63,6 +66,7 @@ namespace SibGameJam2021.Core.Enemies
             {
                 // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
                 Position += (player.Position - Position) / 50;
+                //this.MoveAndCollide(); TODO
                 SetAnimationRun();
             }
             else
