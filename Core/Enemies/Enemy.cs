@@ -8,6 +8,7 @@ namespace SibGameJam2021.Core.Enemies
     public class Enemy : Entity
     {
         private HealthBar _healthbar;
+        private MovementOnNavigation2D movementOnNav2D;
 
         // AI
         [Export]
@@ -15,6 +16,8 @@ namespace SibGameJam2021.Core.Enemies
 
         [Export]
         private float SightActivationRadius = 350;
+        [Export]
+        private float StopAtRadius = 50;
 
         public Enemy() : base()
         {
@@ -29,7 +32,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             var player = GameManager.Instance.Player;
 
-            UpdatePosition(player);
+            UpdatePosition(player, delta);
 
             UpdateAnimation(player);
         }
@@ -37,7 +40,7 @@ namespace SibGameJam2021.Core.Enemies
         public override void _Ready()
         {
             base._Ready();
-
+            movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
@@ -57,12 +60,15 @@ namespace SibGameJam2021.Core.Enemies
             }
         }
 
-        virtual public void UpdatePosition(Player player)
+        virtual public void UpdatePosition(Player player, float delta)
         {
-            if (player.Position.DistanceSquaredTo(Position) < ActivationRadius * ActivationRadius)
+            float distanceSquared = player.Position.DistanceSquaredTo(Position);
+            if ((distanceSquared < ActivationRadius * ActivationRadius) && (distanceSquared > StopAtRadius*StopAtRadius))
             {
                 // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
-                Position += (player.Position - Position) / 50;
+                //Position += (player.Position - Position) / 50;
+                //this.MoveAndCollide(); TODO
+                FollowPath(this.MAX_SPEED*delta, player.Position);
                 SetAnimationRun();
             }
             else
@@ -70,6 +76,16 @@ namespace SibGameJam2021.Core.Enemies
                 SetAnimationIdle();
             }
         }
+        //
+        private void FollowPath(float moveDistance, Vector2 destiny)
+        {
+            // https://youtu.be/0fPOt0Jw52s
+            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
+            GD.Print(nextPoint);
+            
+            Position = Position.MoveToward(nextPoint, moveDistance);
+        }
+        //
 
         protected override void Die()
         {
