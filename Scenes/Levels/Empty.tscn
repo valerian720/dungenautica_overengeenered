@@ -530,8 +530,8 @@ position = Vector2( 115, 10 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 6 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
-ExtResource( 14 ): 2
+ExtResource( 14 ): 2,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1
 }
 
 [node name="SpawnPoint" parent="YSort/SpawnManager" instance=ExtResource( 1 )]

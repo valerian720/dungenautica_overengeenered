@@ -7,18 +7,18 @@ namespace SibGameJam2021.Core
         protected AnimationPlayer _animationPlayer = null;
         protected AnimationNodeStateMachinePlayback _animationState = null;
         protected AnimationTree _animationTree = null;
-        protected float _сurrentHealth;
+        protected float _currentHealth;
 
         public Entity()
         {
-            CurrentHealth = MAX_HEALTH;
+            _currentHealth = MAX_HEALTH;
         }
 
         public virtual float CurrentHealth
         {
-            get { return _сurrentHealth; }
+            get { return _currentHealth; }
 
-            protected set { _сurrentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
+            protected set { _currentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
         }
 
         protected virtual float ACCELERATION { get; } = 600;

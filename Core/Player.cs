@@ -15,12 +15,12 @@ namespace SibGameJam2021.Core
         private const float DashForce = 400;
 
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
-
         private bool _canDash = true;
-
+        private int _coins = 0;
         private WeaponBase _currentWeapon = null;
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
+        private int _lifes = 1;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
@@ -31,7 +31,38 @@ namespace SibGameJam2021.Core
             _dashTimer.Connect("timeout", this, nameof(OnDashTimeout));
         }
 
-        public int Coins { get; set; } = 0;
+        public int Coins
+        {
+            get { return _coins; }
+
+            set
+            {
+                _coins = value;
+                GameManager.Instance.UIManager.UpdateGoldCount(_coins);
+            }
+        }
+
+        public override float CurrentHealth
+        {
+            get { return _currentHealth; }
+
+            protected set
+            {
+                base.CurrentHealth = value;
+                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, MAX_HEALTH);
+            }
+        }
+
+        public int Lifes
+        {
+            get { return _lifes; }
+
+            set
+            {
+                _lifes = value;
+                GameManager.Instance.UIManager.UpdateLifesCount(_lifes);
+            }
+        }
 
         public override void _Input(InputEvent inputEvent)
         {
@@ -105,6 +136,8 @@ namespace SibGameJam2021.Core
 
             _gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
 
+            UpdateHUD();
+
             EquipWeapon();
 
             AddChild(_dashTimer);
@@ -159,6 +192,7 @@ namespace SibGameJam2021.Core
 
             _gunSlot.AddChild(_currentWeapon);
             _currentWeapon.Position = Vector2.Zero;
+            GameManager.Instance.UIManager.UpdateAmmoCount(_currentWeapon.AmmoCount);
         }
 
         private void OnDashTimeout()
@@ -174,6 +208,15 @@ namespace SibGameJam2021.Core
         private void OnReloadBarFinished()
         {
             _currentWeapon.FinishReloading();
+        }
+
+        private void UpdateHUD()
+        {
+            var uiManager = GameManager.Instance.UIManager;
+
+            uiManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            uiManager.UpdateGoldCount(Coins);
+            uiManager.UpdateLifesCount(Lifes);
         }
 
         private void UpdateWeaponPosition()

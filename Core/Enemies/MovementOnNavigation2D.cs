@@ -13,22 +13,31 @@ namespace SibGameJam2021.Core.Enemies
         }
         public Vector2 GetPointTowardsDestiny(Vector2 source, Vector2 destiny)
         {
-            Vector2 ret = source; // по умолчанию остается на месте
+            Vector2 ret = Vector2.Zero; // по умолчанию остается на месте
             // возвращает координаты ближайщей точки по направлению движения
 
             // TODO не вызывать кучу раз (на каждом кадре), а вызвать, затем пройти некоторый путь по path, затем пересчитать path
+            // или мб добавить просчет пути по таймеру каждую секунду (?)
             try
             {
                 path = nav2D.GetSimplePath(source, destiny);
+                 /*
+                GD.Print(path[0]);
+                GD.Print(path.Length);
+
+                GD.Print(source);
+                GD.Print(destiny);
+                GD.Print("========");
+                 */
             }
             catch (Exception e)
             {
                 GD.PrintErr(e);
             }
 
-            if (path.Length>0) // блинблять
+            if (path.Length>1) // блинблять
             {
-                ret = path[0];
+                ret = path[1];
             }
 
             return ret;

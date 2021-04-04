@@ -17,7 +17,7 @@ namespace SibGameJam2021.Core.Enemies
         [Export]
         private float SightActivationRadius = 350;
         [Export]
-        private float StopAtRadius = 5;
+        private float StopAtRadius = 50;
 
         public Enemy() : base()
         {
@@ -32,7 +32,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             var player = GameManager.Instance.Player;
 
-            UpdatePosition(player);
+            UpdatePosition(player, delta);
 
             UpdateAnimation(player);
         }
@@ -60,13 +60,15 @@ namespace SibGameJam2021.Core.Enemies
             }
         }
 
-        virtual public void UpdatePosition(Player player)
+        virtual public void UpdatePosition(Player player, float delta)
         {
-            if (player.Position.DistanceSquaredTo(Position) < ActivationRadius * ActivationRadius)
+            float distanceSquared = player.Position.DistanceSquaredTo(Position);
+            if ((distanceSquared < ActivationRadius * ActivationRadius) && (distanceSquared > StopAtRadius*StopAtRadius))
             {
                 // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
-                Position += (player.Position - Position) / 50;
+                //Position += (player.Position - Position) / 50;
                 //this.MoveAndCollide(); TODO
+                FollowPath(this.MAX_SPEED*delta, player.Position);
                 SetAnimationRun();
             }
             else
@@ -74,6 +76,31 @@ namespace SibGameJam2021.Core.Enemies
                 SetAnimationIdle();
             }
         }
+        //
+        private void FollowPath(float moveDistance, Vector2 destiny)
+        {
+            // https://youtu.be/0fPOt0Jw52s
+            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
+            GD.Print(nextPoint);
+            /* 
+             * известно:
+             * - текущая точка моба
+             * - следующая точка моба
+             * - дистанция которая будет пройдена за кадр
+             * 
+             * найти точку на векторе, исходящему из текущей точки в сторону следующей, уделенному от исходной точки на расстояние
+             * 
+             * решение MoveToward // бля
+             */
+            Position = Position.MoveToward(nextPoint, moveDistance);
+
+            //float distanceToNextPoint = Position.DistanceTo(nextPoint);
+            //if (moveDistance<= distanceToNextPoint && moveDistance>=0.0)
+            //{
+            //    Position = Position.LinearInterpolate(nextPoint, moveDistance*1000 / distanceToNextPoint);
+            //}
+        }
+        //
 
         protected override void Die()
         {

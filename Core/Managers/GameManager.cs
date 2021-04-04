@@ -11,6 +11,8 @@ namespace SibGameJam2021.Core.Managers
 
         public static GameManager Instance { get; } = new GameManager();
 
+        public Level CurrentLevel => SceneManager.CurrentLevel;
+
         public Player Player { get; }
 
         public SceneManager SceneManager { get; } = new SceneManager();
