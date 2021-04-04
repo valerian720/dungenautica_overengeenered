@@ -44,7 +44,7 @@ namespace SibGameJam2021.Core.Weapons
         public virtual float BulletSpeed { get; protected set; } = 300;
 
         [Export]
-        public virtual float Damage { get; protected set; } = 35;
+        public virtual float Damage { get; protected set; } = 25;
 
         [Export]
         public virtual string GunDescription { get; protected set; } = "an abomination";

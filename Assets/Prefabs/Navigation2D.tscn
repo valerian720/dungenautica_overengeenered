@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="Navigation2D" type="Navigation2D"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
