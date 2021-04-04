@@ -19,22 +19,22 @@ namespace SibGameJam2021.Core
         private const float DashDelay = 1;
         private const float DashForce = 400;
 
+        private const float MaxHealthDefault = 100f;
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
         private bool _canDash = true;
         private int _coins = 0;
         private WeaponBase _currentWeapon = null;
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
+        private Area2D _hitbox;
         private int _lifes = 1;
-        private float _maxHealth = 100f;
+        private float _maxHealth = MaxHealthDefault;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
 
-        private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
-
         private AudioStreamPlayer2D audioPlayer = null;
-
+        private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
 
         public Player() : base()
         {
@@ -213,6 +213,9 @@ namespace SibGameJam2021.Core
 
             _gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
 
+            _hitbox = GetNode<Area2D>("Hitbox");
+            _hitbox.Connect("area_entered", this, nameof(OnHitboxAreaEntered));
+
             UpdateHUD();
 
             EquipWeapon();
@@ -231,19 +234,26 @@ namespace SibGameJam2021.Core
             _velocity += velocity;
         }
 
+        public void Reset()
+        {
+            MaxHealth = MaxHealthDefault;
+            CurrentHealth = MaxHealth;
+
+            foreach (var weapon in _weapons)
+            {
+                weapon.FinishReloading();
+            }
+
+            DamageBoost = 0;
+            SpeedBoost = 0;
+            GoldBoost = 0;
+            AmmoBoost = 0;
+            BounceBoost = 0;
+        }
+
         protected override void Die()
         {
             GameManager.Instance.SceneManager.LoadMainMenu();
-        }
-
-        private void _on_Hitbox_body_entered(Node body)
-        {
-            if (body.Name.IndexOf("Enemy") == 0)
-            {
-                GetDamage((body as Enemy).Damage);
-                _animationState.Travel("Hurt");
-                audioPlayer.Stream = player_hurt;
-            }
         }
 
         private void Dash()
@@ -280,6 +290,16 @@ namespace SibGameJam2021.Core
         private void OnDashTimeout()
         {
             _canDash = true;
+        }
+
+        private void OnHitboxAreaEntered(Area2D area)
+        {
+            if (area.Name.Equals("AttackBox"))
+            {
+                GetDamage((area.GetParent() as Enemy).Damage);
+                _animationState.Travel("Hurt");
+                audioPlayer.Stream = player_hurt;
+            }
         }
 
         private void OnLevelChange()

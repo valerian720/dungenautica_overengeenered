@@ -6,7 +6,7 @@ using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.World
 {
-    public class Pedestal : Node2D
+    public class Pedestal : StaticBody2D
     {
         private BoostBase _boost;
         private Node2D _boostSpawn;

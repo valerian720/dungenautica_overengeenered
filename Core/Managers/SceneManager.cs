@@ -11,6 +11,9 @@ namespace SibGameJam2021.Core.Managers
     {
         private const int _shopLevelInterval = 4;
         private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels", new string[] { "empty", "shop" });
+
+        private static PackedScene _shopLevel = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/shop.tscn");
+
         private int _levelCount;
         private MainMenu _mainMenu;
         private SceneTree _tree;
@@ -35,12 +38,24 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadLevel(string levelName)
         {
-            var level = _levels[levelName].Instance();
+            Node level;
+
+            if (levelName == "shop")
+            {
+                level = _shopLevel.Instance();
+            }
+            else
+            {
+                level = _levels[levelName].Instance();
+            }
+
             LoadLevel(level);
         }
 
         public void LoadMainMenu()
         {
+            GameManager.Instance.Player.Reset();
+
             CurrentLevel.RemovePlayer();
             CurrentLevel.QueueFree();
             CurrentLevel = null;
@@ -56,7 +71,7 @@ namespace SibGameJam2021.Core.Managers
 
             if (_levelCount % _shopLevelInterval == 0)
             {
-                LoadLevel("shop");
+                LoadLevel(_shopLevel.Instance());
             }
             else
             {

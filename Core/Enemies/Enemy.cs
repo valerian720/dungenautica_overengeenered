@@ -21,7 +21,7 @@ namespace SibGameJam2021.Core.Enemies
         private float SightActivationRadius = 350;
 
         [Export]
-        private float StopAtRadius = 5;
+        private float StopAtRadius = 20;
 
         public Enemy() : base()
         {
@@ -36,11 +36,7 @@ namespace SibGameJam2021.Core.Enemies
 
         public override void _PhysicsProcess(float delta)
         {
-            var player = GameManager.Instance.Player;
-
-            UpdatePosition(player, delta);
-
-            UpdateAnimation(player);
+            UpdatePosition(delta);
         }
 
         public override void _Ready()
@@ -51,6 +47,8 @@ namespace SibGameJam2021.Core.Enemies
             _attackShape.SetDeferred("disabled", true);
 
             _healthbar = GetNode<HealthBar>("HealthBar");
+
+            AddChild(_attackDurationTimer);
 
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             AddChild(movementOnNav2D);
@@ -63,29 +61,37 @@ namespace SibGameJam2021.Core.Enemies
             _healthbar.UpdateHealth(CurrentHealth, MaxHealth);
         }
 
-        virtual public void UpdateAnimation(Player player)
+        virtual public void UpdatePosition(float delta)
         {
-            if (player.Position.DistanceSquaredTo(Position) < SightActivationRadius * SightActivationRadius)
-            {
-                // обновление анимаций моба если игрок входит в определенный радиус
-                UpdateAnimationTreeState((player.Position - Position).Normalized());
-            }
-        }
+            var player = GameManager.Instance.Player;
 
-        virtual public void UpdatePosition(Player player, float delta)
-        {
-            float distanceSquared = player.Position.DistanceSquaredTo(Position);
-            if ((distanceSquared < ActivationRadius * ActivationRadius) && (distanceSquared > StopAtRadius * StopAtRadius))
+            float distanceSquared = player.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+
+            if (distanceSquared < ActivationRadius * ActivationRadius)
             {
-                // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
-                //Position += (player.Position - Position) / 50;
-                //this.MoveAndCollide(); TODO
-                FollowPath(player.Position);
-                SetAnimationRun();
+                if (distanceSquared > StopAtRadius * StopAtRadius)
+                {
+                    var nextPoint = movementOnNav2D.GetPointTowardsDestiny(GlobalPosition, player.GlobalPosition);
+                    var velocity = (nextPoint - GlobalPosition).Normalized() * MaxSpeed;
+
+                    MoveAndSlide(velocity);
+
+                    SetAnimationRun();
+                }
+                else
+                {
+                    Attack();
+                }
             }
             else
             {
                 SetAnimationIdle();
+            }
+
+            if (distanceSquared < SightActivationRadius * SightActivationRadius)
+            {
+                // обновление анимаций моба если игрок входит в определенный радиус
+                UpdateAnimationTreeState((player.GlobalPosition - GlobalPosition).Normalized());
             }
         }
 
@@ -116,16 +122,6 @@ namespace SibGameJam2021.Core.Enemies
 
             // here
         }
-
-        private void FollowPath(Vector2 destiny)
-        {
-            // https://youtu.be/0fPOt0Jw52s
-            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(GlobalPosition, destiny);
-            var velocity = (nextPoint - GlobalPosition).Normalized() * MaxSpeed;
-
-            MoveAndSlide(velocity);
-        }
-        //
 
         private void OnAttackDurationEnded()
         {

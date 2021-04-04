@@ -19,10 +19,6 @@ tile_data = PoolIntArray( -917517, 0, 0, -917516, 0, 1, -917515, 0, 1, -917514, 
 position = Vector2( 240, -80 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
-Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 12,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 7
-}
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
 position = Vector2( 240, 256 )

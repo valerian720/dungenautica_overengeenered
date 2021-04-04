@@ -330,6 +330,8 @@ shape = SubResource( 1 )
 current = true
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -5 )
@@ -359,4 +361,3 @@ parameters/playback = SubResource( 37 )
 parameters/Hurt/blend_position = Vector2( 0.588785, -0.0948277 )
 parameters/Idle/blend_position = Vector2( 0.6054, -0.0474138 )
 parameters/Run/blend_position = Vector2( 0.449637, 0.10431 )
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
