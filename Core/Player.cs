@@ -31,6 +31,11 @@ namespace SibGameJam2021.Core
         private Vector2 _velocity = Vector2.Zero;
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
 
+        private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
+
+        private AudioStreamPlayer2D audioPlayer = null;
+
+
         public Player() : base()
         {
             _dashTimer.OneShot = true;
@@ -215,6 +220,10 @@ namespace SibGameJam2021.Core
             AddChild(_dashTimer);
 
             GameManager.Instance.SceneManager.Connect(nameof(SceneManager.OnLevelChange), this, nameof(OnLevelChange));
+
+            audioPlayer = new AudioStreamPlayer2D();
+            AddChild(audioPlayer);
+            audioPlayer.Playing = true;
         }
 
         public void ApplyImpulse(Vector2 velocity)
@@ -233,6 +242,7 @@ namespace SibGameJam2021.Core
             {
                 GetDamage((body as Enemy).Damage);
                 _animationState.Travel("Hurt");
+                audioPlayer.Stream = player_hurt;
             }
         }
 
