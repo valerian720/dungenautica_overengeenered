@@ -12,35 +12,35 @@ namespace SibGameJam2021.Core.UI
 
 		private static readonly string[] DisplayModesNames = { "Windowed", "Borderless Fullscreen", "Fullscreen" };
 
-		private static readonly DynamicFont Font = new DynamicFont();
+        private static readonly DynamicFont Font = new DynamicFont();
 
-		private static readonly Vector2[] Resolutions =
-		{
-			new Vector2(1024, 576),
-			new Vector2(1280, 720),
-			new Vector2(1366, 768),
-			new Vector2(1536, 864),
-			new Vector2(1600, 900),
-			new Vector2(1920, 1080)
-		};
+        private static readonly Vector2[] Resolutions =
+        {
+            new Vector2(1024, 576),
+            new Vector2(1280, 720),
+            new Vector2(1366, 768),
+            new Vector2(1536, 864),
+            new Vector2(1600, 900),
+            new Vector2(1920, 1080)
+        };
 
 		private static readonly string[] ResolutionsNames = Resolutions.Select(x => $"{(int)x.x}x{(int)x.y}").ToArray();
 
-		private OptionButton _displayModeOption;
+        private OptionButton _displayModeOption;
 
-		private ValueSlider _masterVolumeSlider;
+        private ValueSlider _masterVolumeSlider;
 
-		private OptionButton _resolutionsOption;
+        private OptionButton _resolutionsOption;
 
-		private Settings _settings;
+        private Settings _settings;
 
-		private ConfirmationDialog _settingsWindow;
+        private ConfirmationDialog _settingsWindow;
 
-		static MainMenu()
-		{
-			Font.FontData = ResourceLoader.Load<DynamicFontData>("res://Assets/Fonts/Pixel/Pixel-Regular.ttf");
-			Font.Size = 10;
-		}
+        static MainMenu()
+        {
+            Font.FontData = ResourceLoader.Load<DynamicFontData>("res://Assets/Fonts/Pixel/Pixel-Regular.ttf");
+            Font.Size = 10;
+        }
 
 		public void _on_PlayButton_pressed()
 		{
@@ -78,23 +78,23 @@ namespace SibGameJam2021.Core.UI
 			saveFile.Close();
 		}
 
-		public override void _Ready()
-		{
-			_settingsWindow = GetNode<ConfirmationDialog>("SettingsWindow");
+        public override void _Ready()
+        {
+            _settingsWindow = GetNode<ConfirmationDialog>("SettingsWindow");
 
-			_settingsWindow.Connect("confirmed", this, nameof(_on_SettingsWindow_confirmed));
-			_settingsWindow.GetCancel().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
-			_settingsWindow.GetCloseButton().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
+            _settingsWindow.Connect("confirmed", this, nameof(_on_SettingsWindow_confirmed));
+            _settingsWindow.GetCancel().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
+            _settingsWindow.GetCloseButton().Connect("pressed", this, nameof(_on_SettingsWindow_canceled));
 
-			_settingsWindow.GetOk().Text = "Apply";
-			_settingsWindow.GetLabel().AddFontOverride("font", Font);
-			_settingsWindow.GetOk().AddFontOverride("font", Font);
-			_settingsWindow.GetCancel().AddFontOverride("font", Font);
-			_settingsWindow.GetCloseButton().AddFontOverride("font", Font);
+            _settingsWindow.GetOk().Text = "Apply";
+            _settingsWindow.GetLabel().AddFontOverride("font", Font);
+            _settingsWindow.GetOk().AddFontOverride("font", Font);
+            _settingsWindow.GetCancel().AddFontOverride("font", Font);
+            _settingsWindow.GetCloseButton().AddFontOverride("font", Font);
 
-			_resolutionsOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/ResolutionOptionButton");
-			_displayModeOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/DisplayModeOptionButton");
-			_masterVolumeSlider = GetNode<ValueSlider>("SettingsWindow/MarginContainer/GridContainer/MasterVolumeValueSlider");
+            _resolutionsOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/ResolutionOptionButton");
+            _displayModeOption = GetNode<OptionButton>("SettingsWindow/MarginContainer/GridContainer/DisplayModeOptionButton");
+            _masterVolumeSlider = GetNode<ValueSlider>("SettingsWindow/MarginContainer/GridContainer/MasterVolumeValueSlider");
 
 			foreach (var res in ResolutionsNames)
 			{

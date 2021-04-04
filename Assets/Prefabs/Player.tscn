@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Core/Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Prefabs/ReloadBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/UI/ReloadBar.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CircleShape2D" id=38]
+[sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -322,14 +322,12 @@ hframes = 52
 frame = 44
 
 [node name="GunSlot" type="Node2D" parent="."]
-scale = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 38 )
+shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 2, 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 

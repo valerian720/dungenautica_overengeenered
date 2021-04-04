@@ -14,16 +14,16 @@ namespace SibGameJam2021.Core
 		private const float DashDelay = 1;
 		private const float DashForce = 400;
 
-		private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
-
-		private bool _canDash = true;
-
-		private WeaponBase _currentWeapon = null;
-		private Timer _dashTimer = new Timer();
-		private Node2D _gunSlot;
-		private ReloadBar _reloadBar;
-		private Vector2 _velocity = Vector2.Zero;
-		private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
+        private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
+        private bool _canDash = true;
+        private int _coins = 0;
+        private WeaponBase _currentWeapon = null;
+        private Timer _dashTimer = new Timer();
+        private Node2D _gunSlot;
+        private int _lifes = 1;
+        private ReloadBar _reloadBar;
+        private Vector2 _velocity = Vector2.Zero;
+        private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
 
 		public Player() : base()
 		{
@@ -31,36 +31,67 @@ namespace SibGameJam2021.Core
 			_dashTimer.Connect("timeout", this, nameof(OnDashTimeout));
 		}
 
-		public int Coins { get; set; } = 0;
+        public int Coins
+        {
+            get { return _coins; }
 
-		public override void _Input(InputEvent inputEvent)
-		{
-			if (inputEvent.IsActionPressed("slot1"))
-			{
-				EquipWeapon(0);
-			}
-			if (inputEvent.IsActionPressed("slot2"))
-			{
-				EquipWeapon(1);
-			}
-			if (inputEvent.IsActionPressed("slot3"))
-			{
-				EquipWeapon(2);
-			}
-			if (inputEvent.IsActionPressed("ui_fire"))
-			{
-				_currentWeapon.StartShooting();
-			}
-			if (inputEvent.IsActionPressed("reload"))
-			{
-				_currentWeapon.StartReloading();
-				_reloadBar.StartReloading(_currentWeapon.ReloadDuration);
-			}
-			if (inputEvent.IsActionPressed("dash"))
-			{
-				Dash();
-			}
-		}
+            set
+            {
+                _coins = value;
+                GameManager.Instance.UIManager.UpdateGoldCount(_coins);
+            }
+        }
+
+        public override float CurrentHealth
+        {
+            get { return _currentHealth; }
+
+            protected set
+            {
+                base.CurrentHealth = value;
+                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, MAX_HEALTH);
+            }
+        }
+
+        public int Lifes
+        {
+            get { return _lifes; }
+
+            set
+            {
+                _lifes = value;
+                GameManager.Instance.UIManager.UpdateLifesCount(_lifes);
+            }
+        }
+
+        public override void _Input(InputEvent inputEvent)
+        {
+            if (inputEvent.IsActionPressed("slot1"))
+            {
+                EquipWeapon(0);
+            }
+            if (inputEvent.IsActionPressed("slot2"))
+            {
+                EquipWeapon(1);
+            }
+            if (inputEvent.IsActionPressed("slot3"))
+            {
+                EquipWeapon(2);
+            }
+            if (inputEvent.IsActionPressed("ui_fire"))
+            {
+                _currentWeapon.StartShooting();
+            }
+            if (inputEvent.IsActionPressed("reload"))
+            {
+                _currentWeapon.StartReloading();
+                _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
+            }
+            if (inputEvent.IsActionPressed("dash"))
+            {
+                Dash();
+            }
+        }
 
 		public override void _PhysicsProcess(float delta)
 		{
@@ -105,7 +136,9 @@ namespace SibGameJam2021.Core
 
 			_gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
 
-			EquipWeapon();
+            UpdateHUD();
+
+            EquipWeapon();
 
 			AddChild(_dashTimer);
 
@@ -157,9 +190,10 @@ namespace SibGameJam2021.Core
 
 			_currentWeapon = _weapons.ElementAt(index);
 
-			_gunSlot.AddChild(_currentWeapon);
-			_currentWeapon.Position = Vector2.Zero;
-		}
+            _gunSlot.AddChild(_currentWeapon);
+            _currentWeapon.Position = Vector2.Zero;
+            GameManager.Instance.UIManager.UpdateAmmoCount(_currentWeapon.AmmoCount);
+        }
 
 		private void OnDashTimeout()
 		{
@@ -176,9 +210,18 @@ namespace SibGameJam2021.Core
 			_currentWeapon.FinishReloading();
 		}
 
-		private void UpdateWeaponPosition()
-		{
-			var mousePos = GetGlobalMousePosition();
+        private void UpdateHUD()
+        {
+            var uiManager = GameManager.Instance.UIManager;
+
+            uiManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            uiManager.UpdateGoldCount(Coins);
+            uiManager.UpdateLifesCount(Lifes);
+        }
+
+        private void UpdateWeaponPosition()
+        {
+            var mousePos = GetGlobalMousePosition();
 
 			if (mousePos.x > _gunSlot.GlobalPosition.x)
 			{
