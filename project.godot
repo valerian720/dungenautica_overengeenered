@@ -34,7 +34,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "godot_2d_navmesh_generator", "ui_design_tool" )
+enabled=PoolStringArray( "ui_design_tool" )
 
 [importer_defaults]
 
