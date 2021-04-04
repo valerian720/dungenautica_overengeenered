@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Core/Level.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Prefabs/Navigation2D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=7]
@@ -8,6 +9,11 @@
 [ext_resource path="res://Assets/Prefabs/BrokenCollumn.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/Collumn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Prefabs/Vase.tscn" type="PackedScene" id=11]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 424, 232, 424, -104, 480, 224, 480, 312, 64, 312, 288, 232, 192, 232, 288, 200, 64, 280, 56, 232, -24, 280, -24, -96, 0, -96, 32, 8, 0, -184, 432, -184, 432, -168, 56, -104, 488, -168, 488, -184, 504, -184, 504, 224, 288, -72, 312, -72, 312, -48, 288, -48, 288, 8, 312, 8, 312, 136, 288, 136, 288, 168, 312, 168, 312, 200, 192, 168, 192, 136, 192, 8, 168, 136, 168, 8, 192, -24, 168, -24, 168, -72, 192, -72, 288, -104, 192, -104, 56, -24, 32, -24, 56, 8 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5 ), PoolIntArray( 6, 7, 5, 4, 8 ), PoolIntArray( 9, 6, 8, 10 ), PoolIntArray( 9, 10, 11, 12, 13 ), PoolIntArray( 12, 14, 15, 16, 17 ), PoolIntArray( 18, 19, 20, 21 ), PoolIntArray( 18, 21, 2, 1, 16 ), PoolIntArray( 22, 23, 24, 25 ), PoolIntArray( 26, 27, 28, 29 ), PoolIntArray( 30, 31, 32, 7 ), PoolIntArray( 7, 6, 33, 30 ), PoolIntArray( 29, 30, 33, 34 ), PoolIntArray( 26, 29, 34, 35 ), PoolIntArray( 34, 36, 37, 35 ), PoolIntArray( 25, 26, 35, 38 ), PoolIntArray( 38, 39, 40, 41, 25 ), PoolIntArray( 22, 25, 41 ), PoolIntArray( 42, 22, 41, 43 ), PoolIntArray( 17, 44, 45, 12 ), PoolIntArray( 13, 46, 9 ), PoolIntArray( 45, 13, 12 ), PoolIntArray( 43, 17, 16 ), PoolIntArray( 42, 43, 16 ), PoolIntArray( 42, 16, 1 ) ]
+outlines = [ PoolVector2Array( -24, -96, -24, 280, 64, 280, 64, 312, 480, 312, 480, 224, 504, 224, 504, -184, 488, -184, 488, -168, 432, -168, 432, -184, 0, -184, 0, -96 ), PoolVector2Array( 56, -104, 192, -104, 192, -72, 168, -72, 168, -24, 192, -24, 192, 8, 168, 8, 168, 136, 192, 136, 192, 168, 192, 232, 56, 232, 56, 8, 32, 8, 32, -24, 56, -24 ), PoolVector2Array( 288, 232, 424, 232, 424, -104, 288, -104, 288, -72, 312, -72, 312, -48, 288, -48, 288, 8, 312, 8, 312, 136, 288, 136, 288, 168, 312, 168, 312, 200, 288, 200 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,8 +28,8 @@ position = Vector2( 240, -208 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 12,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 7
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 7,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 12
 }
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
@@ -116,4 +122,11 @@ position = Vector2( 304, 0 )
 [node name="BrokenCollumn3" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 48, 0 )
 
+[node name="Navigation2D" parent="." instance=ExtResource( 2 )]
+
+[node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
+navpoly = SubResource( 1 )
+
 [editable path="YSort/SpawnManager"]
+
+[editable path="Navigation2D"]

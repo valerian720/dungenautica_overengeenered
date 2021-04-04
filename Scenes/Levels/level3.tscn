@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Core/Level.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Statue.tscn" type="PackedScene" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Prefabs/Collumn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/Navigation2D.tscn" type="PackedScene" id=9]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 128, -40, 128, -56, 224, -56, 224, -40, 152, 88, 256, -40, 256, -56, 384, -56, 384, -32, 264, 104, 384, 0, 408, 0, 408, 8, 288, 208, 264, 208, 448, 8, 448, 24, 472, 24, 472, 112, 448, 112, 448, 144, 472, 144, 472, 264, 448, 264, 448, 280, 408, 280, 408, 344, 384, 344, 384, 320, 352, 320, 352, 344, 328, 344, 328, 312, 296, 312, 296, 280, 288, 280, 288, 264, 264, 264, 264, 240, 288, 240, 232, 104, 232, 88, 152, 104, 120, 104, 0, 0, 96, -40, 120, 264, 88, 264, 88, 312, 56, 312, -24, 280, 56, 344, -24, 344, -64, 280, -64, 264, -88, 264, -88, 240, -64, 240, -64, 176, -88, 176, -88, 24, -64, 24, -64, 8, -24, 8, -24, 0, 0, -56, 96, -56 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8 ), PoolIntArray( 9, 10, 11, 12, 13, 14 ), PoolIntArray( 12, 15, 16 ), PoolIntArray( 16, 17, 18, 19 ), PoolIntArray( 20, 21, 22, 23 ), PoolIntArray( 23, 24, 25 ), PoolIntArray( 25, 26, 27, 28 ), PoolIntArray( 29, 30, 31, 32 ), PoolIntArray( 32, 33, 34, 25 ), PoolIntArray( 34, 35, 36 ), PoolIntArray( 36, 37, 38, 39 ), PoolIntArray( 10, 9, 40, 41, 5, 8 ), PoolIntArray( 4, 42, 43, 44, 45, 0 ), PoolIntArray( 43, 46, 47 ), PoolIntArray( 47, 48, 49, 50 ), PoolIntArray( 49, 51, 52, 50 ), PoolIntArray( 50, 53, 54, 43, 47 ), PoolIntArray( 54, 55, 56, 57 ), PoolIntArray( 58, 59, 60, 61, 43 ), PoolIntArray( 61, 62, 63, 43 ), PoolIntArray( 63, 64, 44, 43 ), PoolIntArray( 44, 65, 66, 45 ), PoolIntArray( 43, 54, 57 ), PoolIntArray( 43, 57, 58 ), PoolIntArray( 41, 4, 3, 5 ), PoolIntArray( 12, 16, 19, 13 ), PoolIntArray( 13, 20, 23, 25, 39 ), PoolIntArray( 13, 19, 20 ), PoolIntArray( 36, 39, 25, 34 ), PoolIntArray( 32, 25, 28, 29 ) ]
+outlines = [ PoolVector2Array( 96, -56, 0, -56, 0, 0, -24, 0, -24, 8, -64, 8, -64, 24, -88, 24, -88, 176, -64, 176, -64, 240, -88, 240, -88, 264, -64, 264, -64, 280, -24, 280, -24, 344, 56, 344, 56, 312, 88, 312, 88, 264, 120, 264, 120, 104, 152, 104, 152, 88, 232, 88, 232, 104, 264, 104, 264, 208, 288, 208, 288, 240, 264, 240, 264, 264, 288, 264, 288, 280, 296, 280, 296, 312, 328, 312, 328, 344, 352, 344, 352, 320, 384, 320, 384, 344, 408, 344, 408, 280, 448, 280, 448, 264, 472, 264, 472, 144, 448, 144, 448, 112, 472, 112, 472, 24, 448, 24, 448, 8, 408, 8, 408, 0, 384, 0, 384, -32, 384, -56, 256, -56, 256, -40, 224, -40, 224, -56, 128, -56, 128, -40, 96, -40 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,11 +28,11 @@ position = Vector2( 176, -80 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 3,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 6,
 Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 2,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 3,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0
 }
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
@@ -107,4 +113,11 @@ position = Vector2( 112, -48 )
 [node name="Collumn10" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 240, -48 )
 
+[node name="Navigation2D" parent="." instance=ExtResource( 9 )]
+
+[node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
+navpoly = SubResource( 1 )
+
 [editable path="YSort/SpawnManager"]
+
+[editable path="Navigation2D"]

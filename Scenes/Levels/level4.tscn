@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Core/Level.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Vase.tscn" type="PackedScene" id=2]
@@ -7,6 +7,12 @@
 [ext_resource path="res://Assets/Prefabs/Collumn.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/Navigation2D.tscn" type="PackedScene" id=8]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 536, 120, 536, 280, 488, 232, 488, 128, 376, 232, 320, 280, 320, 256, 480, -120, 488, -216, 536, -216, 600, 120, 480, -88, 168, -208, 248, -312, 248, -184, 168, -184, 168, -288, 248, 88, 248, 216, 168, 192, 168, 88, 264, 8, 264, -104, 344, -8, 344, 72, 320, 72, 600, -216, 536, -376, 488, -328, -120, -376, 352, -328, 352, -296, 288, -296, 288, -312, 160, -288, 160, -312, 128, -312, 128, -296, 96, -296, 96, -320, -64, -192, -40, -192, -40, -120, -64, -120, 72, -88, 72, -168, 96, -168, 96, -184, 320, -184, 320, -168, 344, -168, 344, -88, 456, -120, 456, -216, 480, 8, 480, 64, 456, 64, 456, 40, 480, 40, 456, 8, 456, -8, 152, -104, 152, -32, 128, -32, 320, 88, 160, 8, 152, 0, 96, 88, 96, 72, 128, 0, 72, 72, 72, -8, -64, 24, -40, 24, -40, 96, -64, 96, 64, 224, 64, 200, 128, 200, 128, 216, 288, 216, 288, 200, 376, 200, 288, 256, 288, 280, -120, 280, 160, 216, -120, 120, -184, 120, -184, -216, -120, -216, 160, 200, 152, 216, 32, 232, -64, -8, 40, -320, 32, -328, -72, -328, -72, -248, -72, -224, -64, -216, -64, -88, -72, 128, 480, 120, -64, 120, 40, 224, -72, 232, -16, -88 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6 ), PoolIntArray( 7, 8, 9, 10, 0, 11 ), PoolIntArray( 12, 13, 14, 15 ), PoolIntArray( 13, 12, 16 ), PoolIntArray( 17, 18, 19, 20 ), PoolIntArray( 21, 22, 23, 24, 25 ), PoolIntArray( 9, 26, 10 ), PoolIntArray( 27, 9, 8, 28 ), PoolIntArray( 29, 27, 28, 30 ), PoolIntArray( 30, 31, 32, 33 ), PoolIntArray( 29, 30, 33, 13 ), PoolIntArray( 16, 34, 35, 13 ), PoolIntArray( 36, 37, 38, 39 ), PoolIntArray( 40, 41, 42, 43 ), PoolIntArray( 44, 45, 46 ), PoolIntArray( 46, 47, 15 ), PoolIntArray( 14, 48, 49 ), PoolIntArray( 49, 50, 51 ), PoolIntArray( 7, 52, 53, 8 ), PoolIntArray( 11, 0, 3, 54 ), PoolIntArray( 55, 56, 57, 58 ), PoolIntArray( 54, 59, 60, 11 ), PoolIntArray( 61, 62, 63 ), PoolIntArray( 21, 25, 64, 17, 65 ), PoolIntArray( 65, 17, 20 ), PoolIntArray( 66, 65, 20, 67, 68, 69 ), PoolIntArray( 69, 68, 70, 71, 63 ), PoolIntArray( 72, 73, 74, 75 ), PoolIntArray( 76, 77, 78, 79 ), PoolIntArray( 80, 81, 82, 4, 6 ), PoolIntArray( 80, 6, 83, 18 ), PoolIntArray( 18, 83, 84, 85, 86 ), PoolIntArray( 87, 88, 89, 90 ), PoolIntArray( 29, 13, 35 ), PoolIntArray( 29, 35, 36, 39 ), PoolIntArray( 91, 19, 18, 86 ), PoolIntArray( 92, 86, 85 ), PoolIntArray( 76, 79, 92, 85, 93 ), PoolIntArray( 44, 46, 15, 14, 61 ), PoolIntArray( 14, 49, 51, 22 ), PoolIntArray( 60, 23, 22, 51 ), PoolIntArray( 61, 63, 71, 94, 44 ), PoolIntArray( 39, 95, 96 ), PoolIntArray( 29, 39, 96 ), PoolIntArray( 29, 96, 97 ), PoolIntArray( 90, 29, 97, 98 ), PoolIntArray( 90, 98, 99, 87 ), PoolIntArray( 87, 99, 100, 40 ), PoolIntArray( 87, 40, 43 ), PoolIntArray( 87, 43, 101, 102 ), PoolIntArray( 3, 103, 55 ), PoolIntArray( 75, 104, 102 ), PoolIntArray( 93, 105, 76 ), PoolIntArray( 106, 93, 85 ), PoolIntArray( 106, 85, 87, 102 ), PoolIntArray( 72, 75, 102 ), PoolIntArray( 3, 55, 58 ), PoolIntArray( 3, 58, 54 ), PoolIntArray( 51, 11, 60 ), PoolIntArray( 14, 22, 61 ), PoolIntArray( 107, 44, 94 ), PoolIntArray( 101, 107, 94 ), PoolIntArray( 102, 101, 94 ), PoolIntArray( 102, 94, 72 ) ]
+outlines = [ PoolVector2Array( -120, -376, 536, -376, 536, -216, 600, -216, 600, 120, 536, 120, 536, 280, 320, 280, 320, 256, 288, 256, 288, 280, -120, 280, -120, 120, -184, 120, -184, -216, -120, -216 ), PoolVector2Array( 488, -328, 488, -216, 456, -216, 456, -120, 480, -120, 480, -88, 344, -88, 344, -168, 320, -168, 320, -184, 248, -184, 248, -312, 288, -312, 288, -296, 352, -296, 352, -328 ), PoolVector2Array( 168, -208, 168, -288, 160, -288, 160, -312, 128, -312, 128, -296, 96, -296, 96, -320, 40, -320, 32, -328, -72, -328, -72, -248, -72, -224, -64, -216, -64, -192, -40, -192, -40, -120, -64, -120, -64, -88, -16, -88, 72, -88, 72, -168, 96, -168, 96, -184, 168, -184 ), PoolVector2Array( 72, -8, 72, 72, 96, 72, 96, 88, 168, 88, 168, 192, 160, 200, 160, 216, 152, 216, 128, 216, 128, 200, 64, 200, 64, 224, 40, 224, 32, 232, -72, 232, -72, 128, -64, 120, -64, 96, -40, 96, -40, 24, -64, 24, -64, -8 ), PoolVector2Array( 248, 88, 320, 88, 320, 72, 344, 72, 344, -8, 456, -8, 456, 8, 480, 8, 480, 40, 456, 40, 456, 64, 480, 64, 480, 120, 488, 128, 488, 232, 376, 232, 376, 200, 288, 200, 288, 216, 248, 216 ), PoolVector2Array( 264, 8, 264, -104, 152, -104, 152, -32, 128, -32, 128, 0, 152, 0, 160, 8 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,11 +27,11 @@ position = Vector2( 208, -16 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 4,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0
 }
 WaveDelay = 10.0
 
@@ -131,4 +137,11 @@ position = Vector2( 144, -304 )
 [node name="Collumn10" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 464, 16 )
 
+[node name="Navigation2D" parent="." instance=ExtResource( 8 )]
+
+[node name="NavigationPolygonInstance" parent="Navigation2D" index="0"]
+navpoly = SubResource( 1 )
+
 [editable path="YSort/SpawnManager"]
+
+[editable path="Navigation2D"]
