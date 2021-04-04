@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Core/Enemies/FishManKing.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/Enemy/FishManKing.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Prefabs/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/UI/HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.02397
