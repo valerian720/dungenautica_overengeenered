@@ -15,7 +15,7 @@ namespace SibGameJam2021.Core.Weapons
         public override string GunName { get; protected set; } = "пушка";
 
         [Export]
-        public override float RateOfFire { get; protected set; } = 5;
+        public override float RateOfFire { get; protected set; } = 10;
 
         protected override void AdditionalLogic()
         {

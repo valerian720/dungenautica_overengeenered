@@ -10,13 +10,13 @@ namespace SibGameJam2021.Core.Weapons
         }
 
         [Export]
-        public override float Damage { get; protected set; } = 20f;
+        public override float Damage { get; protected set; } = 15f;
 
         [Export]
         public override int MagSize { get; protected set; } = 50;
 
         [Export]
-        public override float RateOfFire { get; protected set; } = 15f;
+        public override float RateOfFire { get; protected set; } = 20f;
 
         [Export]
         public override float Recoil { get; protected set; } = 30f;
