@@ -1,6 +1,7 @@
 using Godot;
 using SibGameJam2021.Core.Managers;
 using SibGameJam2021.Core.World;
+using System;
 
 namespace SibGameJam2021.Core
 {
@@ -8,6 +9,13 @@ namespace SibGameJam2021.Core
     {
         private Gate _gate;
         private SpawnManager _spawnManager;
+
+        private AudioStream battleMusic1 = ResourceLoader.Load<AudioStream>("res://Assets/Music/fight_music.wav");
+        private AudioStream battleMusic2 = ResourceLoader.Load<AudioStream>("res://Assets/Music/fight_music_2.wav");
+
+        private AudioStream openGateSound = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/gate_open.wav");
+
+        private AudioStreamPlayer2D audioPlayer = null;
 
         public Navigation2D Navigation2D { get; private set; } = null;
 
@@ -18,6 +26,13 @@ namespace SibGameJam2021.Core
             Navigation2D = GetNode<Navigation2D>("Navigation2D");
 
             _spawnManager.Connect(nameof(SpawnManager.LevelCleared), this, nameof(OnLevelCleared));
+
+            audioPlayer = new AudioStreamPlayer2D();
+            AddChild(audioPlayer);
+
+            Random rnd = new Random();
+            audioPlayer.Stream =  (rnd.Next(2) == 0 ?  battleMusic1: battleMusic2);
+            audioPlayer.Playing = true;
         }
 
         public void RemovePlayer()
@@ -33,6 +48,7 @@ namespace SibGameJam2021.Core
         private void OnLevelCleared()
         {
             _gate.Open();
+
         }
     }
 }
