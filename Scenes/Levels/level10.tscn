@@ -28,6 +28,13 @@ tile_data = PoolIntArray( -720907, 0, 0, -720906, 0, 1, -720905, 0, 1, -720904, 
 position = Vector2( 496, 280 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 1 )]
+Enemies = {
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 6,
+Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 8,
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
+Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 3
+}
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
 position = Vector2( 480.641, 321.11 )
