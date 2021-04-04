@@ -6,8 +6,8 @@ namespace SibGameJam2021.Core.Enemies
     {
         // TODO special behavour
 
-        private AudioStream fish_attack = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/fish_attack.wav");
-        private AudioStream fish_death = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/fish_death.wav");
+        private AudioStream fish_attack = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/guard_attack.wav");
+        private AudioStream fish_death = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/guard_death.wav");
 
         protected override void Attack()
         {
