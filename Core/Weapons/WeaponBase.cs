@@ -8,12 +8,15 @@ namespace SibGameJam2021.Core.Weapons
 
         protected Node2D _muzzlePoint;
         private int _ammoCount = 0;
+        private bool _canShoot = true;
+        private Timer _shootTimer = new Timer();
         private Sprite _sprite;
-        private float _timeElapsed;
 
         protected WeaponBase()
         {
             FinishReloading();
+            _shootTimer.OneShot = true;
+            _shootTimer.Connect("timeout", this, nameof(OnShootTimer));
         }
 
         [Export]
@@ -59,14 +62,7 @@ namespace SibGameJam2021.Core.Weapons
         {
             if (Input.IsActionPressed("ui_fire"))
             {
-                _timeElapsed += delta;
-
-                if (_timeElapsed >= ShotDelay)
-                {
-                    _timeElapsed -= ShotDelay;
-
-                    Shoot();
-                }
+                Shoot();
             }
             else
             {
@@ -79,6 +75,8 @@ namespace SibGameJam2021.Core.Weapons
             _sprite = GetNode<Sprite>("Sprite");
 
             _muzzlePoint = GetNode<Node2D>("Muzzle");
+
+            AddChild(_shootTimer);
         }
 
         public void FinishReloading()
@@ -104,8 +102,8 @@ namespace SibGameJam2021.Core.Weapons
         public void StartShooting()
         {
             Shoot();
+
             SetProcess(true);
-            _timeElapsed = 0f;
         }
 
         protected abstract void AdditionalLogic();
@@ -124,15 +122,23 @@ namespace SibGameJam2021.Core.Weapons
 
         protected abstract void SpawnBullets();
 
+        private void OnShootTimer()
+        {
+            _canShoot = true;
+        }
+
         private void Shoot()
         {
-            if (AmmoCount <= 0)
+            if (!_canShoot || AmmoCount <= 0)
             {
                 return;
             }
 
             SpawnBullets();
             AdditionalLogic();
+
+            _canShoot = false;
+            _shootTimer.Start(ShotDelay);
         }
     }
 }

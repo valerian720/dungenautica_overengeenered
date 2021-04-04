@@ -11,9 +11,15 @@ namespace SibGameJam2021.Core
 {
     public class Player : Entity
     {
+        private const float DashDelay = 1;
+        private const float DashForce = 400;
+
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
 
+        private bool _canDash = true;
+
         private WeaponBase _currentWeapon = null;
+        private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
@@ -21,6 +27,8 @@ namespace SibGameJam2021.Core
 
         public Player() : base()
         {
+            _dashTimer.OneShot = true;
+            _dashTimer.Connect("timeout", this, nameof(OnDashTimeout));
         }
 
         public int Coins { get; set; } = 0;
@@ -47,6 +55,10 @@ namespace SibGameJam2021.Core
             {
                 _currentWeapon.StartReloading();
                 _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
+            }
+            if (inputEvent.IsActionPressed("dash"))
+            {
+                Dash();
             }
         }
 
@@ -95,6 +107,8 @@ namespace SibGameJam2021.Core
 
             EquipWeapon();
 
+            AddChild(_dashTimer);
+
             GameManager.Instance.SceneManager.Connect(nameof(SceneManager.OnLevelChange), this, nameof(OnLevelChange));
         }
 
@@ -117,6 +131,22 @@ namespace SibGameJam2021.Core
             }
         }
 
+        private void Dash()
+        {
+            if (!_canDash)
+            {
+                return;
+            }
+
+            var dir = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+
+            ApplyImpulse(dir * DashForce);
+
+            _canDash = false;
+
+            _dashTimer.Start(DashDelay);
+        }
+
         private void EquipWeapon(int index = 0)
         {
             if (_currentWeapon != null)
@@ -129,6 +159,11 @@ namespace SibGameJam2021.Core
 
             _gunSlot.AddChild(_currentWeapon);
             _currentWeapon.Position = Vector2.Zero;
+        }
+
+        private void OnDashTimeout()
+        {
+            _canDash = true;
         }
 
         private void OnLevelChange()
