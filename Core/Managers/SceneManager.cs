@@ -9,7 +9,8 @@ namespace SibGameJam2021.Core.Managers
 {
     public class SceneManager : Node2D
     {
-        private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels");
+        private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels", new string[] { "empty", "shop" });
+        private int _levelCount;
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
@@ -50,7 +51,16 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadRandomLevel()
         {
-            LoadLevel(_levels.ElementAt(new Random().Next(0, _levels.Count())).Value.Instance());
+            _levelCount++;
+
+            if (_levelCount % 5 == 0)
+            {
+                LoadLevel("shop");
+            }
+            else
+            {
+                LoadLevel(_levels.ElementAt(new Random().Next(0, _levels.Count())).Value.Instance());
+            }
         }
 
         private void LoadLevel(Node level)

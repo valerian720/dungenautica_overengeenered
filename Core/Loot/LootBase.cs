@@ -9,6 +9,8 @@ namespace SibGameJam2021.Core.Loot
 
         protected Player _player;
 
+        public bool Enabled { get; set; } = true;
+
         public override void _PhysicsProcess(float delta)
         {
             var direction = (_player.GlobalPosition - GlobalPosition).Normalized();
@@ -27,8 +29,12 @@ namespace SibGameJam2021.Core.Loot
 
         public override void _Ready()
         {
-            GetNode<Area2D>("Area2D").Connect("body_entered", this, nameof(OnBodyEntered));
             SetPhysicsProcess(false);
+
+            if (Enabled)
+            {
+                GetNode<Area2D>("Area2D").Connect("body_entered", this, nameof(OnBodyEntered));
+            }
         }
 
         protected abstract void CustomLogic();

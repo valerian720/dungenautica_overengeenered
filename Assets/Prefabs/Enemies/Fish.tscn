@@ -1,8 +1,9 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Assets/Textures/Enemy/fish.png" type="Texture" id=1]
 [ext_resource path="res://Core/Enemies/Fish.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Prefabs/UI/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Prefabs/AttackBox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 5.0
@@ -413,7 +414,6 @@ collision_mask = 7
 script = ExtResource( 2 )
 ActivationRadius = 200.0
 SightActivationRadius = 300.0
-StopAtRadius = 5.0
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -18 )
@@ -434,6 +434,8 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="AttackBox" parent="." instance=ExtResource( 4 )]
 
 [node name="Animations" type="Node2D" parent="."]
 

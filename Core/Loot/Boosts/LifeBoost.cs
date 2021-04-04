@@ -4,7 +4,7 @@ namespace SibGameJam2021.Core.Loot.Boosts
 {
     public class LifeBoost : BoostBase
     {
-        protected override void ApplyBoost()
+        public override void ApplyBoost()
         {
             GameManager.Instance.Player.Lifes++;
         }

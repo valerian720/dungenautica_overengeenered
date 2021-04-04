@@ -2,7 +2,7 @@
 {
     public abstract class BoostBase : LootBase
     {
-        protected abstract void ApplyBoost();
+        public abstract void ApplyBoost();
 
         protected override void CustomLogic()
         {

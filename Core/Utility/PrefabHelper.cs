@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace SibGameJam2021.Core.Utility
 {
     public static class PrefabHelper
     {
-        public static Dictionary<string, PackedScene> LoadPrefabsDictionary(string path)
+        public static Dictionary<string, PackedScene> LoadPrefabsDictionary(string path, string[] namesToExclude = null)
         {
             var dict = new Dictionary<string, PackedScene>();
             var dir = new Directory();
@@ -23,8 +24,16 @@ namespace SibGameJam2021.Core.Utility
                         continue;
                     }
 
+                    var filenameWOExtension = System.IO.Path.GetFileNameWithoutExtension(filename);
+
+                    if (namesToExclude != null && Array.IndexOf(namesToExclude, filenameWOExtension) > -1)
+                    {
+                        filename = dir.GetNext();
+                        continue;
+                    }
+
                     var scene = GD.Load<PackedScene>($"{path}/{filename}");
-                    dict.Add(System.IO.Path.GetFileNameWithoutExtension(filename), scene);
+                    dict.Add(filenameWOExtension, scene);
 
                     filename = dir.GetNext();
                 }

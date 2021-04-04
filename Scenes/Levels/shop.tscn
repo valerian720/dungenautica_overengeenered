@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Core/Level.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Prefabs/Pedestal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=7]
@@ -67,5 +68,17 @@ position = Vector2( 176, 224 )
 
 [node name="Collumn14" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 304, 224 )
+
+[node name="Pedestal" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 120, 72 )
+
+[node name="Pedestal2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 168, 72 )
+
+[node name="Pedestal3" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 312, 72 )
+
+[node name="Pedestal4" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 360, 72 )
 
 [editable path="YSort/SpawnManager"]
