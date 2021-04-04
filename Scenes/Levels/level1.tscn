@@ -519,11 +519,11 @@ position = Vector2( 104.724, 46.7217 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
+Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 5,
 Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
 Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 10,
-Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 4,
-Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 5,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 2
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 2,
+Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 4
 }
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
@@ -534,6 +534,27 @@ position = Vector2( 128, 88 )
 
 [node name="SpawnPoint2" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
 position = Vector2( 376, 88 )
+<<<<<<< HEAD
+=======
+
+[node name="SpawnPoint3" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 376, 192 )
+
+[node name="SpawnPoint4" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 280, 232 )
+
+[node name="SpawnPoint5" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 288, 152 )
+
+[node name="SpawnPoint6" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 0, 152 )
+
+[node name="SpawnPoint7" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 64, 224 )
+
+[node name="Bush" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 55.1217, 72.0916 )
+>>>>>>> origin/dev_omicron
 
 [node name="SpawnPoint3" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
 position = Vector2( 376, 192 )

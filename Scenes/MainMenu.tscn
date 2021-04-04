@@ -196,7 +196,14 @@ margin_right = 209.0
 margin_bottom = 14.0
 custom_fonts/font = SubResource( 9 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundAudio" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 4 )
 volume_db = -6.933
 autoplay = true
