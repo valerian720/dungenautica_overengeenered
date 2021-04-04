@@ -4,16 +4,10 @@
 [ext_resource path="res://Core/UI/MainMenu.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/ValueSlider.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Music/background_music.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Textures/UI/background.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/UI/GameButton.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=1]
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=10]
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -55,42 +49,89 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.203922, 0.368627, 0.576471, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -51.0
-margin_top = -47.5
-margin_right = 51.0
-margin_bottom = 47.5
+margin_left = -64.0
+margin_top = -106.0
+margin_right = 64.0
+margin_bottom = 106.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="Buttons"]
-margin_right = 102.0
-margin_bottom = 25.0
+[node name="PlayButton" type="TextureButton" parent="Buttons"]
+margin_right = 128.0
+margin_bottom = 64.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
+texture_normal = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Buttons/PlayButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 10 )
 text = "Play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="SettingsButton" type="Button" parent="Buttons"]
-margin_top = 35.0
-margin_right = 102.0
-margin_bottom = 60.0
+[node name="SettingsButton" type="TextureButton" parent="Buttons"]
+margin_top = 74.0
+margin_right = 128.0
+margin_bottom = 138.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+texture_normal = ExtResource( 6 )
+
+[node name="Label2" type="Label" parent="Buttons/SettingsButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 10 )
 text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="QuitButton" type="Button" parent="Buttons"]
-margin_top = 70.0
-margin_right = 102.0
-margin_bottom = 95.0
+[node name="QuitButton" type="TextureButton" parent="Buttons"]
+margin_top = 148.0
+margin_right = 128.0
+margin_bottom = 212.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+texture_normal = ExtResource( 6 )
+
+[node name="Label3" type="Label" parent="Buttons/QuitButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 10 )
 text = "Exit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SettingsWindow" type="ConfirmationDialog" parent="."]
 anchor_left = 0.5
