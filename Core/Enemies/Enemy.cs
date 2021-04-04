@@ -7,7 +7,7 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
-        private Timer _attackDurationTimer;
+        private Timer _attackDurationTimer = new Timer();
         private CollisionShape2D _attackShape;
         private HealthBar _healthbar;
 
