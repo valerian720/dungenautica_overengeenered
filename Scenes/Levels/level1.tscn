@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Core/Level.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Prefabs/Bush.tscn" type="PackedScene" id=2]
@@ -484,6 +484,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 0/z_index = 0
 
+[sub_resource type="NavigationPolygon" id=50]
+vertices = PoolVector2Array( 404.597, 70.7591, 402.476, 303.397, 251.862, 300.569, 257.519, 172.582, 369.242, 10.655, -16.1313, 89.1439, 74.3784, 9.24078, 116.805, 177.532, -19.6668, 170.461, 26.2951, 239.758, 92.7631, 239.758 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 4, 3, 7, 8 ), PoolIntArray( 9, 8, 7, 10 ) ]
+outlines = [ PoolVector2Array( 74.3784, 9.24078, 369.242, 10.655, 404.597, 70.7591, 402.476, 303.397, 251.862, 300.569, 257.519, 172.582, 116.805, 177.532, 92.7631, 239.758, 26.2951, 239.758, -19.6668, 170.461, -16.1313, 89.1439 ) ]
+
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -552,8 +557,8 @@ position = Vector2( 408, 40 )
 
 [node name="SpawnManager2" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 5,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 5
 }
 
 [node name="SpawnPoint" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
@@ -576,5 +581,10 @@ position = Vector2( 0, 152 )
 
 [node name="SpawnPoint7" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
 position = Vector2( 64, 224 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 50 )
 
 [editable path="YSort/SpawnManager"]
