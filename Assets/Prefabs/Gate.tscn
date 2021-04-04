@@ -58,7 +58,6 @@ script = ExtResource( 1 )
 frames = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 11 )
 
 [node name="Area2D" type="Area2D" parent="."]
