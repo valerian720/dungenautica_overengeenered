@@ -48,7 +48,8 @@ namespace SibGameJam2021.Core
         private void OnLevelCleared()
         {
             _gate.Open();
-
+            audioPlayer.Stream = openGateSound;
+            audioPlayer.Playing = true;
         }
     }
 }
