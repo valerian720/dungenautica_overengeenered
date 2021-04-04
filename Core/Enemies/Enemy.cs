@@ -43,6 +43,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             base._Ready();
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
+            AddChild(movementOnNav2D);
             _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
