@@ -81,9 +81,9 @@ namespace SibGameJam2021.Core.Managers
 		[Export]
 		private float WaveDelay { get; set; } = 5;
 
-        public override void _Ready()
-        {
-            _playerSpawn = GetNode<Node2D>("PlayerSpawn");
+		public override void _Ready()
+		{
+			_playerSpawn = GetNode<Node2D>("PlayerSpawn");
 
 			foreach (var child in GetChildren())
 			{
@@ -100,29 +100,29 @@ namespace SibGameJam2021.Core.Managers
 			_timer.Start(WaveDelay);
 		}
 
-        public void RemovePlayer()
-        {
-            CallDeferred("remove_child", GameManager.Instance.Player);
-        }
+		public void RemovePlayer()
+		{
+			CallDeferred("remove_child", GameManager.Instance.Player);
+		}
 
-        public void SpawnPlayer()
-        {
-            CallDeferred("add_child", GameManager.Instance.Player);
-            GameManager.Instance.Player.GlobalPosition = _playerSpawn.GlobalPosition;
-        }
+		public void SpawnPlayer()
+		{
+			CallDeferred("add_child", GameManager.Instance.Player);
+			GameManager.Instance.Player.GlobalPosition = _playerSpawn.GlobalPosition;
+		}
 
-        private void OnTimer()
-        {
-            if (_enemiesToSpawn <= 0)
-            {
-                EnemiesAlive = 0;
-                _timer.Stop();
-                return;
-            }
+		private void OnTimer()
+		{
+			if (_enemiesToSpawn <= 0)
+			{
+				EnemiesAlive = 0;
+				_timer.Stop();
+				return;
+			}
 
-            foreach (var point in _spawnpoints)
-            {
-                var enemies = Enemies.Where(x => x.Value > 0);
+			foreach (var point in _spawnpoints)
+			{
+				var enemies = Enemies.Where(x => x.Value > 0);
 
 				if (enemies.Count() < 1)
 				{
