@@ -581,6 +581,7 @@ position = Vector2( -402.573, -388.256 )
 
 [node name="EnemyAngler" parent="YSort" instance=ExtResource( 14 )]
 position = Vector2( -337.117, -13.2091 )
+ActivationRadius = 1.0
 
 [node name="BrokenCollumn2" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 554.529, 31.6824 )
@@ -599,9 +600,7 @@ position = Vector2( 182.755, 18.6415 )
 
 [node name="FishMan" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( -400.597, -19.4303 )
-
-[node name="FishMan2" parent="YSort" instance=ExtResource( 13 )]
-position = Vector2( -399.803, 304.399 )
+ActivationRadius = 1.0
 
 [node name="BrokenCollumn4" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 292.244, 159.279 )
