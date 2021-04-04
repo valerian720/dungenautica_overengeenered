@@ -9,9 +9,11 @@ namespace SibGameJam2021.Core.Managers
         private const int HeartValue = 10;
 
         private TextureRect _ammoTexture;
+        private Label _goldLabel;
         private TextureRect _healthEmptyTexture;
         private TextureRect _healthFullTexture;
         private Control _hud;
+        private Label _lifesLabel;
         private Control _pauseMenu;
 
         public override void _Input(InputEvent @event)
@@ -48,9 +50,11 @@ namespace SibGameJam2021.Core.Managers
         {
             _hud = GetNode<Control>("HUD");
             _pauseMenu = GetNode<Control>("PauseMenu");
-            _ammoTexture = GetNode<TextureRect>("HUD/VBoxContainer/AmmoBar");
-            _healthEmptyTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty");
-            _healthFullTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty/HealthFull");
+            _ammoTexture = GetNode<TextureRect>("HUD/LowerContainer/AmmoBar");
+            _healthEmptyTexture = GetNode<TextureRect>("HUD/LowerContainer/HealthEmpty");
+            _healthFullTexture = GetNode<TextureRect>("HUD/LowerContainer/HealthEmpty/HealthFull");
+            _goldLabel = GetNode<Label>("HUD/UpperContainer/GoldBar/GoldLabel");
+            _lifesLabel = GetNode<Label>("HUD/UpperContainer/LifeBar/LifesLabel");
 
             GameManager.Instance.UIManager = this;
         }
@@ -65,6 +69,11 @@ namespace SibGameJam2021.Core.Managers
             ((AtlasTexture)_ammoTexture.Texture).Region = new Rect2(0, 0, count * AmmoBubbleSize, AmmoBubbleSize);
         }
 
+        public void UpdateGoldCount(int count)
+        {
+            _goldLabel.Text = count.ToString();
+        }
+
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
             var emptyHeartsCount = Mathf.Round(maxHealth / HeartValue);
@@ -72,6 +81,11 @@ namespace SibGameJam2021.Core.Managers
 
             ((AtlasTexture)_healthEmptyTexture.Texture).Region = new Rect2(0, 0, emptyHeartsCount * HeartSize, HeartSize);
             ((AtlasTexture)_healthFullTexture.Texture).Region = new Rect2(0, 0, halfHeartsCount * HeartSize / 2, HeartSize);
+        }
+
+        public void UpdateLifesCount(int count)
+        {
+            _lifesLabel.Text = count.ToString();
         }
 
         private void TogglePause()
