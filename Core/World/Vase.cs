@@ -2,7 +2,7 @@
 using Godot;
 using SibGameJam2021.Core.Weapons;
 
-namespace SibGameJam2021.Core
+namespace SibGameJam2021.Core.World
 {
     public class Vase : StaticBody2D
     {

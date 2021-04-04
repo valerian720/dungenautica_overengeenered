@@ -1,7 +1,7 @@
 using Godot;
 using SibGameJam2021.Core.Managers;
 
-namespace SibGameJam2021.Core
+namespace SibGameJam2021.Core.World
 {
     public class Gate : StaticBody2D
     {
