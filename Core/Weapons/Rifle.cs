@@ -24,12 +24,7 @@ namespace SibGameJam2021.Core.Weapons
 
         protected override void SpawnBullets()
         {
-            var bullet = (Bullet)Bullet.Instance();
-
-            bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
-            bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
-            bullet.Speed = BulletSpeed;
-            bullet.Damage = Damage;
+            var bullet = InstanceBullet();
 
             GetParent().GetParent().GetParent().AddChild(bullet);
         }

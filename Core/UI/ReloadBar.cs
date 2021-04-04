@@ -14,8 +14,14 @@ namespace SibGameJam2021.Core.UI
         public override void _Ready()
         {
             _barSlider = GetNode<Sprite>("BarSlider");
-            _tween.Connect("tween_all_completed", this, nameof(OnTweenCompleted));
+            _tween.Connect("tween_completed", this, nameof(OnTweenCompleted));
             AddChild(_tween);
+        }
+
+        public void InterruptReloading()
+        {
+            Visible = false;
+            _tween.Stop(_barSlider);
         }
 
         public void StartReloading(float duration)
@@ -25,7 +31,7 @@ namespace SibGameJam2021.Core.UI
             _tween.Start();
         }
 
-        private void OnTweenCompleted()
+        private void OnTweenCompleted(Object obj, NodePath key)
         {
             Visible = false;
             EmitSignal(nameof(ReloadFinished));

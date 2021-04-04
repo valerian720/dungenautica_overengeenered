@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BubbleProjectile.png-1cb44623ce7c7c14553a0b30acd3aacb.stex"
+path="res://.import/Shotgun.png-ee93d8a5fd1e247458a1d12bbea36f0c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Weapon/BubbleProjectile.png"
-dest_files=[ "res://.import/BubbleProjectile.png-1cb44623ce7c7c14553a0b30acd3aacb.stex" ]
+source_file="res://Assets/Textures/Weapons/Shotgun.png"
+dest_files=[ "res://.import/Shotgun.png-ee93d8a5fd1e247458a1d12bbea36f0c.stex" ]
 
 [params]
 

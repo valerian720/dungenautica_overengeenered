@@ -13,10 +13,19 @@ namespace SibGameJam2021.Core.Weapons
         public override int AmmoPerShot { get; protected set; } = 5;
 
         [Export]
+        public override float BulletSpeed { get; protected set; } = 200f;
+
+        [Export]
         public override string GunName { get; protected set; } = "just a normal shotgun";
 
         [Export]
+        public override float RateOfFire { get; protected set; } = 2;
+
+        [Export]
         public override float Recoil { get; protected set; } = 100f;
+
+        [Export]
+        public override float ReloadDuration { get; protected set; } = 2f;
 
         protected override void AdditionalLogic()
         {
@@ -31,12 +40,9 @@ namespace SibGameJam2021.Core.Weapons
 
             for (int i = 0; i < AmmoPerShot; i++)
             {
-                var bullet = (Bullet)Bullet.Instance();
+                var bullet = InstanceBullet();
 
-                bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
                 bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized().Rotated(Mathf.Deg2Rad(-45 + i * deltaAngle));
-                bullet.Speed = BulletSpeed;
-                bullet.Damage = Damage;
 
                 GetParent().GetParent().GetParent().AddChild(bullet);
             }

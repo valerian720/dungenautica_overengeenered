@@ -4,20 +4,19 @@ namespace SibGameJam2021.Core.Weapons
 {
     public abstract class WeaponBase : Node2D
     {
-        protected static readonly PackedScene Bullet;
+        protected static readonly PackedScene BulletScene = GD.Load<PackedScene>("res://Assets/Prefabs/Bullet.tscn");
 
         protected Node2D _muzzlePoint;
         private int _ammoCount = 0;
-        private float _timeElapsed;
-
-        static WeaponBase()
-        {
-            Bullet = GD.Load<PackedScene>("res://Assets/Prefabs/Bullet.tscn");
-        }
+        private bool _canShoot = true;
+        private Timer _shootTimer = new Timer();
+        private Sprite _sprite;
 
         protected WeaponBase()
         {
             FinishReloading();
+            _shootTimer.OneShot = true;
+            _shootTimer.Connect("timeout", this, nameof(OnShootTimer));
         }
 
         [Export]
@@ -55,7 +54,7 @@ namespace SibGameJam2021.Core.Weapons
         public virtual float Recoil { get; protected set; } = 0f;
 
         [Export]
-        public virtual float ReloadDuration { get; protected set; } = 2f;
+        public virtual float ReloadDuration { get; protected set; } = 1f;
 
         public float ShotDelay => 1f / RateOfFire;
 
@@ -63,14 +62,7 @@ namespace SibGameJam2021.Core.Weapons
         {
             if (Input.IsActionPressed("ui_fire"))
             {
-                _timeElapsed += delta;
-
-                if (_timeElapsed >= ShotDelay)
-                {
-                    _timeElapsed -= ShotDelay;
-
-                    Shoot();
-                }
+                Shoot();
             }
             else
             {
@@ -80,12 +72,26 @@ namespace SibGameJam2021.Core.Weapons
 
         public override void _Ready()
         {
+            _sprite = GetNode<Sprite>("Sprite");
+
             _muzzlePoint = GetNode<Node2D>("Muzzle");
+
+            AddChild(_shootTimer);
         }
 
         public void FinishReloading()
         {
             AmmoCount = MagSize;
+        }
+
+        public void LookLeft()
+        {
+            _sprite.FlipV = true;
+        }
+
+        public void LookRight()
+        {
+            _sprite.FlipV = false;
         }
 
         public void StartReloading()
@@ -96,23 +102,43 @@ namespace SibGameJam2021.Core.Weapons
         public void StartShooting()
         {
             Shoot();
+
             SetProcess(true);
-            _timeElapsed = 0f;
         }
 
         protected abstract void AdditionalLogic();
 
+        protected Bullet InstanceBullet()
+        {
+            var bullet = (Bullet)BulletScene.Instance();
+
+            bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
+            bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+            bullet.Speed = BulletSpeed;
+            bullet.Damage = Damage;
+
+            return bullet;
+        }
+
         protected abstract void SpawnBullets();
+
+        private void OnShootTimer()
+        {
+            _canShoot = true;
+        }
 
         private void Shoot()
         {
-            if (AmmoCount <= 0)
+            if (!_canShoot || AmmoCount <= 0)
             {
                 return;
             }
 
             SpawnBullets();
             AdditionalLogic();
+
+            _canShoot = false;
+            _shootTimer.Start(ShotDelay);
         }
     }
 }

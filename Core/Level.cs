@@ -1,5 +1,6 @@
 using Godot;
 using SibGameJam2021.Core.Managers;
+using SibGameJam2021.Core.World;
 
 namespace SibGameJam2021.Core
 {
@@ -13,7 +14,7 @@ namespace SibGameJam2021.Core
             _gate = GetNode<Gate>("YSort/Gate");
             _spawnManager = GetNode<SpawnManager>("YSort/SpawnManager");
 
-            _spawnManager.Connect("LevelCleared", this, nameof(OnLevelCleared));
+            _spawnManager.Connect(nameof(SpawnManager.LevelCleared), this, nameof(OnLevelCleared));
         }
 
         public void RemovePlayer()

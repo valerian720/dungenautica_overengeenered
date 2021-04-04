@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Coin.png-704d39431537b6dc7d966da56132136c.stex"
+path="res://.import/MachineGun.png-04df38230739220534aa6f3991fef901.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/World/Coin.png"
-dest_files=[ "res://.import/Coin.png-704d39431537b6dc7d966da56132136c.stex" ]
+source_file="res://Assets/Textures/Weapons/MachineGun.png"
+dest_files=[ "res://.import/MachineGun.png-04df38230739220534aa6f3991fef901.stex" ]
 
 [params]
 

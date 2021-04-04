@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rifle.png-02896e9af2a10dc978db898198fb5f94.stex"
+path="res://.import/Coin.png-8b21de6473d6b7f6b97e8c0ecb2d640e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Weapon/rifle.png"
-dest_files=[ "res://.import/rifle.png-02896e9af2a10dc978db898198fb5f94.stex" ]
+source_file="res://Assets/Textures/Loot/Coin.png"
+dest_files=[ "res://.import/Coin.png-8b21de6473d6b7f6b97e8c0ecb2d640e.stex" ]
 
 [params]
 

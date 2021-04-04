@@ -7,7 +7,7 @@ using SibGameJam2021.Core.Utility;
 
 namespace SibGameJam2021.Core.Managers
 {
-    public class SceneManager
+    public class SceneManager : Node2D
     {
         private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels");
         private Level _currentLevel = null;
@@ -21,6 +21,9 @@ namespace SibGameJam2021.Core.Managers
             _mainMenu = _tree.Root.GetNode<MainMenu>("/root/MainMenu"); // start scene
             _uiManager = (UIManager)GD.Load<PackedScene>("res://Scenes/UIManager.tscn").Instance();
         }
+
+        [Signal]
+        public delegate void OnLevelChange();
 
         public void LoadDemoLevel()
         {
@@ -51,6 +54,8 @@ namespace SibGameJam2021.Core.Managers
 
         private void LoadLevel(Node level)
         {
+            EmitSignal(nameof(OnLevelChange));
+
             if (_currentLevel == null)
             {
                 _tree.Root.RemoveChild(_mainMenu);
