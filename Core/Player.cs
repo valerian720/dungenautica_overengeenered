@@ -95,17 +95,12 @@ namespace SibGameJam2021.Core
 
             EquipWeapon();
 
-            Connect(nameof(SceneManager.OnLevelChange), this, nameof(OnLevelChange));
+            GameManager.Instance.SceneManager.Connect(nameof(SceneManager.OnLevelChange), this, nameof(OnLevelChange));
         }
 
         public void ApplyImpulse(Vector2 velocity)
         {
             _velocity += velocity;
-        }
-
-        public void OnLevelChange()
-        {
-            _reloadBar.InterruptReloading();
         }
 
         protected override void Die()
@@ -134,6 +129,11 @@ namespace SibGameJam2021.Core
 
             _gunSlot.AddChild(_currentWeapon);
             _currentWeapon.Position = Vector2.Zero;
+        }
+
+        private void OnLevelChange()
+        {
+            _reloadBar.InterruptReloading();
         }
 
         private void OnReloadBarFinished()
