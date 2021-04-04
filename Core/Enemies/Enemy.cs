@@ -43,6 +43,8 @@ namespace SibGameJam2021.Core.Enemies
             UpdateAnimation(player);
         }
 
+        public AudioStreamPlayer2D audioPlayer = null;
+
         public override void _Ready()
         {
             base._Ready();
@@ -54,6 +56,9 @@ namespace SibGameJam2021.Core.Enemies
 
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             AddChild(movementOnNav2D);
+
+            AddChild(audioPlayer);
+            audioPlayer.Playing = true;
         }
 
         public override void GetDamage(float damage)
@@ -107,7 +112,7 @@ namespace SibGameJam2021.Core.Enemies
             GetDamage(bullet.Pop());
         }
 
-        private void Attack()
+        virtual protected void Attack()
         {
             SetAnimationAttack();
 

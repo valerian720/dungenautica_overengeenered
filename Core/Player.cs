@@ -32,6 +32,7 @@ namespace SibGameJam2021.Core
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
 
         private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
+        private AudioStream steps = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/steps.wav");
 
         private AudioStreamPlayer2D audioPlayer = null;
 
@@ -186,6 +187,7 @@ namespace SibGameJam2021.Core
 
                 // переключение дерева анимации на бег
                 _animationState.Travel("Run");
+                audioPlayer.Stream = player_hurt;
 
                 // применение трения к игроку
                 _velocity = _velocity.MoveToward(inputVector * MaxSpeed * Mathf.Round(1f + SpeedBoost), Acceleration * delta);
@@ -243,6 +245,7 @@ namespace SibGameJam2021.Core
                 GetDamage((body as Enemy).Damage);
                 _animationState.Travel("Hurt");
                 audioPlayer.Stream = player_hurt;
+                audioPlayer.Playing = true;
             }
         }
 
