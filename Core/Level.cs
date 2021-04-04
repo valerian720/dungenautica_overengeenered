@@ -4,10 +4,10 @@ using SibGameJam2021.Core.World;
 
 namespace SibGameJam2021.Core
 {
-    public class Level : Node2D
-    {
-        private Gate _gate;
-        private SpawnManager _spawnManager;
+	public class Level : Node2D
+	{
+		private Gate _gate;
+		private SpawnManager _spawnManager;
 
         public Navigation2D Navigation2D { get; private set; } = null;
 
