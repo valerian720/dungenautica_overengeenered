@@ -10,13 +10,16 @@ namespace SibGameJam2021.Core.Weapons
         }
 
         [Export]
-        public override int AmmoPerShot { get; protected set; } = 5;
-
-        [Export]
         public override float BulletSpeed { get; protected set; } = 200f;
 
         [Export]
         public override string GunName { get; protected set; } = "just a normal shotgun";
+
+        [Export]
+        public override int MagSize { get; protected set; } = 8;
+
+        [Export]
+        public override int ProjectilesPerShot { get; protected set; } = 5;
 
         [Export]
         public override float RateOfFire { get; protected set; } = 2;
@@ -34,11 +37,11 @@ namespace SibGameJam2021.Core.Weapons
             GameManager.Instance.Player.ApplyImpulse((GlobalPosition - GetGlobalMousePosition()).Normalized() * Recoil);
         }
 
-        protected override void SpawnBullets()
+        protected override void SpawnProjectiles()
         {
-            var deltaAngle = 90 / AmmoPerShot;
+            var deltaAngle = 90 / ProjectilesPerShot;
 
-            for (int i = 0; i < AmmoPerShot; i++)
+            for (int i = 0; i < ProjectilesPerShot; i++)
             {
                 var bullet = InstanceBullet();
 

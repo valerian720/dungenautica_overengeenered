@@ -15,9 +15,7 @@ namespace SibGameJam2021.Core
         private const float DashForce = 400;
 
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
-
         private bool _canDash = true;
-
         private WeaponBase _currentWeapon = null;
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
@@ -32,6 +30,17 @@ namespace SibGameJam2021.Core
         }
 
         public int Coins { get; set; } = 0;
+
+        public override float CurrentHealth
+        {
+            get { return _currentHealth; }
+
+            protected set
+            {
+                base.CurrentHealth = value;
+                GameManager.Instance.UIManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            }
+        }
 
         public override void _Input(InputEvent inputEvent)
         {
@@ -92,6 +101,8 @@ namespace SibGameJam2021.Core
             }
 
             _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
+
+            GameManager.Instance.UIManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
 
             UpdateWeaponPosition();
         }
@@ -159,6 +170,7 @@ namespace SibGameJam2021.Core
 
             _gunSlot.AddChild(_currentWeapon);
             _currentWeapon.Position = Vector2.Zero;
+            GameManager.Instance.UIManager.UpdateAmmoCount(_currentWeapon.AmmoCount);
         }
 
         private void OnDashTimeout()

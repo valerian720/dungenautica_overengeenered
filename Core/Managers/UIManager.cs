@@ -4,6 +4,11 @@ namespace SibGameJam2021.Core.Managers
 {
     public class UIManager : CanvasLayer
     {
+        private const int AmmoBubbleSize = 4;
+        private const int HeartSize = 8;
+
+        private TextureRect _ammoTexture;
+        private TextureRect _healthTexture;
         private Control _hud;
         private Control _pauseMenu;
 
@@ -41,6 +46,8 @@ namespace SibGameJam2021.Core.Managers
         {
             _hud = GetNode<Control>("HUD");
             _pauseMenu = GetNode<Control>("PauseMenu");
+            _ammoTexture = GetNode<TextureRect>("HUD/VBoxContainer/AmmoBar");
+            _healthTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty/HealthFull");
 
             GameManager.Instance.UIManager = this;
         }
@@ -48,6 +55,19 @@ namespace SibGameJam2021.Core.Managers
         public void ToggleHUD(bool visible)
         {
             _hud.Visible = visible;
+        }
+
+        public void UpdateAmmoCount(int count)
+        {
+            ((AtlasTexture)_ammoTexture.Texture).Region = new Rect2(0, 0, count * AmmoBubbleSize, AmmoBubbleSize);
+        }
+
+        public void UpdateHealth(float currentHealth, float maxHealth)
+        {
+            var halfHeartValue = maxHealth / 20;
+            var halfHeartsCount = Mathf.Round(currentHealth / halfHeartValue);
+
+            ((AtlasTexture)_healthTexture.Texture).Region = new Rect2(0, 0, halfHeartsCount * HeartSize / 2, HeartSize);
         }
 
         private void TogglePause()

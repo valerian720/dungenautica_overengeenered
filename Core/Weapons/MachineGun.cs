@@ -31,7 +31,7 @@ namespace SibGameJam2021.Core.Weapons
             GameManager.Instance.Player.ApplyImpulse((GlobalPosition - GetGlobalMousePosition()).Normalized() * Recoil);
         }
 
-        protected override void SpawnBullets()
+        protected override void SpawnProjectiles()
         {
             var bullet = InstanceBullet();
 
