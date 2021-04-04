@@ -6,9 +6,11 @@ namespace SibGameJam2021.Core.Managers
     {
         private const int AmmoBubbleSize = 4;
         private const int HeartSize = 8;
+        private const int HeartValue = 10;
 
         private TextureRect _ammoTexture;
-        private TextureRect _healthTexture;
+        private TextureRect _healthEmptyTexture;
+        private TextureRect _healthFullTexture;
         private Control _hud;
         private Control _pauseMenu;
 
@@ -47,7 +49,8 @@ namespace SibGameJam2021.Core.Managers
             _hud = GetNode<Control>("HUD");
             _pauseMenu = GetNode<Control>("PauseMenu");
             _ammoTexture = GetNode<TextureRect>("HUD/VBoxContainer/AmmoBar");
-            _healthTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty/HealthFull");
+            _healthEmptyTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty");
+            _healthFullTexture = GetNode<TextureRect>("HUD/VBoxContainer/HealthEmpty/HealthFull");
 
             GameManager.Instance.UIManager = this;
         }
@@ -64,10 +67,11 @@ namespace SibGameJam2021.Core.Managers
 
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
-            var halfHeartValue = maxHealth / 20;
-            var halfHeartsCount = Mathf.Round(currentHealth / halfHeartValue);
+            var emptyHeartsCount = Mathf.Round(maxHealth / HeartValue);
+            var halfHeartsCount = Mathf.Round(currentHealth / HeartValue * 2);
 
-            ((AtlasTexture)_healthTexture.Texture).Region = new Rect2(0, 0, halfHeartsCount * HeartSize / 2, HeartSize);
+            ((AtlasTexture)_healthEmptyTexture.Texture).Region = new Rect2(0, 0, emptyHeartsCount * HeartSize, HeartSize);
+            ((AtlasTexture)_healthFullTexture.Texture).Region = new Rect2(0, 0, halfHeartsCount * HeartSize / 2, HeartSize);
         }
 
         private void TogglePause()
