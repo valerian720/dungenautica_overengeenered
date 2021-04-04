@@ -27,11 +27,11 @@ position = Vector2( 208, -16 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 4,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8,
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1
 }
 WaveDelay = 10.0
 
