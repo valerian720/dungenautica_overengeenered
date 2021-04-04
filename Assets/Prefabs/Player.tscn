@@ -8,7 +8,7 @@
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 13 )
+extents = Vector2( 10, 14.0346 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "HurtDown"

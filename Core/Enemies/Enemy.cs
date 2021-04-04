@@ -57,6 +57,7 @@ namespace SibGameJam2021.Core.Enemies
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             AddChild(movementOnNav2D);
 
+            audioPlayer = new AudioStreamPlayer2D();
             AddChild(audioPlayer);
             audioPlayer.Playing = true;
         }
