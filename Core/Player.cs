@@ -239,17 +239,22 @@ namespace SibGameJam2021.Core
         {
             MaxHealth = MaxHealthDefault;
             CurrentHealth = MaxHealth;
+            Lifes = 1;
+            Coins = 0;
+            DamageBoost = 0;
+            SpeedBoost = 0;
+            GoldBoost = 0;
+            AmmoBoost = 0;
+            BounceBoost = 0;
 
             foreach (var weapon in _weapons)
             {
                 weapon.FinishReloading();
             }
 
-            DamageBoost = 0;
-            SpeedBoost = 0;
-            GoldBoost = 0;
-            AmmoBoost = 0;
-            BounceBoost = 0;
+            _velocity = Vector2.Zero;
+
+            EquipWeapon(0);
         }
 
         protected override void Die()
