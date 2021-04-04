@@ -7,6 +7,8 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class Enemy : Entity
     {
+        private Timer _attackDurationTimer;
+        private CollisionShape2D _attackShape;
         private HealthBar _healthbar;
 
         // AI
@@ -23,6 +25,8 @@ namespace SibGameJam2021.Core.Enemies
 
         public Enemy() : base()
         {
+            _attackDurationTimer.OneShot = true;
+            _attackDurationTimer.Connect("timeout", this, nameof(OnAttackDurationEnded));
         }
 
         [Export]
@@ -42,9 +46,14 @@ namespace SibGameJam2021.Core.Enemies
         public override void _Ready()
         {
             base._Ready();
+
+            _attackShape = GetNode<CollisionShape2D>("AttackBox/CollisionShape2D");
+            _attackShape.SetDeferred("disabled", true);
+
+            _healthbar = GetNode<HealthBar>("HealthBar");
+
             movementOnNav2D = new MovementOnNavigation2D(GameManager.Instance.CurrentLevel.Navigation2D);
             AddChild(movementOnNav2D);
-            _healthbar = GetNode<HealthBar>("HealthBar");
         }
 
         public override void GetDamage(float damage)
@@ -86,7 +95,6 @@ namespace SibGameJam2021.Core.Enemies
             SpawnManager.EnemiesAlive--;
         }
 
-        //
         private void _on_Area2D_body_entered(Node body)
         {
             var bullet = body as Bullet;
@@ -99,7 +107,16 @@ namespace SibGameJam2021.Core.Enemies
             GetDamage(bullet.Pop());
         }
 
-        //
+        private void Attack()
+        {
+            SetAnimationAttack();
+
+            _attackShape.SetDeferred("disabled", false);
+            _attackDurationTimer.Start(0.5f);
+
+            // here
+        }
+
         private void FollowPath(float moveDistance, Vector2 destiny)
         {
             // https://youtu.be/0fPOt0Jw52s
@@ -107,6 +124,11 @@ namespace SibGameJam2021.Core.Enemies
             GD.Print(nextPoint);
 
             Position = Position.MoveToward(nextPoint, moveDistance);
+        }
+
+        private void OnAttackDurationEnded()
+        {
+            _attackShape.SetDeferred("disabled", true);
         }
 
         private void SetAnimationAttack()
