@@ -9,10 +9,13 @@ namespace SibGameJam2021.Core
         private Gate _gate;
         private SpawnManager _spawnManager;
 
+        public Navigation2D Navigation2D { get; private set; } = null;
+
         public override void _Ready()
         {
             _gate = GetNode<Gate>("YSort/Gate");
             _spawnManager = GetNode<SpawnManager>("YSort/SpawnManager");
+            Navigation2D = GetNode<Navigation2D>("Navigation2D");
 
             _spawnManager.Connect(nameof(SpawnManager.LevelCleared), this, nameof(OnLevelCleared));
         }

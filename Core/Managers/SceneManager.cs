@@ -10,7 +10,6 @@ namespace SibGameJam2021.Core.Managers
     public class SceneManager : Node2D
     {
         private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels");
-        private Level _currentLevel = null;
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
@@ -25,6 +24,8 @@ namespace SibGameJam2021.Core.Managers
         [Signal]
         public delegate void OnLevelChange();
 
+        public Level CurrentLevel { get; private set; } = null;
+
         public void LoadDemoLevel()
         {
             LoadLevel("Empty");
@@ -38,9 +39,9 @@ namespace SibGameJam2021.Core.Managers
 
         public void LoadMainMenu()
         {
-            _currentLevel.RemovePlayer();
-            _currentLevel.QueueFree();
-            _currentLevel = null;
+            CurrentLevel.RemovePlayer();
+            CurrentLevel.QueueFree();
+            CurrentLevel = null;
 
             _tree.Root.RemoveChild(_uiManager);
             _tree.Root.AddChild(_mainMenu);
@@ -56,20 +57,20 @@ namespace SibGameJam2021.Core.Managers
         {
             EmitSignal(nameof(OnLevelChange));
 
-            if (_currentLevel == null)
+            if (CurrentLevel == null)
             {
                 _tree.Root.RemoveChild(_mainMenu);
                 _tree.Root.AddChild(_uiManager);
             }
             else
             {
-                _currentLevel.RemovePlayer();
-                _currentLevel.QueueFree();
+                CurrentLevel.RemovePlayer();
+                CurrentLevel.QueueFree();
             }
 
-            _currentLevel = (Level)level;
-            _tree.Root.CallDeferred("add_child", _currentLevel);
-            _currentLevel.CallDeferred(nameof(_currentLevel.SpawnPlayer));
+            CurrentLevel = (Level)level;
+            _tree.Root.CallDeferred("add_child", CurrentLevel);
+            CurrentLevel.CallDeferred(nameof(CurrentLevel.SpawnPlayer));
 
             _uiManager.ToggleHUD(true);
         }

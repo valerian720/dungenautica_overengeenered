@@ -16,9 +16,11 @@ namespace SibGameJam2021.Core
 
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
         private bool _canDash = true;
+        private int _coins = 0;
         private WeaponBase _currentWeapon = null;
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
+        private int _lifes = 1;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
@@ -29,7 +31,16 @@ namespace SibGameJam2021.Core
             _dashTimer.Connect("timeout", this, nameof(OnDashTimeout));
         }
 
-        public int Coins { get; set; } = 0;
+        public int Coins
+        {
+            get { return _coins; }
+
+            set
+            {
+                _coins = value;
+                GameManager.Instance.UIManager.UpdateGoldCount(_coins);
+            }
+        }
 
         public override float CurrentHealth
         {
@@ -38,7 +49,18 @@ namespace SibGameJam2021.Core
             protected set
             {
                 base.CurrentHealth = value;
-                GameManager.Instance.UIManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, MAX_HEALTH);
+            }
+        }
+
+        public int Lifes
+        {
+            get { return _lifes; }
+
+            set
+            {
+                _lifes = value;
+                GameManager.Instance.UIManager.UpdateLifesCount(_lifes);
             }
         }
 
@@ -102,8 +124,6 @@ namespace SibGameJam2021.Core
 
             _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
 
-            GameManager.Instance.UIManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
-
             UpdateWeaponPosition();
         }
 
@@ -115,6 +135,8 @@ namespace SibGameJam2021.Core
             _reloadBar.Connect(nameof(ReloadBar.ReloadFinished), this, nameof(OnReloadBarFinished));
 
             _gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
+
+            UpdateHUD();
 
             EquipWeapon();
 
@@ -186,6 +208,15 @@ namespace SibGameJam2021.Core
         private void OnReloadBarFinished()
         {
             _currentWeapon.FinishReloading();
+        }
+
+        private void UpdateHUD()
+        {
+            var uiManager = GameManager.Instance.UIManager;
+
+            uiManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            uiManager.UpdateGoldCount(Coins);
+            uiManager.UpdateLifesCount(Lifes);
         }
 
         private void UpdateWeaponPosition()
