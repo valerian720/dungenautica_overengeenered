@@ -82,23 +82,8 @@ namespace SibGameJam2021.Core.Enemies
             // https://youtu.be/0fPOt0Jw52s
             Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
             GD.Print(nextPoint);
-            /* 
-             * известно:
-             * - текущая точка моба
-             * - следующая точка моба
-             * - дистанция которая будет пройдена за кадр
-             * 
-             * найти точку на векторе, исходящему из текущей точки в сторону следующей, уделенному от исходной точки на расстояние
-             * 
-             * решение MoveToward // бля
-             */
+            
             Position = Position.MoveToward(nextPoint, moveDistance);
-
-            //float distanceToNextPoint = Position.DistanceTo(nextPoint);
-            //if (moveDistance<= distanceToNextPoint && moveDistance>=0.0)
-            //{
-            //    Position = Position.LinearInterpolate(nextPoint, moveDistance*1000 / distanceToNextPoint);
-            //}
         }
         //
 

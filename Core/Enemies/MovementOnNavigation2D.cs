@@ -21,14 +21,7 @@ namespace SibGameJam2021.Core.Enemies
             try
             {
                 path = nav2D.GetSimplePath(source, destiny);
-                 /*
-                GD.Print(path[0]);
-                GD.Print(path.Length);
 
-                GD.Print(source);
-                GD.Print(destiny);
-                GD.Print("========");
-                 */
             }
             catch (Exception e)
             {
