@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace SibGameJam2021.Core
+namespace SibGameJam2021.Core.Loot
 {
     public class Coin : Node2D
     {
@@ -8,6 +8,9 @@ namespace SibGameJam2021.Core
         private const float Tolerance = 3;
 
         private Player _player;
+
+        [Export]
+        protected virtual int Value { get; set; } = 1;
 
         public override void _PhysicsProcess(float delta)
         {
@@ -21,12 +24,13 @@ namespace SibGameJam2021.Core
 
                 QueueFree();
 
-                _player.Coins++;
+                _player.Coins += Value;
             }
         }
 
         public override void _Ready()
         {
+            GetNode<AnimatedSprite>("AnimatedSprite").Play();
             GetNode<Area2D>("Area2D").Connect("body_entered", this, nameof(OnBodyEntered));
             SetPhysicsProcess(false);
         }

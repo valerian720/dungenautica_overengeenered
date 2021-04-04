@@ -86,8 +86,7 @@ namespace SibGameJam2021.Core.Enemies
                 return;
             }
 
-            GetDamage(bullet.Damage);
-            bullet.QueueFree();
+            GetDamage(bullet.Pop());
         }
 
         private void SetAnimationAttack()
