@@ -9,6 +9,9 @@ namespace SibGameJam2021.Core
 
         private Player _player;
 
+        [Export]
+        protected virtual int Value { get; set; } = 1;
+
         public override void _PhysicsProcess(float delta)
         {
             var direction = (_player.GlobalPosition - GlobalPosition).Normalized();
@@ -21,7 +24,7 @@ namespace SibGameJam2021.Core
 
                 QueueFree();
 
-                _player.Coins++;
+                _player.Coins += Value;
             }
         }
 
