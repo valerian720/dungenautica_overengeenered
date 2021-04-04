@@ -209,9 +209,9 @@ collision_mask = 8
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="AttackBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 shape = SubResource( 3 )
 
 [node name="Animations" type="Node2D" parent="."]
