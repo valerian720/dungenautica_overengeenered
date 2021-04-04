@@ -30,6 +30,7 @@ namespace SibGameJam2021.Core
 
         public override void _Ready()
         {
+            GetNode<AnimatedSprite>("AnimatedSprite").Play();
             GetNode<Area2D>("Area2D").Connect("body_entered", this, nameof(OnBodyEntered));
             SetPhysicsProcess(false);
         }

@@ -35,6 +35,7 @@ namespace SibGameJam2021.Core.Weapons
 
         public float Pop()
         {
+            SetPhysicsProcess(false);
             _animatedSprite.Play();
             return Damage;
         }

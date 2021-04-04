@@ -11,12 +11,13 @@ namespace SibGameJam2021.Core
 {
     public class Player : Entity
     {
-        private static readonly Dictionary<string, PackedScene> _weapons = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
+        private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
 
-        private Node2D _gunSlot = null;
+        private WeaponBase _currentWeapon = null;
+        private Node2D _gunSlot;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
-        private WeaponBase _weapon;
+        private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
 
         public Player() : base()
         {
@@ -26,14 +27,26 @@ namespace SibGameJam2021.Core
 
         public override void _Input(InputEvent inputEvent)
         {
+            if (inputEvent.IsActionPressed("slot1"))
+            {
+                EquipWeapon(0);
+            }
+            if (inputEvent.IsActionPressed("slot2"))
+            {
+                EquipWeapon(1);
+            }
+            if (inputEvent.IsActionPressed("slot3"))
+            {
+                EquipWeapon(2);
+            }
             if (inputEvent.IsActionPressed("ui_fire"))
             {
-                _weapon.StartShooting();
+                _currentWeapon.StartShooting();
             }
             if (inputEvent.IsActionPressed("reload"))
             {
-                _weapon.StartReloading();
-                _reloadBar.StartReloading(_weapon.ReloadDuration);
+                _currentWeapon.StartReloading();
+                _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
             }
         }
 
@@ -68,7 +81,7 @@ namespace SibGameJam2021.Core
 
             _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
 
-            _gunSlot.LookAt(GetGlobalMousePosition());
+            UpdateWeaponPosition();
         }
 
         public override void _Ready()
@@ -76,19 +89,23 @@ namespace SibGameJam2021.Core
             base._Ready();
 
             _reloadBar = GetNode<ReloadBar>("ReloadBar");
+            _reloadBar.Connect(nameof(ReloadBar.ReloadFinished), this, nameof(OnReloadBarFinished));
 
             _gunSlot = GetNode<Node2D>("GunSlot"); // подгрузка ссылки на слот для оружия
 
-            _weapon = _weapons.Values.First().Instance() as WeaponBase;
+            EquipWeapon();
 
-            _gunSlot.AddChild(_weapon);
-
-            _reloadBar.Connect(nameof(ReloadBar.ReloadFinished), _weapon, nameof(WeaponBase.FinishReloading));
+            Connect(nameof(SceneManager.OnLevelChange), this, nameof(OnLevelChange));
         }
 
         public void ApplyImpulse(Vector2 velocity)
         {
             _velocity += velocity;
+        }
+
+        public void OnLevelChange()
+        {
+            _reloadBar.InterruptReloading();
         }
 
         protected override void Die()
@@ -103,6 +120,41 @@ namespace SibGameJam2021.Core
                 GetDamage((body as Enemy).Damage);
                 _animationState.Travel("Hurt");
             }
+        }
+
+        private void EquipWeapon(int index = 0)
+        {
+            if (_currentWeapon != null)
+            {
+                _gunSlot.RemoveChild(_currentWeapon);
+                _reloadBar.InterruptReloading();
+            }
+
+            _currentWeapon = _weapons.ElementAt(index);
+
+            _gunSlot.AddChild(_currentWeapon);
+            _currentWeapon.Position = Vector2.Zero;
+        }
+
+        private void OnReloadBarFinished()
+        {
+            _currentWeapon.FinishReloading();
+        }
+
+        private void UpdateWeaponPosition()
+        {
+            var mousePos = GetGlobalMousePosition();
+
+            if (mousePos.x > _gunSlot.GlobalPosition.x)
+            {
+                _currentWeapon.LookRight();
+            }
+            else
+            {
+                _currentWeapon.LookLeft();
+            }
+
+            _gunSlot.LookAt(mousePos);
         }
     }
 }

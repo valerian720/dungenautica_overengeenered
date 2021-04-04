@@ -4,16 +4,12 @@ namespace SibGameJam2021.Core.Weapons
 {
     public abstract class WeaponBase : Node2D
     {
-        protected static readonly PackedScene Bullet;
+        protected static readonly PackedScene BulletScene = GD.Load<PackedScene>("res://Assets/Prefabs/Bullet.tscn");
 
         protected Node2D _muzzlePoint;
         private int _ammoCount = 0;
+        private Sprite _sprite;
         private float _timeElapsed;
-
-        static WeaponBase()
-        {
-            Bullet = GD.Load<PackedScene>("res://Assets/Prefabs/Bullet.tscn");
-        }
 
         protected WeaponBase()
         {
@@ -55,7 +51,7 @@ namespace SibGameJam2021.Core.Weapons
         public virtual float Recoil { get; protected set; } = 0f;
 
         [Export]
-        public virtual float ReloadDuration { get; protected set; } = 2f;
+        public virtual float ReloadDuration { get; protected set; } = 1f;
 
         public float ShotDelay => 1f / RateOfFire;
 
@@ -80,12 +76,24 @@ namespace SibGameJam2021.Core.Weapons
 
         public override void _Ready()
         {
+            _sprite = GetNode<Sprite>("Sprite");
+
             _muzzlePoint = GetNode<Node2D>("Muzzle");
         }
 
         public void FinishReloading()
         {
             AmmoCount = MagSize;
+        }
+
+        public void LookLeft()
+        {
+            _sprite.FlipV = true;
+        }
+
+        public void LookRight()
+        {
+            _sprite.FlipV = false;
         }
 
         public void StartReloading()
@@ -101,6 +109,18 @@ namespace SibGameJam2021.Core.Weapons
         }
 
         protected abstract void AdditionalLogic();
+
+        protected Bullet InstanceBullet()
+        {
+            var bullet = (Bullet)BulletScene.Instance();
+
+            bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
+            bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+            bullet.Speed = BulletSpeed;
+            bullet.Damage = Damage;
+
+            return bullet;
+        }
 
         protected abstract void SpawnBullets();
 
