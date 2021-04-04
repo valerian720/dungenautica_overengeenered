@@ -8,13 +8,18 @@ namespace SibGameJam2021.Core.Managers
         private const int HeartSize = 8;
         private const int HeartValue = 10;
 
+        private Label _ammoBoostLabel;
         private TextureRect _ammoTexture;
+        private Label _bounceBoostLabel;
+        private Label _damageBoostLabel;
+        private Label _goldBoostLabel;
         private Label _goldLabel;
         private TextureRect _healthEmptyTexture;
         private TextureRect _healthFullTexture;
         private Control _hud;
         private Label _lifesLabel;
         private Control _pauseMenu;
+        private Label _speedBoostLabel;
 
         public override void _Input(InputEvent @event)
         {
@@ -50,11 +55,19 @@ namespace SibGameJam2021.Core.Managers
         {
             _hud = GetNode<Control>("HUD");
             _pauseMenu = GetNode<Control>("PauseMenu");
-            _ammoTexture = GetNode<TextureRect>("HUD/LowerContainer/AmmoBar");
-            _healthEmptyTexture = GetNode<TextureRect>("HUD/LowerContainer/HealthEmpty");
-            _healthFullTexture = GetNode<TextureRect>("HUD/LowerContainer/HealthEmpty/HealthFull");
-            _goldLabel = GetNode<Label>("HUD/UpperContainer/GoldBar/GoldLabel");
-            _lifesLabel = GetNode<Label>("HUD/UpperContainer/LifeBar/LifesLabel");
+
+            _ammoTexture = GetNode<TextureRect>("HUD/LowerLeft/AmmoBar");
+            _healthEmptyTexture = GetNode<TextureRect>("HUD/LowerLeft/HealthEmpty");
+            _healthFullTexture = GetNode<TextureRect>("HUD/LowerLeft/HealthEmpty/HealthFull");
+
+            _goldLabel = GetNode<Label>("HUD/UpperLeft/GoldBar/GoldLabel");
+            _lifesLabel = GetNode<Label>("HUD/UpperLeft/LifeBar/LifesLabel");
+
+            _damageBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/DamageBoostLabel");
+            _goldBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/GoldBoostLabel");
+            _speedBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/SpeedBoostLabel");
+            _ammoBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/AmmoBoostLabel");
+            _bounceBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/BounceBoostLabel");
 
             GameManager.Instance.UIManager = this;
         }
@@ -64,9 +77,61 @@ namespace SibGameJam2021.Core.Managers
             _hud.Visible = visible;
         }
 
+        public void UpdateAmmoBoost(float value)
+        {
+            if (Mathf.IsEqualApprox(value, 0))
+            {
+                _ammoBoostLabel.Visible = false;
+            }
+            else
+            {
+                _ammoBoostLabel.Visible = true;
+                _ammoBoostLabel.Text = $"Ammo: +{value * 100}%";
+            }
+        }
+
         public void UpdateAmmoCount(int count)
         {
             ((AtlasTexture)_ammoTexture.Texture).Region = new Rect2(0, 0, count * AmmoBubbleSize, AmmoBubbleSize);
+        }
+
+        public void UpdateBounceBoost(int value)
+        {
+            if (value == 0)
+            {
+                _bounceBoostLabel.Visible = false;
+            }
+            else
+            {
+                _bounceBoostLabel.Visible = true;
+                _bounceBoostLabel.Text = $"Bounces: {value}";
+            }
+        }
+
+        public void UpdateDamageBoost(float value)
+        {
+            if (Mathf.IsEqualApprox(value, 0))
+            {
+                _damageBoostLabel.Visible = false;
+            }
+            else
+            {
+                _damageBoostLabel.Visible = true;
+                _damageBoostLabel.Text = $"Damage: +{value * 100}%";
+            }
+        }
+
+        public void UpdateGoldBoost(float value)
+        {
+            if (Mathf.IsEqualApprox(value, 0))
+            {
+                _goldBoostLabel.Visible = false;
+            }
+            else
+            {
+                _goldBoostLabel.Visible = true;
+                _goldBoostLabel.Text = $"Gold: +{value * 100}%";
+            }
         }
 
         public void UpdateGoldCount(int count)
@@ -86,6 +151,19 @@ namespace SibGameJam2021.Core.Managers
         public void UpdateLifesCount(int count)
         {
             _lifesLabel.Text = count.ToString();
+        }
+
+        public void UpdateSpeedBoost(float value)
+        {
+            if (Mathf.IsEqualApprox(value, 0))
+            {
+                _speedBoostLabel.Visible = false;
+            }
+            else
+            {
+                _speedBoostLabel.Visible = true;
+                _speedBoostLabel.Text = $"Speed: +{value * 100}%";
+            }
         }
 
         private void TogglePause()

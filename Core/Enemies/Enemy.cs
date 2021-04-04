@@ -8,14 +8,16 @@ namespace SibGameJam2021.Core.Enemies
     public class Enemy : Entity
     {
         private HealthBar _healthbar;
-        private MovementOnNavigation2D movementOnNav2D;
 
         // AI
         [Export]
         private float ActivationRadius = 300;
 
+        private MovementOnNavigation2D movementOnNav2D;
+
         [Export]
         private float SightActivationRadius = 350;
+
         [Export]
         private float StopAtRadius = 50;
 
@@ -48,7 +50,7 @@ namespace SibGameJam2021.Core.Enemies
         {
             base.GetDamage(damage);
 
-            _healthbar.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            _healthbar.UpdateHealth(CurrentHealth, MaxHealth);
         }
 
         virtual public void UpdateAnimation(Player player)
@@ -63,12 +65,12 @@ namespace SibGameJam2021.Core.Enemies
         virtual public void UpdatePosition(Player player, float delta)
         {
             float distanceSquared = player.Position.DistanceSquaredTo(Position);
-            if ((distanceSquared < ActivationRadius * ActivationRadius) && (distanceSquared > StopAtRadius*StopAtRadius))
+            if ((distanceSquared < ActivationRadius * ActivationRadius) && (distanceSquared > StopAtRadius * StopAtRadius))
             {
                 // базовое перемещение в сторону игрока если он находится в некотром радиусе от моба
                 //Position += (player.Position - Position) / 50;
                 //this.MoveAndCollide(); TODO
-                FollowPath(this.MAX_SPEED*delta, player.Position);
+                FollowPath(MaxSpeed * delta, player.Position);
                 SetAnimationRun();
             }
             else
@@ -76,16 +78,6 @@ namespace SibGameJam2021.Core.Enemies
                 SetAnimationIdle();
             }
         }
-        //
-        private void FollowPath(float moveDistance, Vector2 destiny)
-        {
-            // https://youtu.be/0fPOt0Jw52s
-            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
-            GD.Print(nextPoint);
-            
-            Position = Position.MoveToward(nextPoint, moveDistance);
-        }
-        //
 
         protected override void Die()
         {
@@ -93,6 +85,7 @@ namespace SibGameJam2021.Core.Enemies
             SpawnManager.EnemiesAlive--;
         }
 
+        //
         private void _on_Area2D_body_entered(Node body)
         {
             var bullet = body as Bullet;
@@ -103,6 +96,16 @@ namespace SibGameJam2021.Core.Enemies
             }
 
             GetDamage(bullet.Pop());
+        }
+
+        //
+        private void FollowPath(float moveDistance, Vector2 destiny)
+        {
+            // https://youtu.be/0fPOt0Jw52s
+            Vector2 nextPoint = movementOnNav2D.GetPointTowardsDestiny(Position, destiny);
+            GD.Print(nextPoint);
+
+            Position = Position.MoveToward(nextPoint, moveDistance);
         }
 
         private void SetAnimationAttack()

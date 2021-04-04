@@ -1,52 +1,23 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Loot
 {
-    public class Coin : Node2D
+    public class Coin : LootBase
     {
-        private const float Speed = 100;
-        private const float Tolerance = 3;
-
-        private Player _player;
-
         [Export]
         protected virtual int Value { get; set; } = 1;
 
-        public override void _PhysicsProcess(float delta)
-        {
-            var direction = (_player.GlobalPosition - GlobalPosition).Normalized();
-
-            GlobalPosition += direction * Speed * delta;
-
-            if (Mathf.Abs(GlobalPosition.x - _player.GlobalPosition.x) < Tolerance || Mathf.Abs(GlobalPosition.y - _player.GlobalPosition.y) < Tolerance)
-            {
-                GlobalPosition = _player.GlobalPosition;
-
-                QueueFree();
-
-                _player.Coins += Value;
-            }
-        }
-
         public override void _Ready()
         {
+            base._Ready();
+
             GetNode<AnimatedSprite>("AnimatedSprite").Play();
-            GetNode<Area2D>("Area2D").Connect("body_entered", this, nameof(OnBodyEntered));
-            SetPhysicsProcess(false);
         }
 
-        private void OnBodyEntered(Node body)
+        protected override void CustomLogic()
         {
-            var player = body as Player;
-
-            if (player == null)
-            {
-                return;
-            }
-
-            _player = player;
-
-            SetPhysicsProcess(true);
+            _player.Coins += Value * (int)Mathf.Round(1f + GameManager.Instance.Player.GoldBoost);
         }
     }
 }

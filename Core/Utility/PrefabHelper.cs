@@ -3,7 +3,7 @@ using Godot;
 
 namespace SibGameJam2021.Core.Utility
 {
-    internal static class PrefabHelper
+    public static class PrefabHelper
     {
         public static Dictionary<string, PackedScene> LoadPrefabsDictionary(string path)
         {

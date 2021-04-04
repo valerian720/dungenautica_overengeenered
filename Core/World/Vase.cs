@@ -1,14 +1,12 @@
 ﻿using System;
 using Godot;
+using SibGameJam2021.Core.Managers;
 using SibGameJam2021.Core.Weapons;
 
 namespace SibGameJam2021.Core.World
 {
     public class Vase : StaticBody2D
     {
-        private static readonly PackedScene CoinScene = ResourceLoader.Load<PackedScene>("res://Assets/Prefabs/Coin.tscn");
-        private static readonly PackedScene CrownScene = ResourceLoader.Load<PackedScene>("res://Assets/Prefabs/Crown.tscn");
-
         private AnimatedSprite _animatedSprite;
         private CollisionShape2D _collisionShape1;
         private CollisionShape2D _collisionShape2;
@@ -28,11 +26,11 @@ namespace SibGameJam2021.Core.World
 
             if (new Random().Next(10) == 0) // 10% chance
             {
-                coin = CrownScene.Instance();
+                coin = LootManager.CrownScene.Instance();
             }
             else
             {
-                coin = CoinScene.Instance();
+                coin = LootManager.CoinScene.Instance();
             }
 
             CallDeferred("add_child", coin);

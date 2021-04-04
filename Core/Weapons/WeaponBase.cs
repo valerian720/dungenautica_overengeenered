@@ -36,9 +36,7 @@ namespace SibGameJam2021.Core.Weapons
         }
 
         [Export]
-        public virtual int AmmoPerShot { get; protected set; } = 1;     
-        [Export]
-        public virtual int ProjectilesPerShot { get; protected set; } = 1;
+        public virtual int AmmoPerShot { get; protected set; } = 1;
 
         [Export]
         public virtual float BulletSpeed { get; protected set; } = 300;
@@ -54,6 +52,9 @@ namespace SibGameJam2021.Core.Weapons
 
         [Export]
         public virtual int MagSize { get; protected set; } = 30;
+
+        [Export]
+        public virtual int ProjectilesPerShot { get; protected set; } = 1;
 
         [Export]
         public virtual float RateOfFire { get; protected set; } = 2f;
@@ -89,7 +90,7 @@ namespace SibGameJam2021.Core.Weapons
 
         public void FinishReloading()
         {
-            AmmoCount = MagSize;
+            AmmoCount = MagSize * (int)Mathf.Round(1f + GameManager.Instance.Player.AmmoBoost);
         }
 
         public void LookLeft()
@@ -123,7 +124,7 @@ namespace SibGameJam2021.Core.Weapons
             bullet.GlobalPosition = _muzzlePoint.GlobalPosition;
             bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
             bullet.Speed = BulletSpeed;
-            bullet.Damage = Damage;
+            bullet.Damage = Damage * Mathf.Round(1f + GameManager.Instance.Player.DamageBoost);
 
             return bullet;
         }

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using SibGameJam2021.Core.Managers;
 
@@ -12,7 +14,7 @@ namespace SibGameJam2021.Core.World
         public override void _Ready()
         {
             _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
-            _animatedSprite.Connect("animation_finished", this, nameof(DisableCollision));
+            _animatedSprite.Connect("animation_finished", this, nameof(OnOpened));
 
             _area2D = GetNode<Area2D>("Area2D");
             _area2D.Connect("body_entered", this, nameof(OnBodyEntered));
@@ -42,8 +44,27 @@ namespace SibGameJam2021.Core.World
             _animatedSprite.Play();
         }
 
-        private void DisableCollision()
+        private void OnOpened()
         {
+            var boosts = LootManager.Boosts;
+
+            var count = boosts.Count() + 1;
+
+            var index = new Random().Next(count);
+
+            Node loot;
+
+            if (index == count - 1)
+            {
+                loot = LootManager.CrownScene.Instance();
+            }
+            else
+            {
+                loot = boosts.ElementAt(index).Value.Instance();
+            }
+
+            CallDeferred("add_child", loot);
+
             _collisionShape.SetDeferred("disabled", true);
         }
     }

@@ -11,6 +11,11 @@ namespace SibGameJam2021.Core
 {
     public class Player : Entity
     {
+        public float _ammoBoost = 0;
+        public int _bounceBoost = 0;
+        public float _damageBoost = 0;
+        public float _goldBoost = 0;
+        public float _speedBoost = 0;
         private const float DashDelay = 1;
         private const float DashForce = 400;
 
@@ -21,6 +26,7 @@ namespace SibGameJam2021.Core
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
         private int _lifes = 1;
+        private float _maxHealth = 100f;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
         private List<WeaponBase> _weapons = _weaponScenes.Select(kv => (WeaponBase)kv.Value.Instance()).ToList();
@@ -29,6 +35,28 @@ namespace SibGameJam2021.Core
         {
             _dashTimer.OneShot = true;
             _dashTimer.Connect("timeout", this, nameof(OnDashTimeout));
+        }
+
+        public float AmmoBoost
+        {
+            get { return _ammoBoost; }
+
+            set
+            {
+                _ammoBoost = value;
+                GameManager.Instance.UIManager.UpdateAmmoBoost(_ammoBoost);
+            }
+        }
+
+        public int BounceBoost
+        {
+            get { return _bounceBoost; }
+
+            set
+            {
+                _bounceBoost = value;
+                GameManager.Instance.UIManager.UpdateBounceBoost(_bounceBoost);
+            }
         }
 
         public int Coins
@@ -49,7 +77,29 @@ namespace SibGameJam2021.Core
             protected set
             {
                 base.CurrentHealth = value;
-                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, MAX_HEALTH);
+                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, _maxHealth);
+            }
+        }
+
+        public float DamageBoost
+        {
+            get { return _damageBoost; }
+
+            set
+            {
+                _damageBoost = value;
+                GameManager.Instance.UIManager.UpdateDamageBoost(_damageBoost);
+            }
+        }
+
+        public float GoldBoost
+        {
+            get { return _goldBoost; }
+
+            set
+            {
+                _goldBoost = value;
+                GameManager.Instance.UIManager.UpdateGoldBoost(_goldBoost);
             }
         }
 
@@ -61,6 +111,28 @@ namespace SibGameJam2021.Core
             {
                 _lifes = value;
                 GameManager.Instance.UIManager.UpdateLifesCount(_lifes);
+            }
+        }
+
+        public override float MaxHealth
+        {
+            get { return _maxHealth; }
+
+            set
+            {
+                _maxHealth = value;
+                GameManager.Instance.UIManager.UpdateHealth(_currentHealth, _maxHealth);
+            }
+        }
+
+        public float SpeedBoost
+        {
+            get { return _speedBoost; }
+
+            set
+            {
+                _speedBoost = value;
+                GameManager.Instance.UIManager.UpdateSpeedBoost(_speedBoost);
             }
         }
 
@@ -111,7 +183,7 @@ namespace SibGameJam2021.Core
                 _animationState.Travel("Run");
 
                 // применение трения к игроку
-                _velocity = _velocity.MoveToward(inputVector * MAX_SPEED, ACCELERATION * delta);
+                _velocity = _velocity.MoveToward(inputVector * MaxSpeed * Mathf.Round(1f + SpeedBoost), Acceleration * delta);
             }
             else
             {
@@ -119,7 +191,7 @@ namespace SibGameJam2021.Core
                 _animationState.Travel("Idle");
 
                 // применение трения к игроку
-                _velocity = _velocity.MoveToward(Vector2.Zero, FRICTION * delta);
+                _velocity = _velocity.MoveToward(Vector2.Zero, Friction * delta);
             }
 
             _velocity = MoveAndSlide(_velocity); // скольжение вдоль коллайдера
@@ -214,9 +286,14 @@ namespace SibGameJam2021.Core
         {
             var uiManager = GameManager.Instance.UIManager;
 
-            uiManager.UpdateHealth(CurrentHealth, MAX_HEALTH);
+            uiManager.UpdateHealth(CurrentHealth, MaxHealth);
             uiManager.UpdateGoldCount(Coins);
             uiManager.UpdateLifesCount(Lifes);
+            uiManager.UpdateDamageBoost(DamageBoost);
+            uiManager.UpdateSpeedBoost(SpeedBoost);
+            uiManager.UpdateGoldBoost(GoldBoost);
+            uiManager.UpdateAmmoBoost(AmmoBoost);
+            uiManager.UpdateBounceBoost(BounceBoost);
         }
 
         private void UpdateWeaponPosition()
