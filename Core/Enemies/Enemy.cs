@@ -112,7 +112,7 @@ namespace SibGameJam2021.Core.Enemies
             GetDamage(bullet.Pop());
         }
 
-        virtual public void Attack()
+        virtual protected void Attack()
         {
             SetAnimationAttack();
 
