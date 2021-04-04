@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Scenes/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/Vase.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/Prefabs/TileMap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Prefabs/Enemies/FishMan.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Prefabs/Enemies/Fish.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Prefabs/Enemies/FishManGuard.tscn" type="PackedScene" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -597,6 +598,10 @@ position = Vector2( 175.96, 116.392 )
 
 [node name="BrokenCollumn3" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 182.755, 18.6415 )
+
+[node name="FishMan2" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -464.466, -20.7261 )
+ActivationRadius = 1.0
 
 [node name="FishMan" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( -400.597, -19.4303 )

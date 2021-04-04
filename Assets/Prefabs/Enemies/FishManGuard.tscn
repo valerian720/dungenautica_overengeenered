@@ -1,7 +1,7 @@
 [gd_scene load_steps=53 format=2]
 
-[ext_resource path="res://Assets/Textures/Enemy/FishMan.png" type="Texture" id=1]
-[ext_resource path="res://Core/Enemies/FishMan.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Textures/Enemy/FishManGold.png" type="Texture" id=1]
+[ext_resource path="res://Core/Enemies/FishManGuard.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Prefabs/HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -428,6 +428,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 80
+frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

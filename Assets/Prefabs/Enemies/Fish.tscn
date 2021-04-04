@@ -424,7 +424,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 76
-frame = 30
+frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
