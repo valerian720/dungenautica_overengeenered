@@ -529,14 +529,26 @@ Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 2
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
 position = Vector2( 35, 89 )
 
-[node name="Bush" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 55.1217, 72.0916 )
+[node name="SpawnPoint" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 128, 88 )
 
-[node name="Bush7" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 285.142, 50.893 )
+[node name="SpawnPoint2" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 376, 88 )
 
-[node name="Bush2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 64.1105, 141.917 )
+[node name="SpawnPoint3" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 376, 192 )
+
+[node name="SpawnPoint4" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 280, 232 )
+
+[node name="SpawnPoint5" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 288, 152 )
+
+[node name="SpawnPoint6" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 0, 152 )
+
+[node name="SpawnPoint7" parent="YSort/SpawnManager" instance=ExtResource( 8 )]
+position = Vector2( 64, 224 )
 
 [node name="Vase" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 48, 16 )
@@ -562,34 +574,14 @@ position = Vector2( 408, 8 )
 [node name="Vase8" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 408, 40 )
 
-[node name="SpawnManager2" parent="YSort" instance=ExtResource( 7 )]
-Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 5,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 8
-}
+[node name="Collumn" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 288, 16 )
 
-[node name="SpawnPoint" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 128, 88 )
+[node name="Collumn2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 240, 0 )
 
-[node name="SpawnPoint2" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 376, 88 )
-
-[node name="SpawnPoint3" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 376, 192 )
-
-[node name="SpawnPoint4" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 280, 232 )
-
-[node name="SpawnPoint5" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 288, 152 )
-
-[node name="SpawnPoint6" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 0, 152 )
-
-[node name="SpawnPoint7" parent="YSort/SpawnManager2" instance=ExtResource( 8 )]
-position = Vector2( 64, 224 )
-
-[node name="Navigation2D" type="Navigation2D" parent="."]
+[node name="Collumn3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 144, 0 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = SubResource( 50 )
