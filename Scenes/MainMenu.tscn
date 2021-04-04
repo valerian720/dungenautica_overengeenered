@@ -7,7 +7,17 @@
 [ext_resource path="res://Assets/Textures/UI/background.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Textures/UI/GameButton.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -27,16 +37,6 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 10
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 10
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=9]
 size = 10
 use_filter = true
 font_data = ExtResource( 1 )
@@ -89,7 +89,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label" type="Label" parent="Buttons/PlayButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 1 )
 text = "Play"
 align = 1
 valign = 1
@@ -107,7 +107,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label2" type="Label" parent="Buttons/SettingsButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 1 )
 text = "Options"
 align = 1
 valign = 1
@@ -125,7 +125,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label3" type="Label" parent="Buttons/QuitButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 1 )
 text = "Exit"
 align = 1
 valign = 1
@@ -180,7 +180,7 @@ columns = 2
 margin_right = 109.0
 margin_bottom = 19.0
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Resolution"
 valign = 1
 
@@ -188,7 +188,7 @@ valign = 1
 margin_left = 129.0
 margin_right = 338.0
 margin_bottom = 19.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "1280x720"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -198,7 +198,7 @@ __meta__ = {
 margin_top = 32.0
 margin_right = 109.0
 margin_bottom = 45.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "Display Mode"
 valign = 1
 
@@ -207,14 +207,14 @@ margin_left = 129.0
 margin_top = 29.0
 margin_right = 338.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Borderless Fullscreen"
 
 [node name="Label2" type="Label" parent="SettingsWindow/MarginContainer/GridContainer"]
 margin_top = 59.0
 margin_right = 109.0
 margin_bottom = 72.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 6 )
 text = "Master Volume"
 valign = 1
 
@@ -235,7 +235,7 @@ margin_left = 183.0
 margin_top = 1.0
 margin_right = 209.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 
 [node name="Music" type="Control" parent="."]
 margin_right = 40.0

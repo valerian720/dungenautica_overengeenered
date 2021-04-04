@@ -11,11 +11,13 @@ namespace SibGameJam2021.Core.Enemies
         protected override void Attack()
         {
             audioPlayer.Stream = fish_attack;
+            audioPlayer.Playing = true;
             base.Attack();
         }
         protected override void Die()
         {
             audioPlayer.Stream = fish_death;
+            audioPlayer.Playing = true;
             base.Die();
         }
     }
