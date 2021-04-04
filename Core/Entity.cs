@@ -11,23 +11,20 @@ namespace SibGameJam2021.Core
 
         public Entity()
         {
-            _currentHealth = MAX_HEALTH;
+            _currentHealth = MaxHealth;
         }
 
         public virtual float CurrentHealth
         {
             get { return _currentHealth; }
 
-            protected set { _currentHealth = value > 0 ? (value < MAX_HEALTH ? value : MAX_HEALTH) : 0; }
+            protected set { _currentHealth = value > 0 ? (value < MaxHealth ? value : MaxHealth) : 0; }
         }
 
-        protected virtual float ACCELERATION { get; } = 600;
-
-        protected virtual float FRICTION { get; } = 700;
-
-        protected virtual float MAX_HEALTH { get; } = 100;
-
-        protected virtual float MAX_SPEED { get; } = 80;
+        public virtual float MaxHealth { get; set; } = 100;
+        protected virtual float Acceleration { get; } = 600;
+        protected virtual float Friction { get; } = 700;
+        protected virtual float MaxSpeed { get; } = 80;
 
         public override void _Ready()
         {

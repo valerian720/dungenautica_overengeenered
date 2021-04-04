@@ -1,4 +1,5 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Weapons
 {
@@ -8,6 +9,7 @@ namespace SibGameJam2021.Core.Weapons
         public float LifeTime = 10f;
 
         private AnimatedSprite _animatedSprite;
+        private int _bouncesLeft;
         private Timer _timer = new Timer();
         public float Damage { get; set; }
         public Vector2 Direction { get; set; }
@@ -15,11 +17,19 @@ namespace SibGameJam2021.Core.Weapons
 
         public override void _PhysicsProcess(float delta)
         {
-            var info = MoveAndCollide(Direction * Speed * delta);
+            var collision = MoveAndCollide(Direction * Speed * delta);
 
-            if (info != null)
+            if (collision != null)
             {
-                Pop();
+                if (_bouncesLeft > 0)
+                {
+                    Direction = Direction.Bounce(collision.Normal);
+                    _bouncesLeft--;
+                }
+                else
+                {
+                    Pop();
+                }
             }
         }
 
@@ -27,6 +37,8 @@ namespace SibGameJam2021.Core.Weapons
         {
             _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
             _animatedSprite.Connect("animation_finished", this, "queue_free");
+
+            _bouncesLeft = GameManager.Instance.Player.BounceBoost;
 
             AddChild(_timer);
             _timer.Connect("timeout", this, nameof(OnTimer));

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Core/Managers/UIManager.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/Pixel/Pixel-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,33 +7,39 @@
 [ext_resource path="res://Assets/Textures/UI/HeartFull.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Textures/UI/CoinIcon.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Textures/UI/LifeIcon.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=1]
 size = 10
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=2]
 size = 8
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="DynamicFont" id=7]
+size = 8
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="AtlasTexture" id=3]
 flags = 2
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=4]
 flags = 2
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 8, 8 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 flags = 2
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 4, 4 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=6]
 size = 10
 use_filter = true
 font_data = ExtResource( 2 )
@@ -57,13 +63,13 @@ margin_top = 10.0
 margin_right = -10.0
 margin_bottom = 19.0
 rect_clip_content = true
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 1 )
 text = "Pause"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpperContainer" type="VBoxContainer" parent="HUD"]
+[node name="UpperLeft" type="VBoxContainer" parent="HUD"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 14.0
@@ -73,42 +79,82 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoldBar" type="HBoxContainer" parent="HUD/UpperContainer"]
-margin_right = 32.0
+[node name="GoldBar" type="HBoxContainer" parent="HUD/UpperLeft"]
+margin_right = 48.0
 margin_bottom = 10.0
 
-[node name="TextureRect" type="TextureRect" parent="HUD/UpperContainer/GoldBar"]
+[node name="TextureRect" type="TextureRect" parent="HUD/UpperLeft/GoldBar"]
 margin_right = 8.0
 margin_bottom = 10.0
 texture = ExtResource( 6 )
 
-[node name="GoldLabel" type="Label" parent="HUD/UpperContainer/GoldBar"]
+[node name="GoldLabel" type="Label" parent="HUD/UpperLeft/GoldBar"]
 margin_left = 12.0
 margin_right = 32.0
 margin_bottom = 10.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "100"
 valign = 1
 
-[node name="LifeBar" type="HBoxContainer" parent="HUD/UpperContainer"]
+[node name="LifeBar" type="HBoxContainer" parent="HUD/UpperLeft"]
 margin_top = 15.0
-margin_right = 32.0
+margin_right = 48.0
 margin_bottom = 25.0
 
-[node name="TextureRect" type="TextureRect" parent="HUD/UpperContainer/LifeBar"]
+[node name="TextureRect" type="TextureRect" parent="HUD/UpperLeft/LifeBar"]
 margin_right = 8.0
 margin_bottom = 10.0
 texture = ExtResource( 7 )
 
-[node name="LifesLabel" type="Label" parent="HUD/UpperContainer/LifeBar"]
+[node name="LifesLabel" type="Label" parent="HUD/UpperLeft/LifeBar"]
 margin_left = 12.0
 margin_right = 18.0
 margin_bottom = 10.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "1"
 valign = 1
 
-[node name="LowerContainer" type="VBoxContainer" parent="HUD"]
+[node name="BoostsBar" type="VBoxContainer" parent="HUD/UpperLeft"]
+modulate = Color( 1, 1, 1, 0.498039 )
+margin_top = 30.0
+margin_right = 48.0
+margin_bottom = 96.0
+
+[node name="DamageBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
+margin_right = 48.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 7 )
+text = "Damage: +5%"
+
+[node name="SpeedBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
+margin_top = 14.0
+margin_right = 48.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 7 )
+text = "Speed: +5%"
+
+[node name="GoldBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
+margin_top = 28.0
+margin_right = 48.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 7 )
+text = "Gold: +5%"
+
+[node name="AmmoBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
+margin_top = 42.0
+margin_right = 48.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 7 )
+text = "Ammo: +5%"
+
+[node name="BounceBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
+margin_top = 56.0
+margin_right = 48.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 7 )
+text = "Bounce: 1"
+
+[node name="LowerLeft" type="VBoxContainer" parent="HUD"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -120,30 +166,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthEmpty" type="TextureRect" parent="HUD/LowerContainer"]
+[node name="HealthEmpty" type="TextureRect" parent="HUD/LowerLeft"]
 margin_right = 8.0
 margin_bottom = 8.0
 size_flags_horizontal = 2
-texture = SubResource( 8 )
+texture = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthFull" type="TextureRect" parent="HUD/LowerContainer/HealthEmpty"]
+[node name="HealthFull" type="TextureRect" parent="HUD/LowerLeft/HealthEmpty"]
 margin_right = 8.0
 margin_bottom = 8.0
 size_flags_horizontal = 2
-texture = SubResource( 9 )
+texture = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoBar" type="TextureRect" parent="HUD/LowerContainer"]
+[node name="AmmoBar" type="TextureRect" parent="HUD/LowerLeft"]
 margin_top = 13.0
 margin_right = 4.0
 margin_bottom = 17.0
 size_flags_horizontal = 2
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 stretch_mode = 1
 
 [node name="PauseMenu" type="Control" parent="."]
@@ -181,7 +227,7 @@ __meta__ = {
 margin_right = 82.0
 margin_bottom = 19.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "Resume"
 
 [node name="SaveButton" type="Button" parent="PauseMenu/VBoxContainer"]
@@ -189,14 +235,14 @@ margin_top = 29.0
 margin_right = 82.0
 margin_bottom = 48.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 
 [node name="MainMenuButton" type="Button" parent="PauseMenu/VBoxContainer"]
 margin_top = 58.0
 margin_right = 82.0
 margin_bottom = 77.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "Main Menu"
 [connection signal="pressed" from="HUD/PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
