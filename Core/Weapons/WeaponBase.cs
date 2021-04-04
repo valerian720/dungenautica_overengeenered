@@ -1,4 +1,5 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Weapons
 {
@@ -14,7 +15,8 @@ namespace SibGameJam2021.Core.Weapons
 
         protected WeaponBase()
         {
-            FinishReloading();
+            _ammoCount = MagSize;
+
             _shootTimer.OneShot = true;
             _shootTimer.Connect("timeout", this, nameof(OnShootTimer));
         }
@@ -26,11 +28,17 @@ namespace SibGameJam2021.Core.Weapons
         {
             get { return _ammoCount; }
 
-            protected set { _ammoCount = value > 0 ? (value < MagSize ? value : MagSize) : 0; }
+            protected set
+            {
+                _ammoCount = value > 0 ? (value < MagSize ? value : MagSize) : 0;
+                GameManager.Instance.UIManager.UpdateAmmoCount(AmmoCount);
+            }
         }
 
         [Export]
-        public virtual int AmmoPerShot { get; protected set; } = 1;
+        public virtual int AmmoPerShot { get; protected set; } = 1;     
+        [Export]
+        public virtual int ProjectilesPerShot { get; protected set; } = 1;
 
         [Export]
         public virtual float BulletSpeed { get; protected set; } = 300;
@@ -120,7 +128,7 @@ namespace SibGameJam2021.Core.Weapons
             return bullet;
         }
 
-        protected abstract void SpawnBullets();
+        protected abstract void SpawnProjectiles();
 
         private void OnShootTimer()
         {
@@ -134,7 +142,7 @@ namespace SibGameJam2021.Core.Weapons
                 return;
             }
 
-            SpawnBullets();
+            SpawnProjectiles();
             AdditionalLogic();
 
             _canShoot = false;

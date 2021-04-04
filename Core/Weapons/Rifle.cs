@@ -22,7 +22,7 @@ namespace SibGameJam2021.Core.Weapons
             AmmoCount -= AmmoPerShot;
         }
 
-        protected override void SpawnBullets()
+        protected override void SpawnProjectiles()
         {
             var bullet = InstanceBullet();
 
