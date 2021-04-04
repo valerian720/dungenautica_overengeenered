@@ -19,7 +19,7 @@ namespace SibGameJam2021.Core.Enemies
         private float SightActivationRadius = 350;
 
         [Export]
-        private float StopAtRadius = 50;
+        private float StopAtRadius = 5;
 
         public Enemy() : base()
         {
