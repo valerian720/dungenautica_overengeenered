@@ -5,7 +5,6 @@ namespace SibGameJam2021.Core.Managers
     public class DebugManager : CanvasLayer
     {
         private Control _debugOverlay;
-        private int _firstElement = 0;
         private int _minArgumentToConsoleCount = 2;
 
         public override void _Input(InputEvent @event)
@@ -32,20 +31,31 @@ namespace SibGameJam2021.Core.Managers
 
             if (splittedText.Length >= _minArgumentToConsoleCount)
             {
-                switch (splittedText[_firstElement])
+                switch (splittedText[0])
                 {
                     case "lvl":
-                        splittedText[_firstElement] = "";
-                        string levelName = string.Join(" ", splittedText);
+                    {
+                        string levelName = splittedText[1];
                         try
                         {
-                            GameManager.Instance.SceneManager.LoadLevel(levelName.Substr(1, levelName.Length - 1));
+                            GameManager.Instance.SceneManager.LoadLevel(levelName);
                         }
                         catch
                         {
                             throw;
                         }
                         break;
+                    }
+
+                    case "gold":
+                    {
+                        if (int.TryParse(splittedText[1], out var gold))
+                        {
+                            GameManager.Instance.Player.Coins = gold;
+                        }
+
+                        break;
+                    }
 
                     default:
                         break;

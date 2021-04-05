@@ -261,7 +261,14 @@ namespace SibGameJam2021.Core
 
         protected override void Die()
         {
-            GameManager.Instance.SceneManager.LoadMainMenu();
+            Lifes--;
+
+            CurrentHealth = MaxHealth;
+
+            if (Lifes <= 0)
+            {
+                GameManager.Instance.SceneManager.LoadMainMenu();
+            }
         }
 
         private void Dash()
