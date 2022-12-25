@@ -6,7 +6,7 @@ namespace SibGameJam2021.Core.Loot
     public class Heal : LootBase
     {
         [Export]
-        protected virtual int Value { get; set; } = 5;
+        protected virtual int Value { get; set; } = 25;
 
         public override void _Ready()
         {

@@ -242,7 +242,6 @@ namespace SibGameJam2021.Core
 
         public void IncreaseHealth(float value)
         {
-            // TODO
             CurrentHealth += value;
         }
 
@@ -353,6 +352,12 @@ namespace SibGameJam2021.Core
             uiManager.UpdateGoldBoost(GoldBoost);
             uiManager.UpdateAmmoBoost(AmmoBoost);
             uiManager.UpdateBounceBoost(BounceBoost);
+        }
+
+        public bool HasEquiped(int index)
+        {
+            // TODO
+            return _currentWeapon == _weapons.ElementAt(index);
         }
 
         private void UpdateWeaponPosition()

@@ -20,20 +20,27 @@ namespace SibGameJam2021.Core.World
             _collisionShape2 = area2D.GetNode<CollisionShape2D>("CollisionShape2D");
         }
 
-        private void DropCoin()
+        private void DropLoot()
         {
-            Node coin;
+            Node loot;
 
             if (new Random().Next(10) == 0) // 10% chance
             {
-                coin = LootManager.CrownScene.Instance();
+                loot = LootManager.CrownScene.Instance();
             }
             else
             {
-                coin = LootManager.CoinScene.Instance();
+                if (new Random().Next(3) == 0) // 25% chance
+                {
+                    loot = LootManager.HealScene.Instance();
+                }
+                else
+                {
+                    loot = LootManager.CoinScene.Instance();
+                }
             }
 
-            CallDeferred("add_child", coin);
+            CallDeferred("add_child", loot);
         }
 
         private void OnBodyEntered(Node body)
@@ -49,7 +56,7 @@ namespace SibGameJam2021.Core.World
             _collisionShape1.SetDeferred("disabled", true);
             _collisionShape2.SetDeferred("disabled", true);
 
-            DropCoin();
+            DropLoot();
 
             bullet.Pop();
         }

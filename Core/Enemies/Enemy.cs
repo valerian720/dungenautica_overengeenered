@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using SibGameJam2021.Core.Managers;
 using SibGameJam2021.Core.UI;
@@ -114,6 +115,35 @@ namespace SibGameJam2021.Core.Enemies
         {
             QueueFree();
             SpawnManager.EnemiesAlive--;
+
+            DropLoot();
+        }
+
+        private void DropLoot()
+        {
+            Node loot;
+
+            GD.Print($"pos: {Position}");
+
+
+            if (new Random().Next(10) == 0 || GameManager.Instance.Player.HasEquiped(2)) // 10% chance if not shotgun and 100 if
+            {
+                if (new Random().Next(4) == 0) // 25% chance
+                {
+                    loot = LootManager.CoinScene.Instance();
+                }
+                else
+                {
+                    loot = LootManager.HealScene.Instance();
+                }
+                // TODO make sure pos is rigth
+                Node2D tmp = (Node2D)loot;
+                tmp.Position = Position;
+                //loot.Position();
+                GameManager.Instance.CurrentLevel.AddChild(tmp);
+                //CallDeferred("add_child", loot);
+            }
+
         }
 
         private void _on_Area2D_body_entered(Node body)
