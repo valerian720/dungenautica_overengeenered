@@ -80,7 +80,6 @@ namespace SibGameJam2021.Core.Managers
             if (LevelCount % _shopLevelInterval == 0)
             {
                 LoadLevel(_shopLevel.Instance());
-                _soundManager.PlayBGMusic();
 
             }
             else

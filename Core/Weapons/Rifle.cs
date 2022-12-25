@@ -1,4 +1,5 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Weapons
 {
@@ -27,12 +28,22 @@ namespace SibGameJam2021.Core.Weapons
 
         protected override void SpecialAttack()
         {
+
+            var tmpDamage = Damage;
+            var tmpBulletSpeed = BulletSpeed;
+
+
+            Damage = Damage * AmmoCount;
             SpawnProjectiles();
+            BulletSpeed = BulletSpeed / 2;
             SpawnProjectiles();
+            BulletSpeed = BulletSpeed / 2;
             SpawnProjectiles();
 
             AdditionalLogic();
             AdditionalLogic();
+            Damage = tmpDamage;
+            BulletSpeed = tmpBulletSpeed;
 
         }
 

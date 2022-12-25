@@ -46,5 +46,11 @@ namespace SibGameJam2021.Core
                 _canPlayOpenGateSound = false;
             }
         }
+
+        public void AddChildAt(Node2D node, Vector2 pos)
+        {
+            node.Position = Position;
+            AddChild(node);
+        }
     }
 }

@@ -100,6 +100,13 @@ namespace SibGameJam2021.Core.Weapons
             GameManager.Instance.SoundManager.PlayReload();
         }
 
+        public void InterruptReloading()
+        {
+            AmmoCount = 0;
+            _reloadInProgress = false;
+        }
+        
+
         public void LookLeft()
         {
             _sprite.FlipV = true;
@@ -110,17 +117,24 @@ namespace SibGameJam2021.Core.Weapons
             _sprite.FlipV = false;
         }
 
-        public void StartReloading()
+        public bool StartReloading()
         {
             if (AmmoCount > 0 && !_reloadInProgress)
             {
                 SpecialAttack();
             }
 
-            AmmoCount = 0;
-            _reloadInProgress = true;
+            if (!_reloadInProgress)
+            {
+                AmmoCount = 0;
+                _reloadInProgress = true;
 
-            GameManager.Instance.SoundManager.PlayReload();
+                GameManager.Instance.SoundManager.PlayReload();
+                return true;
+            }
+            else
+                return false; // пока что нельзя начинать новыю перезарядку
+
         }
 
         public void StartShooting()

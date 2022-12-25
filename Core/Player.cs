@@ -141,6 +141,11 @@ namespace SibGameJam2021.Core
             }
         }
 
+        public int BulletsLeft
+        {
+            get { return _currentWeapon.AmmoCount; }
+        }
+
         public override void _Input(InputEvent inputEvent)
         {
             if (inputEvent.IsActionPressed("slot1"))
@@ -236,7 +241,7 @@ namespace SibGameJam2021.Core
 
         public void RunReload()
         {
-            _currentWeapon.StartReloading();
+            if(_currentWeapon.StartReloading())
             _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
         }
 
@@ -276,6 +281,8 @@ namespace SibGameJam2021.Core
 
             CurrentHealth = MaxHealth;
 
+            GameManager.Instance.SoundManager.PlayPlayerHurtSound();
+
             if (Lifes <= 0)
             {
                 GameManager.Instance.SceneManager.LoadMainMenu();
@@ -303,6 +310,7 @@ namespace SibGameJam2021.Core
         {
             if (_currentWeapon != null)
             {
+                _currentWeapon.InterruptReloading();
                 _gunSlot.RemoveChild(_currentWeapon);
                 _reloadBar.InterruptReloading();
             }

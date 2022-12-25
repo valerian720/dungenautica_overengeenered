@@ -43,7 +43,7 @@ namespace SibGameJam2021.Core.Weapons
         protected override void SpecialAttack()
         {
             var tmpProjectilesPerShot = ProjectilesPerShot;
-            ProjectilesPerShot = ProjectilesPerShot * 3;
+            ProjectilesPerShot = ProjectilesPerShot * 2;
             SpawnProjectiles();
             AdditionalLogic();
             AdditionalLogic();

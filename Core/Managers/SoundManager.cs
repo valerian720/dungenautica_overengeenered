@@ -15,6 +15,8 @@ namespace SibGameJam2021.Core.Managers
         private AudioStreamPlayer _pewAudioPlayer = new AudioStreamPlayer();
         private AudioStreamPlayer _reloadAudioPlayer = new AudioStreamPlayer();
 
+        private AudioStreamPlayer _playerAudioPlayer = new AudioStreamPlayer();
+
         // cached sound files
 
         private static AudioStream _backgroundMusic = ResourceLoader.Load<AudioStream>("res://Assets/Music/background_music.wav");
@@ -30,6 +32,8 @@ namespace SibGameJam2021.Core.Managers
         //
         private static AudioStream _reload1 = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/reload_1.wav");
         private static AudioStream _reload2 = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/reload_2.wav");
+        //
+        private static AudioStream _playerHurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
 
 
         public SoundManager()
@@ -40,10 +44,11 @@ namespace SibGameJam2021.Core.Managers
             AddChild(_musicAudioPlayer);
             AddChild(_sfxAudioPlayer);
             AddChild(_pewAudioPlayer);
-            AddChild(_reloadAudioPlayer);
+            AddChild(_reloadAudioPlayer); 
+            AddChild(_playerAudioPlayer); 
 
-            //
-            deathEnemySoundsBuffer = new AudioStreamPlayer2D[bufferSize];
+             //
+             deathEnemySoundsBuffer = new AudioStreamPlayer2D[bufferSize];
             lastPlayedSoundInfo = new DateTime[bufferSize];
 
             for (int i = 0; i < bufferSize; i++)
@@ -113,6 +118,12 @@ namespace SibGameJam2021.Core.Managers
         {
             _sfxAudioPlayer.Stream = _openGateSound;
             _sfxAudioPlayer.Playing = true;
+        }
+
+        public void PlayPlayerHurtSound()
+        {
+            _playerAudioPlayer.Stream = _playerHurt;
+            _playerAudioPlayer.Playing = true;
         }
 
         public void PlayDeathSound(AudioStream sound, Vector2 pos)

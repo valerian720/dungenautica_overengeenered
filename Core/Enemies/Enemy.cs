@@ -122,6 +122,8 @@ namespace SibGameJam2021.Core.Enemies
         {
             Node loot;
 
+            // TODO make nice
+
             if (new Random().Next(10) == 0 || GameManager.Instance.Player.HasEquiped(2)) // 10% chance if not shotgun and 100 if
             {
                 if (new Random().Next(4) == 0) // 25% chance
@@ -132,12 +134,19 @@ namespace SibGameJam2021.Core.Enemies
                 {
                     loot = LootManager.HealScene.Instance();
                 }
-                // TODO make sure pos is rigth
                 Node2D tmp = (Node2D)loot;
                 tmp.Position = Position;
-                //loot.Position();
                 GameManager.Instance.CurrentLevel.AddChild(tmp);
-                //CallDeferred("add_child", loot);
+            }
+
+
+            if (GameManager.Instance.Player.HasEquiped(0) && GameManager.Instance.Player.BulletsLeft <= 0) // 100% chance if killed with last bullet in minigun (or super attack of minigun)
+            {
+                loot = LootManager.CoinScene.Instance();
+
+                Node2D tmp = (Node2D)loot;
+                tmp.Position = Position;
+                GameManager.Instance.CurrentLevel.AddChild(tmp);
             }
 
         }

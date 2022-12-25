@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/SpawnManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/TileMap.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/SpawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/Gate.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Core/Level.cs" type="Script" id=8]
-[ext_resource path="res://Core/Entity.cs" type="Script" id=9]
 [ext_resource path="res://Assets/Prefabs/Navigation2D.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=1]
@@ -29,11 +28,11 @@ position = Vector2( 496, 280 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 1 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 6,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 3,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 6
 }
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]
@@ -83,23 +82,18 @@ position = Vector2( 640, 512 )
 
 [node name="Collumn" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 544, 96 )
-script = ExtResource( 9 )
 
 [node name="Collumn2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 384, 320 )
-script = ExtResource( 9 )
 
 [node name="Collumn3" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 320, 736 )
-script = ExtResource( 9 )
 
 [node name="Collumn4" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 96, 448 )
-script = ExtResource( 9 )
 
 [node name="Collumn5" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 96, 448 )
-script = ExtResource( 9 )
 
 [node name="Vase" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( -24, 256 )

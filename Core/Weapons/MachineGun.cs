@@ -38,11 +38,16 @@ namespace SibGameJam2021.Core.Weapons
         protected override void SpecialAttack()
         {
             var tmpDamage = Damage;
-            Damage = ProjectilesPerShot * 10;
+            var tmpBulletSpeed = BulletSpeed;
+            
+
+            Damage = Damage * AmmoCount;
+            BulletSpeed = BulletSpeed * 3;
             SpawnProjectiles();
             AdditionalLogic();
             AdditionalLogic();
             Damage = tmpDamage;
+            BulletSpeed = tmpBulletSpeed;
 
         }
 
