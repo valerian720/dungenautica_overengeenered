@@ -17,9 +17,23 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public override float RateOfFire { get; protected set; } = 10;
 
+        [Export]
+        public override int SoundType { get; protected set; } = 2;
+
         protected override void AdditionalLogic()
         {
             AmmoCount -= AmmoPerShot;
+        }
+
+        protected override void SpecialAttack()
+        {
+            SpawnProjectiles();
+            SpawnProjectiles();
+            SpawnProjectiles();
+
+            AdditionalLogic();
+            AdditionalLogic();
+
         }
 
         protected override void SpawnProjectiles()

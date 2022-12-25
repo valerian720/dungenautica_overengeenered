@@ -57,7 +57,6 @@ namespace SibGameJam2021.Core.Enemies
 
             audioPlayer = new AudioStreamPlayer2D();
             AddChild(audioPlayer);
-            audioPlayer.Playing = true;
         }
 
         public override void GetDamage(float damage)
@@ -122,9 +121,6 @@ namespace SibGameJam2021.Core.Enemies
         private void DropLoot()
         {
             Node loot;
-
-            GD.Print($"pos: {Position}");
-
 
             if (new Random().Next(10) == 0 || GameManager.Instance.Player.HasEquiped(2)) // 10% chance if not shotgun and 100 if
             {

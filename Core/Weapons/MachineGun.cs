@@ -24,11 +24,26 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public override float ReloadDuration { get; protected set; } = 5f;
 
+        [Export]
+        public override int SoundType { get; protected set; } = 1;
+        
+
         protected override void AdditionalLogic()
         {
             AmmoCount -= AmmoPerShot;
 
             GameManager.Instance.Player.ApplyImpulse((GlobalPosition - GetGlobalMousePosition()).Normalized() * Recoil);
+        }
+
+        protected override void SpecialAttack()
+        {
+            var tmpDamage = Damage;
+            Damage = ProjectilesPerShot * 10;
+            SpawnProjectiles();
+            AdditionalLogic();
+            AdditionalLogic();
+            Damage = tmpDamage;
+
         }
 
         protected override void SpawnProjectiles()

@@ -17,18 +17,24 @@ namespace SibGameJam2021.Core.Managers
         private MainMenu _mainMenu;
         private SceneTree _tree;
         private UIManager _uiManager;
+        private SoundManager _soundManager;
 
         public SceneManager()
         {
             _tree = (SceneTree)Engine.GetMainLoop();
             _mainMenu = _tree.Root.GetNode<MainMenu>("/root/MainMenu"); // start scene
             _uiManager = (UIManager)GD.Load<PackedScene>("res://Scenes/UIManager.tscn").Instance();
+
+            _soundManager = new SoundManager();
+            _tree.Root.AddChild(_soundManager);
         }
 
         [Signal]
         public delegate void OnLevelChange();
 
         public Level CurrentLevel { get; private set; } = null;
+
+        public SoundManager SoundManager { get => _soundManager; }
 
         public int LevelCount { get; set; } = 0;
 
@@ -64,6 +70,7 @@ namespace SibGameJam2021.Core.Managers
             _tree.Root.RemoveChild(_uiManager);
             _tree.Root.AddChild(_mainMenu);
             _uiManager.ToggleHUD(false);
+            _soundManager.PlayBGMusic();
         }
 
         public void LoadRandomLevel()
@@ -73,6 +80,8 @@ namespace SibGameJam2021.Core.Managers
             if (LevelCount % _shopLevelInterval == 0)
             {
                 LoadLevel(_shopLevel.Instance());
+                _soundManager.PlayBGMusic();
+
             }
             else
             {

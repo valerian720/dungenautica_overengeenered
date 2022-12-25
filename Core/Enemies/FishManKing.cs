@@ -1,4 +1,5 @@
 ﻿using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Enemies
 {
@@ -18,8 +19,8 @@ namespace SibGameJam2021.Core.Enemies
 
         protected override void Die()
         {
-            audioPlayer.Stream = fish_death;
-            audioPlayer.Playing = true;
+            GameManager.Instance.SoundManager.PlayDeathSound(fish_death, Position);
+
             base.Die();
         }
     }

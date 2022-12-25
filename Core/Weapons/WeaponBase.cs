@@ -66,6 +66,9 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public virtual float ReloadDuration { get; protected set; } = 1f;
 
+        [Export]
+        public virtual int SoundType { get; protected set; } = 1;
+
         public float ShotDelay => 1f / RateOfFire;
 
         public override void _Process(float delta)
@@ -93,6 +96,8 @@ namespace SibGameJam2021.Core.Weapons
         {
             AmmoCount = MagSize * (int)Mathf.Round(1f + GameManager.Instance.Player.AmmoBoost);
             _reloadInProgress = false;
+
+            GameManager.Instance.SoundManager.PlayReload();
         }
 
         public void LookLeft()
@@ -107,8 +112,15 @@ namespace SibGameJam2021.Core.Weapons
 
         public void StartReloading()
         {
+            if (AmmoCount > 0 && !_reloadInProgress)
+            {
+                SpecialAttack();
+            }
+
             AmmoCount = 0;
             _reloadInProgress = true;
+
+            GameManager.Instance.SoundManager.PlayReload();
         }
 
         public void StartShooting()
@@ -119,6 +131,8 @@ namespace SibGameJam2021.Core.Weapons
         }
 
         protected abstract void AdditionalLogic();
+
+        protected abstract void SpecialAttack();
 
         protected Bullet InstanceBullet()
         {
@@ -146,7 +160,7 @@ namespace SibGameJam2021.Core.Weapons
                 GameManager.Instance.Player.RunReload(); // auto reload
             }
             //
-            if (!_canShoot || AmmoCount <= 0)
+            if (!_canShoot || AmmoCount <= 0 && _reloadInProgress)
             {
                 return;
             }
@@ -156,6 +170,8 @@ namespace SibGameJam2021.Core.Weapons
 
             _canShoot = false;
             _shootTimer.Start(ShotDelay);
+
+            GameManager.Instance.SoundManager.PlayPew(SoundType);
         }
     }
 }

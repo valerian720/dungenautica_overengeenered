@@ -27,7 +27,7 @@ namespace SibGameJam2021.Core
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
         private Area2D _hitbox;
-        private int _lifes = 1;
+        private int _lifes = 3;
         private float _maxHealth = MaxHealthDefault;
         private ReloadBar _reloadBar;
         private Vector2 _velocity = Vector2.Zero;
@@ -356,7 +356,6 @@ namespace SibGameJam2021.Core
 
         public bool HasEquiped(int index)
         {
-            // TODO
             return _currentWeapon == _weapons.ElementAt(index);
         }
 

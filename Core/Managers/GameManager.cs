@@ -17,5 +17,7 @@ namespace SibGameJam2021.Core.Managers
 
         public SceneManager SceneManager { get; } = new SceneManager();
         public UIManager UIManager { get; set; }
+
+        public SoundManager SoundManager => SceneManager.SoundManager;
     }
 }
