@@ -16,5 +16,5 @@ Movement: W A S D
 Shoot: Left Mouse Button
 Weapon Change: 1 2 3
 Reload: R
-Dash: Spacebar
+Dash: Spacebar or Shift
 Pause: Escape

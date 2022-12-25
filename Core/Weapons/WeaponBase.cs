@@ -10,6 +10,7 @@ namespace SibGameJam2021.Core.Weapons
         protected Node2D _muzzlePoint;
         private int _ammoCount = 0;
         private bool _canShoot = true;
+        private bool _reloadInProgress = false;
         private Timer _shootTimer = new Timer();
         private Sprite _sprite;
 
@@ -91,6 +92,7 @@ namespace SibGameJam2021.Core.Weapons
         public void FinishReloading()
         {
             AmmoCount = MagSize * (int)Mathf.Round(1f + GameManager.Instance.Player.AmmoBoost);
+            _reloadInProgress = false;
         }
 
         public void LookLeft()
@@ -106,6 +108,7 @@ namespace SibGameJam2021.Core.Weapons
         public void StartReloading()
         {
             AmmoCount = 0;
+            _reloadInProgress = true;
         }
 
         public void StartShooting()
@@ -138,6 +141,11 @@ namespace SibGameJam2021.Core.Weapons
 
         private void Shoot()
         {
+            if (AmmoCount <=0 && !_reloadInProgress)
+            {
+                GameManager.Instance.Player.RunReload(); // auto reload
+            }
+            //
             if (!_canShoot || AmmoCount <= 0)
             {
                 return;

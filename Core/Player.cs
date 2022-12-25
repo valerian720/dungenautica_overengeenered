@@ -81,7 +81,7 @@ namespace SibGameJam2021.Core
 
             protected set
             {
-                base.CurrentHealth = value;
+                base.CurrentHealth = value > _maxHealth ? _maxHealth : (value < 0 ? 0 : value);
                 GameManager.Instance.UIManager.UpdateHealth(_currentHealth, _maxHealth);
             }
         }
@@ -161,8 +161,7 @@ namespace SibGameJam2021.Core
             }
             if (inputEvent.IsActionPressed("reload"))
             {
-                _currentWeapon.StartReloading();
-                _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
+                RunReload();
             }
             if (inputEvent.IsActionPressed("dash"))
             {
@@ -235,11 +234,24 @@ namespace SibGameJam2021.Core
             _velocity += velocity;
         }
 
+        public void RunReload()
+        {
+            _currentWeapon.StartReloading();
+            _reloadBar.StartReloading(_currentWeapon.ReloadDuration);
+        }
+
+        public void IncreaseHealth(float value)
+        {
+            // TODO
+            CurrentHealth += value;
+        }
+
+
         public void Reset()
         {
             MaxHealth = MaxHealthDefault;
             CurrentHealth = MaxHealth;
-            Lifes = 1;
+            Lifes = 3;
             Coins = 0;
             DamageBoost = 0;
             SpeedBoost = 0;
@@ -278,7 +290,8 @@ namespace SibGameJam2021.Core
                 return;
             }
 
-            var dir = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+            //var dir = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+            var dir = _velocity.Normalized(); // деш в сторону, куда движется игрок
 
             ApplyImpulse(dir * DashForce);
 
