@@ -104,17 +104,28 @@ namespace SibGameJam2021.Core.Managers
                     break;
                 }
 
-                var pair = enemies.ElementAt(new Random().Next(0, enemies.Count()));
+                int enemySpawnTry = 10;
 
-                Enemies[pair.Key]--;
+                for (int i = 0; i < enemySpawnTry; i++)
+                {
+                    if (CanSpawnEnemy(point.GlobalPosition))
+                    {
+                        var pair = enemies.ElementAt(new Random().Next(0, enemies.Count()));
 
-                var enemy = (Enemy)pair.Key.Instance();
-                enemy.SpawnManager = this;
+                        Enemies[pair.Key]--;
 
-                point.SpawnEnemy(enemy);
+                        var enemy = (Enemy)pair.Key.Instance();
+                        enemy.SpawnManager = this;
 
-                _enemiesToSpawn--;
-                EnemiesAlive++;
+                        point.SpawnEnemy(enemy);
+
+                        _enemiesToSpawn--;
+                        EnemiesAlive++;
+
+                        break;
+                    }
+                }
+
 
                 if (_enemiesToSpawn <= 0)
                 {
@@ -123,6 +134,19 @@ namespace SibGameJam2021.Core.Managers
                     break;
                 }
             }
+        }
+
+        private bool CanSpawnEnemy(Vector2 pos, float radius = 50)
+        {
+            foreach (var child in GetChildren())
+            {
+                if (child is Enemy)
+                {
+                    if ((((Enemy)child).GlobalPosition - pos).Length() < radius)
+                        return false;
+                }
+            }
+                return true;
         }
     }
 }
