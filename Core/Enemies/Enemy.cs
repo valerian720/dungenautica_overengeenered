@@ -91,6 +91,7 @@ namespace SibGameJam2021.Core.Enemies
             else
             {
                 SetAnimationIdle();
+                movementOnNav2D.DebugPathClearPoints();
             }
 
             if (distanceSquared < SightActivationRadius * SightActivationRadius)
@@ -112,6 +113,9 @@ namespace SibGameJam2021.Core.Enemies
 
         protected override void Die()
         {
+            movementOnNav2D.DebugPathClearPoints();
+            movementOnNav2D.PopResources();
+
             QueueFree();
             SpawnManager.EnemiesAlive--;
 

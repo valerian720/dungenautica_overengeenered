@@ -1,5 +1,6 @@
 ﻿using System;
 using Godot;
+using SibGameJam2021.Core.Managers;
 
 namespace SibGameJam2021.Core.Enemies
 {
@@ -11,12 +12,18 @@ namespace SibGameJam2021.Core.Enemies
         private Navigation2D nav2D = null;
         private Vector2[] path = new Vector2[0];
 
+        private Line2D _pathVisualized = new Line2D();
+
+
         public MovementOnNavigation2D(Navigation2D _nav2D)
         {
             nav2D = _nav2D;
 
             _calculatePathTimer.OneShot = true;
             _calculatePathTimer.Connect("timeout", this, nameof(OnCalculatePathTimer));
+
+            _pathVisualized.GlobalPosition = Vector2.Zero;
+            _pathVisualized.Width = 1;
         }
 
         public float CalculateDelay => 1f / calculatePerSecond;
@@ -24,6 +31,7 @@ namespace SibGameJam2021.Core.Enemies
         public override void _Ready()
         {
             AddChild(_calculatePathTimer);
+            GameManager.Instance.CurrentLevel.AddChild(_pathVisualized);
         }
 
         public Vector2 GetPointTowardsDestiny(Vector2 source, Vector2 destiny)
@@ -35,7 +43,10 @@ namespace SibGameJam2021.Core.Enemies
             {
                 try
                 {
-                    path = nav2D.GetSimplePath(source, destiny);
+                    path = nav2D.GetSimplePath(source, destiny, true);
+                    if (true)
+                        DebugPath();
+
                     _canCalucate = false;
                     _calculatePathTimer.Start(CalculateDelay);
                 }
@@ -56,6 +67,26 @@ namespace SibGameJam2021.Core.Enemies
         private void OnCalculatePathTimer()
         {
             _canCalucate = true;
+        }
+
+
+        public void DebugPath()
+        {
+            GD.Print(path[1]);
+
+            _pathVisualized.Points = path;
+
+        }
+
+        public void DebugPathClearPoints()
+        {
+            _pathVisualized.ClearPoints();
+        }
+
+        public void PopResources()
+        {
+            RemoveChild(_calculatePathTimer);
+            GameManager.Instance.CurrentLevel.RemoveChild(_pathVisualized);
         }
     }
 }
