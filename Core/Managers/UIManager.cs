@@ -21,6 +21,7 @@ namespace SibGameJam2021.Core.Managers
         private Control _hud;
         private Label _lifesLabel;
         private Control _pauseMenu;
+        private Control _gameOverMenu;
         private Label _speedBoostLabel;
 
         public override void _Input(InputEvent @event)
@@ -33,7 +34,11 @@ namespace SibGameJam2021.Core.Managers
 
         public void _on_MainMenuButton_pressed()
         {
-            TogglePause();
+            if (_pauseMenu.Visible)
+                TogglePause();
+            if (_gameOverMenu.Visible)
+                ToggleGameOver();
+
             GameManager.Instance.SceneManager.LoadMainMenu();
         }
 
@@ -57,6 +62,7 @@ namespace SibGameJam2021.Core.Managers
         {
             _hud = GetNode<Control>("HUD");
             _pauseMenu = GetNode<Control>("PauseMenu");
+            _gameOverMenu = GetNode<Control>("GameOverMenu");
 
             _ammoTexture = GetNode<TextureRect>("HUD/LowerLeft/AmmoBar");
             _healthEmptyTexture = GetNode<TextureRect>("HUD/LowerLeft/HealthEmpty");
@@ -64,12 +70,12 @@ namespace SibGameJam2021.Core.Managers
 
             _goldLabel = GetNode<Label>("HUD/UpperLeft/GoldBar/GoldLabel");
             _totalGoldLabel = GetNode<Label>("HUD/UpperLeft/GoldBar/TotalGoldLabel");
-            
+
             _lifesLabel = GetNode<Label>("HUD/UpperLeft/LifeBar/LifesLabel");
 
             _levelLabel = GetNode<Label>("HUD/UpperLeft/LevelBar/LevelLabel");
 
-             _damageBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/DamageBoostLabel");
+            _damageBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/DamageBoostLabel");
             _goldBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/GoldBoostLabel");
             _speedBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/SpeedBoostLabel");
             _ammoBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/AmmoBoostLabel");
@@ -156,7 +162,7 @@ namespace SibGameJam2021.Core.Managers
         {
             _totalGoldLabel.Text = count.ToString();
         }
-        
+
 
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
@@ -171,7 +177,7 @@ namespace SibGameJam2021.Core.Managers
         {
             _lifesLabel.Text = count.ToString();
         }
-        
+
         public void UpdateLevelCount(int count)
         {
             _levelLabel.Text = count.ToString();
@@ -195,6 +201,13 @@ namespace SibGameJam2021.Core.Managers
             var tree = GetTree();
             tree.Paused = !tree.Paused;
             _pauseMenu.Visible = tree.Paused;
+        }
+
+        public void ToggleGameOver()
+        {
+            var tree = GetTree();
+            tree.Paused = !tree.Paused;
+            _gameOverMenu.Visible = tree.Paused;
         }
     }
 }

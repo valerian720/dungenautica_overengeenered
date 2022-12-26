@@ -298,7 +298,7 @@ namespace SibGameJam2021.Core
 
             if (Lifes <= 0)
             {
-                GameManager.Instance.SceneManager.LoadMainMenu();
+                GameManager.Instance.UIManager.ToggleGameOver();
             }
         }
 
