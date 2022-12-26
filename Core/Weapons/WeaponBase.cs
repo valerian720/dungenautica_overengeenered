@@ -102,8 +102,11 @@ namespace SibGameJam2021.Core.Weapons
 
         public void InterruptReloading()
         {
-            AmmoCount = 0;
-            _reloadInProgress = false;
+            if (_reloadInProgress)
+            {
+                AmmoCount = 0;
+                _reloadInProgress = false;
+            }
         }
         
 
