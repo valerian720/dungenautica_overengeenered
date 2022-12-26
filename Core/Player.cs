@@ -306,6 +306,7 @@ namespace SibGameJam2021.Core
         {
             if (!_canDash)
             {
+                _velocity = Vector2.Zero;
                 return;
             }
 
