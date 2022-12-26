@@ -14,6 +14,8 @@ namespace SibGameJam2021.Core.Managers
         private Label _damageBoostLabel;
         private Label _goldBoostLabel;
         private Label _goldLabel;
+        private Label _totalGoldLabel;
+        private Label _levelLabel;
         private TextureRect _healthEmptyTexture;
         private TextureRect _healthFullTexture;
         private Control _hud;
@@ -61,9 +63,13 @@ namespace SibGameJam2021.Core.Managers
             _healthFullTexture = GetNode<TextureRect>("HUD/LowerLeft/HealthEmpty/HealthFull");
 
             _goldLabel = GetNode<Label>("HUD/UpperLeft/GoldBar/GoldLabel");
+            _totalGoldLabel = GetNode<Label>("HUD/UpperLeft/GoldBar/TotalGoldLabel");
+            
             _lifesLabel = GetNode<Label>("HUD/UpperLeft/LifeBar/LifesLabel");
 
-            _damageBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/DamageBoostLabel");
+            _levelLabel = GetNode<Label>("HUD/UpperLeft/LevelBar/LevelLabel");
+
+             _damageBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/DamageBoostLabel");
             _goldBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/GoldBoostLabel");
             _speedBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/SpeedBoostLabel");
             _ammoBoostLabel = GetNode<Label>("HUD/UpperLeft/BoostsBar/AmmoBoostLabel");
@@ -75,6 +81,7 @@ namespace SibGameJam2021.Core.Managers
         public void ToggleHUD(bool visible)
         {
             _hud.Visible = visible;
+            GameManager.Instance.UIManager.UpdateLevelCount(GameManager.Instance.SceneManager.LevelCount);
         }
 
         public void UpdateAmmoBoost(float value)
@@ -145,6 +152,12 @@ namespace SibGameJam2021.Core.Managers
             _goldLabel.Text = count.ToString();
         }
 
+        public void UpdateTotalGoldCount(int count)
+        {
+            _totalGoldLabel.Text = count.ToString();
+        }
+        
+
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
             var emptyHeartsCount = Mathf.Round(maxHealth / HeartValue);
@@ -157,6 +170,11 @@ namespace SibGameJam2021.Core.Managers
         public void UpdateLifesCount(int count)
         {
             _lifesLabel.Text = count.ToString();
+        }
+        
+        public void UpdateLevelCount(int count)
+        {
+            _levelLabel.Text = count.ToString();
         }
 
         public void UpdateSpeedBoost(float value)

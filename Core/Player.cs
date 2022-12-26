@@ -23,6 +23,7 @@ namespace SibGameJam2021.Core
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
         private bool _canDash = true;
         private int _coins = 0;
+        private int _totalCoins = 0;
         private WeaponBase _currentWeapon = null;
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
@@ -72,6 +73,17 @@ namespace SibGameJam2021.Core
             {
                 _coins = value;
                 GameManager.Instance.UIManager.UpdateGoldCount(_coins);
+            }
+        }
+
+        public int TotalCoins
+        {
+            get { return _totalCoins; }
+
+            set
+            {
+                _totalCoins = value;
+                GameManager.Instance.UIManager.UpdateTotalGoldCount(_totalCoins);
             }
         }
 
@@ -257,6 +269,7 @@ namespace SibGameJam2021.Core
             CurrentHealth = MaxHealth;
             Lifes = 3;
             Coins = 0;
+            TotalCoins = 0;
             DamageBoost = 0;
             SpeedBoost = 0;
             GoldBoost = 0;
@@ -354,7 +367,9 @@ namespace SibGameJam2021.Core
 
             uiManager.UpdateHealth(CurrentHealth, MaxHealth);
             uiManager.UpdateGoldCount(Coins);
+            uiManager.UpdateTotalGoldCount(TotalCoins);
             uiManager.UpdateLifesCount(Lifes);
+            uiManager.UpdateLevelCount(GameManager.Instance.SceneManager.LevelCount);
             uiManager.UpdateDamageBoost(DamageBoost);
             uiManager.UpdateSpeedBoost(SpeedBoost);
             uiManager.UpdateGoldBoost(GoldBoost);

@@ -17,7 +17,9 @@ namespace SibGameJam2021.Core.Loot
 
         protected override void CustomLogic()
         {
-            _player.Coins += Value * (int)Mathf.Round(1f + GameManager.Instance.Player.GoldBoost);
+            var additionalValue = Value * (int)Mathf.Round(1f + GameManager.Instance.Player.GoldBoost);
+            _player.Coins += additionalValue;
+            _player.TotalCoins += additionalValue;
         }
     }
 }

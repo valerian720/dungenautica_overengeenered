@@ -52,7 +52,8 @@ namespace SibGameJam2021.Core.Managers
                         if (int.TryParse(splittedText[1], out var gold))
                         {
                             GameManager.Instance.Player.Coins = gold;
-                        }
+                            GameManager.Instance.Player.TotalCoins = 69;
+                            }
 
                         break;
                     }
