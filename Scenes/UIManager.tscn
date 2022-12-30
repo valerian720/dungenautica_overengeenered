@@ -85,7 +85,7 @@ __meta__ = {
 }
 
 [node name="GoldBar" type="HBoxContainer" parent="HUD/UpperLeft"]
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 10.0
 
 [node name="TextureRect" type="TextureRect" parent="HUD/UpperLeft/GoldBar"]
@@ -104,16 +104,16 @@ valign = 1
 
 [node name="slashLabel" type="Label" parent="HUD/UpperLeft/GoldBar"]
 margin_left = 36.0
-margin_right = 40.0
+margin_right = 77.0
 margin_bottom = 10.0
 rect_pivot_offset = Vector2( -133.067, 40 )
 custom_fonts/font = SubResource( 2 )
-text = "-"
+text = "- score"
 valign = 1
 
 [node name="TotalGoldLabel" type="Label" parent="HUD/UpperLeft/GoldBar"]
-margin_left = 44.0
-margin_right = 64.0
+margin_left = 81.0
+margin_right = 101.0
 margin_bottom = 10.0
 rect_pivot_offset = Vector2( -133.067, 40 )
 custom_fonts/font = SubResource( 2 )
@@ -125,7 +125,7 @@ __meta__ = {
 
 [node name="LevelBar" type="HBoxContainer" parent="HUD/UpperLeft"]
 margin_top = 15.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 25.0
 
 [node name="LevelTextLabel" type="Label" parent="HUD/UpperLeft/LevelBar"]
@@ -145,7 +145,7 @@ valign = 1
 
 [node name="LifeBar" type="HBoxContainer" parent="HUD/UpperLeft"]
 margin_top = 30.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="HUD/UpperLeft/LifeBar"]
@@ -164,39 +164,39 @@ valign = 1
 [node name="BoostsBar" type="VBoxContainer" parent="HUD/UpperLeft"]
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_top = 45.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 111.0
 
 [node name="DamageBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 10.0
 custom_fonts/font = SubResource( 3 )
 text = "Damage: +5%"
 
 [node name="SpeedBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
 margin_top = 14.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 3 )
 text = "Speed: +5%"
 
 [node name="GoldBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
 margin_top = 28.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 3 )
 text = "Gold: +5%"
 
 [node name="AmmoBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
 margin_top = 42.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 52.0
 custom_fonts/font = SubResource( 3 )
 text = "Ammo: +5%"
 
 [node name="BounceBoostLabel" type="Label" parent="HUD/UpperLeft/BoostsBar"]
 margin_top = 56.0
-margin_right = 64.0
+margin_right = 101.0
 margin_bottom = 66.0
 custom_fonts/font = SubResource( 3 )
 text = "Bounce: 1"

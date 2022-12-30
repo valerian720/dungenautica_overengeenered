@@ -29,6 +29,9 @@ namespace SibGameJam2021.Core.Enemies
         {
             _attackDurationTimer.OneShot = true;
             _attackDurationTimer.Connect("timeout", this, nameof(OnAttackDurationEnded));
+            //
+            this.MaxHealth += GameManager.Instance.SceneManager.LevelCount; // auto scale health
+            this.Damage += GameManager.Instance.SceneManager.LevelCount; // auto scale damage
         }
 
         [Export]
@@ -68,6 +71,8 @@ namespace SibGameJam2021.Core.Enemies
 
         virtual public void UpdatePosition(float delta)
         {
+            // TODO redo
+            // add ability to see. not just sense player (move if raycast to player = true)
             var player = GameManager.Instance.Player;
 
             float distanceSquared = player.GlobalPosition.DistanceSquaredTo(GlobalPosition);

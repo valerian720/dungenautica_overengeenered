@@ -20,7 +20,7 @@ namespace SibGameJam2021.Core
 
             protected set { _currentHealth = value > 0 ? (value < MaxHealth ? value : MaxHealth) : 0; }
         }
-
+        [Export]
         public virtual float MaxHealth { get; set; } = 100;
         protected virtual float Acceleration { get; } = 600;
         protected virtual float Friction { get; } = 700;

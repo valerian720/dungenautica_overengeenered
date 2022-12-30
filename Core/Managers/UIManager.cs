@@ -99,7 +99,7 @@ namespace SibGameJam2021.Core.Managers
             else
             {
                 _ammoBoostLabel.Visible = true;
-                _ammoBoostLabel.Text = $"Ammo: +{value * 100}%";
+                _ammoBoostLabel.Text = $"Ammo: +{value * 100:0}%";
             }
         }
 
@@ -136,7 +136,7 @@ namespace SibGameJam2021.Core.Managers
             else
             {
                 _damageBoostLabel.Visible = true;
-                _damageBoostLabel.Text = $"Damage: +{value * 100}%";
+                _damageBoostLabel.Text = $"Damage: +{value * 100:0}%";
             }
         }
 
@@ -149,7 +149,7 @@ namespace SibGameJam2021.Core.Managers
             else
             {
                 _goldBoostLabel.Visible = true;
-                _goldBoostLabel.Text = $"Gold: +{value * 100}%";
+                _goldBoostLabel.Text = $"Gold: +{value * 100:0}%";
             }
         }
 
@@ -192,7 +192,7 @@ namespace SibGameJam2021.Core.Managers
             else
             {
                 _speedBoostLabel.Visible = true;
-                _speedBoostLabel.Text = $"Speed: +{value * 100}%";
+                _speedBoostLabel.Text = $"Speed: +{value * 100:0}%";
             }
         }
 

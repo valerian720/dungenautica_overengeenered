@@ -44,8 +44,7 @@ namespace SibGameJam2021.Core.Enemies
                 try
                 {
                     path = nav2D.GetSimplePath(source, destiny, true);
-                    if (true)
-                        DebugPath();
+                    //DebugPath();
 
                     _canCalucate = false;
                     _calculatePathTimer.Start(CalculateDelay);

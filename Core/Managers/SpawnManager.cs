@@ -54,6 +54,9 @@ namespace SibGameJam2021.Core.Managers
         [Export]
         private float WaveDelay { get; set; } = 5;
 
+        [Export]
+        private float LevelDifficultyCoeff { get; set; } = 1;
+
         public override void _Ready()
         {
             _playerSpawn = GetNode<Node2D>("PlayerSpawn");
@@ -67,7 +70,7 @@ namespace SibGameJam2021.Core.Managers
                 }
             }
 
-            _enemiesToSpawn = Enemies.Sum(x => x.Value);
+            _enemiesToSpawn =  Enemies.Sum(x => x.Value) + (int)(Enemies.Min(x => x.Value) * GameManager.Instance.SceneManager.LevelCount * LevelDifficultyCoeff); // progression by (minenemyVal * level count * coeff)
 
             AddChild(_timer);
             _timer.Start(WaveDelay);

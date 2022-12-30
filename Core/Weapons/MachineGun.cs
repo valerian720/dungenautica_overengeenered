@@ -1,5 +1,6 @@
 ﻿using Godot;
 using SibGameJam2021.Core.Managers;
+using System;
 
 namespace SibGameJam2021.Core.Weapons
 {
@@ -22,10 +23,15 @@ namespace SibGameJam2021.Core.Weapons
         public override float Recoil { get; protected set; } = 30f;
 
         [Export]
-        public override float ReloadDuration { get; protected set; } = 5f;
+        public override float ReloadDuration { get; protected set; } = 4f;
 
         [Export]
         public override int SoundType { get; protected set; } = 1;
+
+        [Export]
+        public int DispersionDegree { get; protected set; } = 20;
+
+        private static Random _bulletRandom = new Random();
         
 
         protected override void AdditionalLogic()
@@ -54,6 +60,8 @@ namespace SibGameJam2021.Core.Weapons
         protected override void SpawnProjectiles()
         {
             var bullet = InstanceBullet();
+            bullet.Direction = (GetGlobalMousePosition() - GlobalPosition).Normalized().Rotated(Mathf.Deg2Rad(_bulletRandom.Next(-DispersionDegree, DispersionDegree)));
+
 
             GetParent().GetParent().GetParent().AddChild(bullet);
         }

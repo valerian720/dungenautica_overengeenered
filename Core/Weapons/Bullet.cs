@@ -24,6 +24,13 @@ namespace SibGameJam2021.Core.Weapons
                 if (_bouncesLeft > 0)
                 {
                     Direction = Direction.Bounce(collision.Normal);
+
+                    Speed /= 2;
+                    if (_bouncesLeft == GameManager.Instance.Player.BounceBoost) // first bounce
+                        Damage *= 2;
+                    else
+                        Damage /= 2;
+
                     _bouncesLeft--;
                 }
                 else

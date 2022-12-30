@@ -20,7 +20,8 @@ radius = 15.0
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
-_price = 30
+_price = 23
+_perLevelOverprice = 7
 
 [node name="PriceInfo" type="HBoxContainer" parent="."]
 anchor_left = 0.5

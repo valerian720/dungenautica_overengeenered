@@ -15,6 +15,9 @@ namespace SibGameJam2021.Core.World
         [Export]
         private int _price = 10;
 
+        [Export]
+        private int _perLevelOverprice = 10;
+
         private HBoxContainer _priceInfo;
 
         public override void _Ready()
@@ -27,6 +30,7 @@ namespace SibGameJam2021.Core.World
 
             _pickCollider = GetNode<CollisionShape2D>("Area2D/CollisionShape2D");
 
+            _price += GameManager.Instance.SceneManager.LevelCount / SceneManager.ShopLevelInterval * _perLevelOverprice; // auto level prices
             _priceInfo = GetNode<HBoxContainer>("PriceInfo");
             _priceInfo.GetNode<Label>("Label").Text = _price.ToString();
 
