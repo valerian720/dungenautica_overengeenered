@@ -5,6 +5,8 @@
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 1 )
+GunDescription = "modified with tech that culd suck life from enemy"
+GunName = "Meat popper"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 7, 0 )

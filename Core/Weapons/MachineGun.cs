@@ -23,13 +23,13 @@ namespace SibGameJam2021.Core.Weapons
         public override float Recoil { get; protected set; } = 30f;
 
         [Export]
-        public override float ReloadDuration { get; protected set; } = 4f;
+        public override float ReloadDuration { get; protected set; } = 2f;
 
         [Export]
         public override int SoundType { get; protected set; } = 1;
 
         [Export]
-        public int DispersionDegree { get; protected set; } = 20;
+        public int DispersionDegree { get; protected set; } = 10;
 
         private static Random _bulletRandom = new Random();
         
@@ -45,15 +45,20 @@ namespace SibGameJam2021.Core.Weapons
         {
             var tmpDamage = Damage;
             var tmpBulletSpeed = BulletSpeed;
+            var tmpDispersionDegree = DispersionDegree;
             
 
             Damage = Damage * AmmoCount;
             BulletSpeed = BulletSpeed * 3;
+            DispersionDegree = 0;
+
             SpawnProjectiles();
             AdditionalLogic();
             AdditionalLogic();
+
             Damage = tmpDamage;
             BulletSpeed = tmpBulletSpeed;
+            DispersionDegree = tmpDispersionDegree;
 
         }
 

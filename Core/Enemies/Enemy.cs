@@ -13,6 +13,8 @@ namespace SibGameJam2021.Core.Enemies
         private CollisionShape2D _attackShape;
         private HealthBar _healthbar;
 
+
+
         // AI
         [Export]
         private float ActivationRadius = 300;
@@ -27,7 +29,7 @@ namespace SibGameJam2021.Core.Enemies
 
         public Enemy() : base()
         {
-            _attackDurationTimer.OneShot = true;
+            //_attackDurationTimer.OneShot = true;
             _attackDurationTimer.Connect("timeout", this, nameof(OnAttackDurationEnded));
             //
             this.MaxHealth += GameManager.Instance.SceneManager.LevelCount; // auto scale health

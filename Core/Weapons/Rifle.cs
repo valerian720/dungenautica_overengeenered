@@ -33,7 +33,7 @@ namespace SibGameJam2021.Core.Weapons
             var tmpBulletSpeed = BulletSpeed;
 
 
-            Damage = Damage * AmmoCount;
+            Damage = Damage * 5;
             SpawnProjectiles();
             BulletSpeed = BulletSpeed / 2;
             SpawnProjectiles();

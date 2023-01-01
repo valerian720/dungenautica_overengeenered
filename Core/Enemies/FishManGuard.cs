@@ -5,10 +5,15 @@ namespace SibGameJam2021.Core.Enemies
 {
     public class FishManGuard : FishMan
     {
+
+        [Export]
+        public override float MaxHealth { get; set; } = 300;
         // TODO special behavour
 
         private AudioStream fish_attack = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/guard_attack.wav");
         private AudioStream fish_death = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/guard_death.wav");
+
+        public FishManGuard() : base() { }
 
         protected override void Attack()
         {

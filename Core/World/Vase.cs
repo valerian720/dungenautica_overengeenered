@@ -7,9 +7,16 @@ namespace SibGameJam2021.Core.World
 {
     public class Vase : StaticBody2D
     {
+        [Export]
+        public bool IsOptional = true;
+        [Export]
+        public int DisaplayPersantage = 30;
+
         private AnimatedSprite _animatedSprite;
         private CollisionShape2D _collisionShape1;
         private CollisionShape2D _collisionShape2;
+
+        static private Random _random = new Random();
 
         public override void _Ready()
         {
@@ -18,6 +25,11 @@ namespace SibGameJam2021.Core.World
             var area2D = GetNode<Area2D>("Area2D");
             area2D.Connect("body_entered", this, nameof(OnBodyEntered));
             _collisionShape2 = area2D.GetNode<CollisionShape2D>("CollisionShape2D");
+
+            if (IsOptional) {
+                if (_random.Next(0, 100) >= DisaplayPersantage)
+                    QueueFree(); // delete
+            }
         }
 
         private void DropLoot()

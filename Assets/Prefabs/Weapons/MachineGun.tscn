@@ -5,8 +5,8 @@
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 1 )
-ReloadDuration = 4.0
-DispersionDegree = 20
+GunDescription = "good old machine gun, that also has modile to act like sniper rifle"
+GunName = "Bubble reaper"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 9, 0.5 )

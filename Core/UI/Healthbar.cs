@@ -24,7 +24,8 @@ namespace SibGameJam2021.Core.UI
 
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
-            _textureProgress.Value = currentHealth;
+            GD.Print($"trying update health bar: current: {currentHealth} max: {maxHealth}");
+            _textureProgress.Value = currentHealth / maxHealth * 100; // progress bar consumes value 0-100
 
             _textureProgress.TextureProgress_ = currentHealth < maxHealth * 0.7f ? currentHealth < maxHealth * 0.35f ? _orangeBar : _yellowBar : _greeenBar;
         }

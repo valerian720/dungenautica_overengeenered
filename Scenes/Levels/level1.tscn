@@ -25,11 +25,11 @@ position = Vector2( 368, -112 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 7 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
-Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 10,
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 4,
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
 Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 5,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 1
+Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 10
 }
 
 [node name="PlayerSpawn" parent="YSort/SpawnManager" index="0"]

@@ -8,11 +8,11 @@
 [ext_resource path="res://Assets/Textures/UI/GameButton.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
+size = 10
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 10
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -66,6 +66,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="overengeeneredLabel" type="Label" parent="."]
+margin_left = 363.133
+margin_top = 24.3479
+margin_right = 489.133
+margin_bottom = 43.3479
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "overengeenered"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -89,7 +103,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label" type="Label" parent="Buttons/PlayButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Play"
 align = 1
 valign = 1
@@ -107,7 +121,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label2" type="Label" parent="Buttons/SettingsButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Options"
 align = 1
 valign = 1
@@ -125,7 +139,7 @@ texture_normal = ExtResource( 6 )
 [node name="Label3" type="Label" parent="Buttons/QuitButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Exit"
 align = 1
 valign = 1
@@ -180,7 +194,7 @@ columns = 2
 margin_right = 109.0
 margin_bottom = 19.0
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Resolution"
 valign = 1
 

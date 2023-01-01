@@ -15,21 +15,45 @@ namespace SibGameJam2021.Core.Weapons
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 
+        private CollisionShape2D _collisionLayer = null;
+
         public override void _PhysicsProcess(float delta)
         {
+            var tmpDir = Direction;
             var collision = MoveAndCollide(Direction * Speed * delta);
 
             if (collision != null)
             {
+                //
+                //if (collision.Collider is TileMap)
+                //{
+                //    var tilemap = (TileMap)collision.Collider;
+                //    var tilePos = tilemap.WorldToMap(collision.Position);
+                //    GD.Print(tilePos);
+                //    var tileName = tilemap.TileSet.TileGetName(tilemap.GetCell((int)tilePos.x, (int)tilePos.y));
+                //    GD.Print(tileName);
+
+                //    //if (tileName == "HoleDeapthTiles") // TODO
+                //    //{
+                //    //    Direction = tmpDir;
+                //    //    Position = Position + Direction * Speed * delta;
+                //    //    return;
+
+                //    //}
+
+                //}
+                //
                 if (_bouncesLeft > 0)
                 {
                     Direction = Direction.Bounce(collision.Normal);
 
-                    Speed /= 2;
                     if (_bouncesLeft == GameManager.Instance.Player.BounceBoost) // first bounce
                         Damage *= 2;
                     else
+                    {
+                        Speed /= 2;
                         Damage /= 2;
+                    }
 
                     _bouncesLeft--;
                 }
@@ -46,6 +70,8 @@ namespace SibGameJam2021.Core.Weapons
             _animatedSprite.Connect("animation_finished", this, "queue_free");
 
             _bouncesLeft = GameManager.Instance.Player.BounceBoost;
+
+            _collisionLayer = (CollisionShape2D)GetChild(1);
 
             AddChild(_timer);
             _timer.Connect("timeout", this, nameof(OnTimer));

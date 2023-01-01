@@ -28,10 +28,10 @@ position = Vector2( 432, 376 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 4 )]
 Enemies = {
-Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 8,
-Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 0,
 Resource( "res://Assets/Prefabs/Enemies/FishMan.tscn" ): 5,
+Resource( "res://Assets/Prefabs/Enemies/FishManKing.tscn" ): 0,
 Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 0,
+Resource( "res://Assets/Prefabs/Enemies/FishManGuard.tscn" ): 8,
 Resource( "res://Assets/Prefabs/Enemies/Fish.tscn" ): 3
 }
 
@@ -57,7 +57,7 @@ position = Vector2( 0, 344 )
 position = Vector2( 608, 0 )
 
 [node name="SpawnPoint7" parent="YSort/SpawnManager" instance=ExtResource( 5 )]
-position = Vector2( 352, 128 )
+position = Vector2( 392, 208 )
 
 [node name="SpawnPoint8" parent="YSort/SpawnManager" instance=ExtResource( 5 )]
 position = Vector2( 224, 0 )
@@ -99,10 +99,10 @@ position = Vector2( 312, 72 )
 position = Vector2( 400, -40 )
 
 [node name="Vase16" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 352, 144 )
+position = Vector2( 344, 144 )
 
 [node name="Vase17" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 384, 144 )
+position = Vector2( 392, 144 )
 
 [node name="Vase6" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 96, -128 )
@@ -138,7 +138,7 @@ position = Vector2( 616, -120 )
 position = Vector2( 304, 112 )
 
 [node name="Collumn5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 322, 286 )
+position = Vector2( 304, 288 )
 
 [node name="Collumn6" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 381, 318 )

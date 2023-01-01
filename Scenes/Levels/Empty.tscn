@@ -530,8 +530,8 @@ position = Vector2( 115, 10 )
 
 [node name="SpawnManager" parent="YSort" instance=ExtResource( 6 )]
 Enemies = {
-ExtResource( 14 ): 2,
-Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1
+Resource( "res://Assets/Prefabs/Enemies/Enemy.tscn" ): 1,
+ExtResource( 14 ): 2
 }
 
 [node name="SpawnPoint" parent="YSort/SpawnManager" instance=ExtResource( 1 )]
@@ -584,11 +584,9 @@ position = Vector2( -402.573, -388.256 )
 
 [node name="FishManKing" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -527.005, -20.0613 )
-ActivationRadius = 1.0
 
 [node name="EnemyAngler" parent="YSort" instance=ExtResource( 14 )]
 position = Vector2( -335.433, -14.3316 )
-ActivationRadius = 1.0
 
 [node name="BrokenCollumn2" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 554.529, 31.6824 )
@@ -607,11 +605,9 @@ position = Vector2( 182.755, 18.6415 )
 
 [node name="FishMan2" parent="YSort" instance=ExtResource( 15 )]
 position = Vector2( -464.466, -20.7261 )
-ActivationRadius = 1.0
 
 [node name="FishMan" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( -400.597, -19.4303 )
-ActivationRadius = 1.0
 
 [node name="BrokenCollumn4" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 292.244, 159.279 )
