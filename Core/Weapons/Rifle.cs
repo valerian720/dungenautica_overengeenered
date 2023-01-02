@@ -21,6 +21,9 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public override int SoundType { get; protected set; } = 2;
 
+        [Export]
+        public override int PlayerHurtAmount { get; protected set; } = 5;
+
         protected override void AdditionalLogic()
         {
             AmmoCount -= AmmoPerShot;

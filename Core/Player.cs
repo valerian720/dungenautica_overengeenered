@@ -345,7 +345,15 @@ namespace SibGameJam2021.Core
         {
             if (area.Name.Equals("AttackBox"))
             {
-                GetDamage((area.GetParent() as Enemy).Damage);
+                PlayerGetDamage((area.GetParent() as Enemy).Damage);
+            }
+        }
+
+        public void PlayerGetDamage(float damage)
+        {
+            if (damage > 0)
+            {
+                GetDamage(damage);
                 _animationState.Travel("Hurt");
                 audioPlayer.Stream = player_hurt;
                 audioPlayer.Playing = true;

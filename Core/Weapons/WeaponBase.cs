@@ -67,6 +67,9 @@ namespace SibGameJam2021.Core.Weapons
         public virtual float ReloadDuration { get; protected set; } = 1f;
 
         [Export]
+        public virtual int PlayerHurtAmount { get; protected set; } = 0;
+
+        [Export]
         public virtual int SoundType { get; protected set; } = 1;
 
         public float ShotDelay => 1f / RateOfFire;
@@ -133,6 +136,9 @@ namespace SibGameJam2021.Core.Weapons
                 _reloadInProgress = true;
 
                 GameManager.Instance.SoundManager.PlayReload();
+
+                GameManager.Instance.Player.PlayerGetDamage(PlayerHurtAmount);
+
                 return true;
             }
             else

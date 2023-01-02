@@ -31,6 +31,9 @@ namespace SibGameJam2021.Core.Weapons
         [Export]
         public int DispersionDegree { get; protected set; } = 10;
 
+        [Export]
+        public override int PlayerHurtAmount { get; protected set; } = 10;
+
         private static Random _bulletRandom = new Random();
         
 
