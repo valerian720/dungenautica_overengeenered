@@ -34,7 +34,7 @@ namespace SibGameJam2021.Core.Managers
         private static AudioStream _reload2 = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/reload_2.wav");
         //
         private static AudioStream _playerHurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
-
+        private AudioStream nextMusic;
 
         public SoundManager()
         {
@@ -60,12 +60,18 @@ namespace SibGameJam2021.Core.Managers
 
                 lastPlayedSoundInfo[i] = new DateTime();
             }
+
+            //
+            CasheRandomMusic();
+        }
+
+        public void CasheRandomMusic()
+        {
+            nextMusic = new Random().Next(2) == 0 ? _battleMusic1 : _battleMusic2;
         }
 
         public void PlayRandomMusic()
         {
-            var nextMusic = new Random().Next(2) == 0 ? _battleMusic1 : _battleMusic2;
-
             if (_musicAudioPlayer.Stream != nextMusic)
             {
                 _musicAudioPlayer.Stream = nextMusic;

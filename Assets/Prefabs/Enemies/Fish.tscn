@@ -412,8 +412,6 @@ start_node = "Idle"
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
-ActivationRadius = 200.0
-SightActivationRadius = 300.0
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -18 )
@@ -425,7 +423,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 76
-frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

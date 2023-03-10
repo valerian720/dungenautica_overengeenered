@@ -155,6 +155,33 @@ namespace SibGameJam2021.Core.Enemies
             {
                 loot = LootManager.CoinScene.Instance();
 
+                if (GameManager.Instance.Player.GlobalPosition.DistanceTo(GlobalPosition) > 220) // if killed enemy was too far then get heal
+                {
+                    loot = LootManager.HealScene.Instance();
+                    GD.Print($"distance = {GameManager.Instance.Player.GlobalPosition.DistanceTo(GlobalPosition)}");
+                }
+
+                Node2D tmp = (Node2D)loot;
+                tmp.Position = Position;
+                GameManager.Instance.CurrentLevel.AddChild(tmp);
+            }
+
+            //GD.Print($"distance = {GameManager.Instance.Player.GlobalPosition.DistanceTo(GlobalPosition)}");
+
+            if (GameManager.Instance.Player.HasEquiped(1) && GameManager.Instance.Player.GlobalPosition.DistanceTo(GlobalPosition) < 60) // 100% chance if killed with pistol while beeing close 
+            {
+                loot = LootManager.HealScene.Instance();
+
+                Node2D tmp = (Node2D)loot;
+                tmp.Position = Position;
+                GameManager.Instance.CurrentLevel.AddChild(tmp);
+            }
+
+
+            if (GameManager.Instance.Player.HasEquiped(0) && GameManager.Instance.Player.GlobalPosition.DistanceTo(GlobalPosition) > 220) // 100% chance if killed with pistol while beeing close 
+            {
+                loot = LootManager.HealScene.Instance();
+
                 Node2D tmp = (Node2D)loot;
                 tmp.Position = Position;
                 GameManager.Instance.CurrentLevel.AddChild(tmp);

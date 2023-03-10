@@ -35,13 +35,14 @@ namespace SibGameJam2021.Core.Weapons
         public override int PlayerHurtAmount { get; protected set; } = 10;
 
         private static Random _bulletRandom = new Random();
-        
+
+        private static int recoilMultiplyer = 1;
 
         protected override void AdditionalLogic()
         {
             AmmoCount -= AmmoPerShot;
 
-            GameManager.Instance.Player.ApplyImpulse((GlobalPosition - GetGlobalMousePosition()).Normalized() * Recoil);
+            GameManager.Instance.Player.ApplyImpulse((GlobalPosition - GetGlobalMousePosition()).Normalized() * Recoil * recoilMultiplyer);
         }
 
         protected override void SpecialAttack()
@@ -49,19 +50,21 @@ namespace SibGameJam2021.Core.Weapons
             var tmpDamage = Damage;
             var tmpBulletSpeed = BulletSpeed;
             var tmpDispersionDegree = DispersionDegree;
-            
+            var tmpRecoilMultiplyer = recoilMultiplyer;
+
 
             Damage = Damage * AmmoCount;
             BulletSpeed = BulletSpeed * 3;
             DispersionDegree = 0;
+            recoilMultiplyer = 20;
 
             SpawnProjectiles();
-            AdditionalLogic();
             AdditionalLogic();
 
             Damage = tmpDamage;
             BulletSpeed = tmpBulletSpeed;
             DispersionDegree = tmpDispersionDegree;
+            recoilMultiplyer = tmpRecoilMultiplyer;
 
         }
 

@@ -89,6 +89,12 @@ namespace SibGameJam2021.Core.Managers
             }
         }
 
+        public void StartNewGame()
+        {
+            SoundManager.CasheRandomMusic();
+            LoadRandomLevel();
+        }
+
         private void LoadLevel(Node level)
         {
             EmitSignal(nameof(OnLevelChange));

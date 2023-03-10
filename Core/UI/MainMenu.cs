@@ -44,7 +44,7 @@ namespace SibGameJam2021.Core.UI
 
         public void _on_PlayButton_pressed()
         {
-            GameManager.Instance.SceneManager.LoadRandomLevel();
+            GameManager.Instance.SceneManager.StartNewGame();
         }
 
         public void _on_QuitButton_pressed()

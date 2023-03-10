@@ -1,9 +1,10 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Core/Enemies/FishManKing.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Textures/Enemy/FishManKing.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Prefabs/UI/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/AttackBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Textures/UI/LifeIcon.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.02397
@@ -413,6 +414,14 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=49]
 
+[sub_resource type="SpriteFrames" id=54]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 24.0
+} ]
+
 [node name="FishManKing" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 7
@@ -470,4 +479,10 @@ parameters/Attack/blend_position = Vector2( 0.453581, -0.275 )
 parameters/Hurt/blend_position = Vector2( 0.479049, -0.451033 )
 parameters/Idle/blend_position = Vector2( 0.388448, -0.288791 )
 parameters/Run/blend_position = Vector2( 0.619818, -0.199138 )
+
+[node name="Skull" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -26.422 )
+frames = SubResource( 54 )
+animation = "New Anim"
+playing = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

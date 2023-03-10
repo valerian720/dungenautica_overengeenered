@@ -1,9 +1,10 @@
-<Project Sdk="Godot.NET.Sdk/3.2.3">
+﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>SibGameJam2021</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Design.txt" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>

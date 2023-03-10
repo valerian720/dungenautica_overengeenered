@@ -19,6 +19,8 @@ namespace SibGameJam2021.Core
         private const float DashDelay = 1;
         private const float DashForce = 400;
 
+        public const int _maxWeapinsScroll = 3;
+
         private const float MaxHealthDefault = 100f;
         private static readonly Dictionary<string, PackedScene> _weaponScenes = PrefabHelper.LoadPrefabsDictionary("res://Assets/Prefabs/Weapons");
         private bool _canDash = true;
@@ -36,6 +38,8 @@ namespace SibGameJam2021.Core
 
         private AudioStreamPlayer2D audioPlayer = null;
         private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
+
+        private int _storedWeaponId = 0;
 
         public Player() : base()
         {
@@ -171,6 +175,14 @@ namespace SibGameJam2021.Core
             if (inputEvent.IsActionPressed("slot3"))
             {
                 EquipWeapon(2);
+            }
+            if (inputEvent.IsActionPressed("next_slot"))
+            {
+                EquipWeapon((_storedWeaponId + 1) % _maxWeapinsScroll);
+            }
+            if (inputEvent.IsActionPressed("previous_slot"))
+            {
+                EquipWeapon((_maxWeapinsScroll + _storedWeaponId - 1) % _maxWeapinsScroll);
             }
             if (inputEvent.IsActionPressed("ui_fire"))
             {
@@ -328,7 +340,7 @@ namespace SibGameJam2021.Core
                 _gunSlot.RemoveChild(_currentWeapon);
                 _reloadBar.InterruptReloading();
             }
-
+            _storedWeaponId = index;
             _currentWeapon = _weapons.ElementAt(index);
 
             _gunSlot.AddChild(_currentWeapon);

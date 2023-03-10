@@ -42,7 +42,7 @@ namespace SibGameJam2021.Core.World
             }
             else
             {
-                if (new Random().Next(3) == 0) // 25% chance
+                if (new Random().Next(3) == 0 || ( GameManager.Instance.Player.CurrentHealth < GameManager.Instance.Player.MaxHealth/3 && new Random().Next(2) == 0)) // 25% chance or if hp is low + coin flip
                 {
                     loot = LootManager.HealScene.Instance();
                 }
