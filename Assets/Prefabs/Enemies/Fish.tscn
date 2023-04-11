@@ -410,7 +410,7 @@ start_node = "Idle"
 
 [node name="EnemyAngler" type="KinematicBody2D"]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 135
 script = ExtResource( 2 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]

@@ -151,4 +151,5 @@ previous_slot={
 2d_physics/layer_5="Loot"
 2d_physics/layer_6="Player HitBox"
 2d_physics/layer_7="Enemy AttackBox"
+2d_physics/layer_8="Player Push"
 2d_physics/layer_10="Gate"

@@ -58,6 +58,10 @@ namespace SibGameJam2021.Core.Enemies
             if (path.Length > 1) // блинблять
             {
                 ret = path[1];
+            } 
+            else
+            {
+
             }
 
             return ret;

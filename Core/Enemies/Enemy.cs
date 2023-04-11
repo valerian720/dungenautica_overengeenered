@@ -26,6 +26,7 @@ namespace SibGameJam2021.Core.Enemies
 
         [Export]
         private float StopAtRadius = 20;
+        private Vector2 _forcedVelocity = Vector2.Zero;
 
         public Enemy() : base()
         {
@@ -71,6 +72,11 @@ namespace SibGameJam2021.Core.Enemies
             _healthbar.UpdateHealth(CurrentHealth, MaxHealth);
         }
 
+        public void ApplyImpulse(Vector2 velocity)
+        {
+            _forcedVelocity = velocity;
+        }
+
         virtual public void UpdatePosition(float delta)
         {
             // TODO redo
@@ -106,6 +112,9 @@ namespace SibGameJam2021.Core.Enemies
                 // обновление анимаций моба если игрок входит в определенный радиус
                 UpdateAnimationTreeState((player.GlobalPosition - GlobalPosition).Normalized());
             }
+
+            MoveAndSlide(_forcedVelocity);
+            _forcedVelocity = _forcedVelocity / 2;
         }
 
         virtual protected void Attack()

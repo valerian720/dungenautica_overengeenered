@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using SibGameJam2021.Core.Enemies;
@@ -30,6 +31,7 @@ namespace SibGameJam2021.Core
         private Timer _dashTimer = new Timer();
         private Node2D _gunSlot;
         private Area2D _hitbox;
+        private Area2D _knockbackArea;
         private int _lifes = 3;
         private float _maxHealth = MaxHealthDefault;
         private ReloadBar _reloadBar;
@@ -40,6 +42,10 @@ namespace SibGameJam2021.Core
         private AudioStream player_hurt = ResourceLoader.Load<AudioStream>("res://Assets/Sounds/player_hurt.wav");
 
         private int _storedWeaponId = 0;
+        private float _knockbackDamage = 25;
+        private const float KnockbackForce = 1100;
+
+        new readonly float MaxSpeed = 100;
 
         public Player() : base()
         {
@@ -245,6 +251,8 @@ namespace SibGameJam2021.Core
             _hitbox = GetNode<Area2D>("Hitbox");
             _hitbox.Connect("area_entered", this, nameof(OnHitboxAreaEntered));
 
+            _knockbackArea = GetNode<Area2D>("KnockbackCollider");
+
             UpdateHUD();
 
             EquipWeapon();
@@ -326,10 +334,33 @@ namespace SibGameJam2021.Core
             var dir = _velocity.Normalized(); // деш в сторону, куда движется игрок
 
             ApplyImpulse(dir * DashForce);
+            KnockbackNearbyEnemies();
 
             _canDash = false;
 
             _dashTimer.Start(DashDelay);
+        }
+
+        private void KnockbackNearbyEnemies()
+        {
+            foreach (var body in _knockbackArea.GetOverlappingBodies())
+            {
+                var enemy = body as Enemy;
+
+                if (enemy != null)
+                {
+                    var dir = (enemy.Position - Position).Normalized(); // деш в противоположную сторону, куда движется игрок
+
+                    enemy.ApplyImpulse(dir * KnockbackForce);
+                    enemy.GetDamage(_knockbackDamage);
+                }
+
+            }
+            // 
+            //if (area.Name.Equals("AttackBox"))
+            //{
+            //    PlayerGetDamage((area.GetParent() as Enemy).Damage);
+            //}
         }
 
         private void EquipWeapon(int index = 0)
