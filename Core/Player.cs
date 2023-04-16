@@ -75,6 +75,11 @@ namespace SibGameJam2021.Core
             }
         }
 
+        internal void ForceSetHealth(int health)
+        {
+            CurrentHealth = health;
+        }
+
         public int Coins
         {
             get { return _coins; }

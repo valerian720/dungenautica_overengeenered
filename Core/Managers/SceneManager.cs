@@ -11,9 +11,12 @@ namespace SibGameJam2021.Core.Managers
     public class SceneManager : Node2D
     {
         public const int ShopLevelInterval = 4;
-        private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels", new string[] { "Empty", "shop" });
+        static private string _shopLevelName = "shop";
+        static private string _demoLevelName = "demo";
+        private static readonly Dictionary<string, PackedScene> _levels = PrefabHelper.LoadPrefabsDictionary("res://Scenes/Levels", new string[] { _demoLevelName, _shopLevelName });
 
         private static PackedScene _shopLevel = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/shop.tscn");
+        private static PackedScene _demoLevel = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/demo.tscn");
 
         private MainMenu _mainMenu;
         private SceneTree _tree;
@@ -39,18 +42,17 @@ namespace SibGameJam2021.Core.Managers
 
         public int LevelCount { get; set; } = 0;
 
-        public void LoadDemoLevel()
-        {
-            LoadLevel("Empty");
-        }
-
         public void LoadLevel(string levelName)
         {
             Node level;
 
-            if (levelName == "shop")
+            if (levelName == _shopLevelName)
             {
                 level = _shopLevel.Instance();
+            }
+            else if (levelName == _demoLevelName)
+            {
+                level = _demoLevel.Instance();
             }
             else
             {
@@ -72,6 +74,19 @@ namespace SibGameJam2021.Core.Managers
             _tree.Root.AddChild(_mainMenu);
             _uiManager.ToggleHUD(false);
             _soundManager.PlayBGMusic();
+        }
+
+        public bool HasLevel(string levelName)
+        {
+            return _levels.ContainsKey(levelName) || levelName == _shopLevelName;
+        }
+        public List<string> ListLevels()
+        {
+            var tmpList = _levels.Keys.ToList();
+            tmpList.Add(_shopLevelName);
+            tmpList.Add(_demoLevelName);
+
+            return tmpList;
         }
 
         public void LoadRandomLevel()

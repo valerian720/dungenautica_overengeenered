@@ -51,7 +51,7 @@ namespace SibGameJam2021.Core.Managers
         {
             var tree = GetTree();
             tree.Paused = false;
-            _pauseMenu.Visible = false;
+            _pauseMenu.Visible = tree.Paused;
         }
 
         public void _on_SaveButton_pressed()
@@ -201,6 +201,11 @@ namespace SibGameJam2021.Core.Managers
             var tree = GetTree();
             tree.Paused = !tree.Paused;
             _pauseMenu.Visible = tree.Paused;
+        }
+
+        public void DebugTogglePause()
+        {
+            TogglePause();
         }
 
         public void ToggleGameOver()
