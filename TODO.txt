@@ -12,6 +12,7 @@
 - противники наносят только 1 удар когда подходят вплотную
 - area_set_shape_disabled: Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead.
 
+- переписать логику спавна с таймера на creshendo event + базовый спавн мобов при загрузке уровня [ ]
 - вывести номер уровня в интерфейс [x]
 - вывести сколько всего золота был собрано [x]
 - если игрок убивает моба из дробовика то из него выпадает аптечка [x]

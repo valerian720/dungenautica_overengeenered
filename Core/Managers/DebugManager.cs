@@ -7,6 +7,7 @@ namespace SibGameJam2021.Core.Managers
     public class DebugManager : CanvasLayer
     {
         private Control _debugOverlay;
+        private LineEdit _consoleInput;
         private TextEdit _consoleOutput;
         private int _minArgumentToConsoleCount = 2;
 
@@ -20,7 +21,7 @@ namespace SibGameJam2021.Core.Managers
                 var ui = GameManager.Instance.UIManager;
                 if (ui != null)
                 {
-                    //ui.DebugTogglePause();
+                    ui.ToggleHUD(!_debugOverlay.Visible);
                 }
             }
         }
@@ -32,7 +33,7 @@ namespace SibGameJam2021.Core.Managers
 
         public void DebugPrint(string text)
         {
-            _consoleOutput.Text += $"> {text}\n";
+            _consoleOutput.Text += $"{text}\n";
             ScrollToCurrent();
 
         }
@@ -42,6 +43,7 @@ namespace SibGameJam2021.Core.Managers
             SetProcessInput(OS.IsDebugBuild());
 
             _debugOverlay = GetNode<Control>("DebugOverlay");
+            _consoleInput = GetNode<LineEdit>("DebugOverlay/ConsoleInput");
             _consoleOutput = GetNode<TextEdit>("DebugOverlay/ConsoleOutput");
             
             GetNode<LineEdit>("DebugOverlay/ConsoleInput").Connect("text_entered", this, nameof(OnConsoleInput));
@@ -64,17 +66,31 @@ namespace SibGameJam2021.Core.Managers
 
         public void OnConsoleInput(string text)
         {
-            GD.Print(text);
-
-            string[] splittedText = text.Split(" ");
-
-            if (splittedText.Length >= _minArgumentToConsoleCount)
+            if (text != "") 
             {
-                DebugPrint(_handlers[splittedText[0]](splittedText[1]));
-            }
-            else
-            {
-                DebugPrint(_handlers[splittedText[0]](""));
+                DebugPrint($"\n> {text}");
+                GD.Print(text);
+
+                string[] splittedText = text.Split(" ");
+                var commandName = splittedText[0];
+                if (_handlers.ContainsKey(commandName))
+                {
+                    if (splittedText.Length >= _minArgumentToConsoleCount)
+                    {
+                        DebugPrint($"-- {_handlers[commandName](splittedText[1])} --");
+                    }
+                    else
+                    {
+                        DebugPrint($"-- {_handlers[commandName]("")} --");
+                    }
+                }
+                else
+                {
+                    DebugPrint($"{commandName} not found");
+                }
+
+
+                _consoleInput.Text = "";
             }
         }
 
